@@ -11,3 +11,10 @@ data/synthetic_sales_full.csv
 # IDE
 .idea/
 .vscode/
+
+# Interview prep — 不上传 GitHub
+docs/interview_story.md
+docs/interview_*.md
+**/interview_script.md
+**/interview_guide.md
+private-prep/

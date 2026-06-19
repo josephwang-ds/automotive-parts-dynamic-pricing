@@ -162,7 +162,7 @@ parts-dynamic-pricing-ai/
 ├── models/                 # Trained model artifacts
 ├── outputs/                # Recommendations + backtest results
 ├── tests/                  # Pytest suite
-└── docs/                   # Architecture, model card, interview story
+└── docs/                   # Architecture and model card
 ```
 
 ## Testing
