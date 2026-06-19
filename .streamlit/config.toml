@@ -3,3 +3,12 @@ headless = true
 
 [browser]
 gatherUsageStats = false
+
+# 固定浅色主题——自定义 CSS 按浅色设计（白卡片、深蓝文字、浅背景），
+# 否则用户系统的深色模式会让标题/标签变成白字看不见。
+[theme]
+base = "light"
+primaryColor = "#2563EB"
+backgroundColor = "#F6F8FC"
+secondaryBackgroundColor = "#FFFFFF"
+textColor = "#0F172A"
