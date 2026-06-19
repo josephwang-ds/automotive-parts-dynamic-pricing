@@ -98,13 +98,16 @@ def run_full_pipeline(scenario: str = "Recommended") -> PipelineState:
 def get_or_run_pipeline(scenario: str = "Recommended") -> PipelineState:
     """获取或运行流水线（带缓存）。"""
     rec_path = OUTPUTS_DIR / "recommendations.csv"
-    model_path = MODELS_DIR / "demand_model.joblib"
+    meta_path = MODELS_DIR / "demand_model_metadata.json"
 
-    if rec_path.exists() and model_path.exists():
+    # Deployment path: use portable metadata plus precomputed outputs. A
+    # scikit-learn joblib created under another Python/NumPy version is not a
+    # stable cross-environment deployment format and is unnecessary here.
+    if rec_path.exists() and meta_path.exists():
         state = PipelineState()
         state.products, state.sales = load_data()
         state.features = build_features(state.sales, state.products)
-        state.demand_model = DemandModelTrainer.load()
+        state.demand_model = DemandModelTrainer.load_metadata(meta_path)
         state.elasticity = ElasticityEstimator()
         state.elasticity_df = state.elasticity.fit(state.sales, state.products)
         state.recommendations = pd.read_csv(rec_path)
@@ -125,12 +128,10 @@ def get_or_run_pipeline(scenario: str = "Recommended") -> PipelineState:
             state.backtest_results = backtest.run_backtest(state.transfers)
 
         # 加载模型指标
-        meta_path = MODELS_DIR / "demand_model_metadata.json"
         if meta_path.exists():
-            import json
-            with open(meta_path) as f:
-                meta = json.load(f)
-            state.model_results = {"hgb": {"metrics": meta.get("metrics", {})}}
+            state.model_results = {
+                "hgb": {"metrics": state.demand_model.metrics}
+            }
 
         return state
 

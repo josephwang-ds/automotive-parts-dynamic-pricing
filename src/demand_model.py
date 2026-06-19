@@ -222,7 +222,10 @@ class DemandModelTrainer:
         }
         joblib.dump(artifact, path)
 
-        meta_path = MODELS_DIR / "demand_model_metadata.json"
+        # Keep metadata beside the requested artifact. This prevents tests or
+        # alternate training runs that use a temporary model path from
+        # overwriting the production metadata in MODELS_DIR.
+        meta_path = path.with_name("demand_model_metadata.json")
         with open(meta_path, "w") as f:
             json.dump({
                 "model_name": self.name,
@@ -244,6 +247,25 @@ class DemandModelTrainer:
         trainer.feature_cols = artifact["feature_cols"]
         trainer.name = artifact["name"]
         trainer.metrics = artifact.get("metrics", {})
+        return trainer
+
+    @classmethod
+    def load_metadata(cls, path: Path | None = None) -> "DemandModelTrainer":
+        """Load portable model metadata without unpickling a scikit-learn artifact.
+
+        The public Streamlit app uses precomputed recommendations and the
+        elasticity-based simulator, so it only needs the model name and
+        evaluation metrics. Avoiding pickle/joblib here makes deployment
+        independent of the Python, NumPy, and scikit-learn versions used to
+        train the offline artifact.
+        """
+        path = path or MODELS_DIR / "demand_model_metadata.json"
+        with open(path, encoding="utf-8") as f:
+            metadata = json.load(f)
+        trainer = cls(model_type=metadata.get("model_type", "hgb"))
+        trainer.name = metadata.get("model_name", "HistGradientBoosting")
+        trainer.metrics = metadata.get("metrics", {})
+        trainer.feature_cols = metadata.get("feature_cols", [])
         return trainer
 
 
