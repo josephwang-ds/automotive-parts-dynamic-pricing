@@ -214,7 +214,7 @@ def page_executive(recs, sales, inv, bt, filters):
                 color_discrete_sequence=[UI_COLORS["electric_blue"]],
             )
             fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
 
     with col2:
         if len(recs) > 0:
@@ -224,7 +224,7 @@ def page_executive(recs, sales, inv, bt, filters):
                 color_discrete_sequence=px.colors.qualitative.Set2,
             )
             fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
 
     col3, col4 = st.columns(2)
     with col3:
@@ -236,14 +236,14 @@ def page_executive(recs, sales, inv, bt, filters):
                 color_discrete_sequence=[UI_COLORS["emerald"]],
             )
             fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
 
     with col4:
         top_candidates = recs.nlargest(10, "gross_profit_lift")[
             ["sku_id", "category", "gross_profit_lift", "recommendation_action"]
         ] if len(recs) > 0 else pd.DataFrame()
         st.markdown("**Top Approval Candidates**")
-        st.dataframe(top_candidates, use_container_width=True, hide_index=True)
+        st.dataframe(top_candidates, width='stretch', hide_index=True)
 
 
 def page_demand_model(state, filters):
@@ -298,7 +298,7 @@ def page_demand_model(state, filters):
             })
         if comparison:
             st.markdown("**Model Comparison**")
-            st.dataframe(pd.DataFrame(comparison), use_container_width=True, hide_index=True)
+            st.dataframe(pd.DataFrame(comparison), width='stretch', hide_index=True)
 
     # 测试集预测图
     if state.model_results and "hgb" in state.model_results:
@@ -316,7 +316,7 @@ def page_demand_model(state, filters):
                     mode="lines", line=dict(dash="dash", color="gray"),
                 ))
                 fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig, width='stretch')
 
             with col2:
                 preds["residual"] = preds["actual"] - preds["predicted"]
@@ -326,7 +326,7 @@ def page_demand_model(state, filters):
                     color_discrete_sequence=[UI_COLORS["electric_blue"]],
                 )
                 fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig, width='stretch')
 
             # 按品类误差
             err_by_cat = preds.groupby("category").apply(
@@ -336,7 +336,7 @@ def page_demand_model(state, filters):
                          title="Error by Category",
                          color_discrete_sequence=[UI_COLORS["warning_amber"]])
             fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
 
     st.markdown(
         '<div class="callout"><strong>Limitations:</strong> '
@@ -385,7 +385,7 @@ def page_elasticity(state, filters):
             color_continuous_scale="RdYlGn_r", aspect="auto",
         )
         fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     if len(filtered) > 0:
         row = filtered.iloc[0]
@@ -413,7 +413,7 @@ def page_elasticity(state, filters):
     st.dataframe(
         filtered[["elasticity_segment", "estimated_elasticity", "confidence_score",
                    "sample_size", "elasticity_class", "estimation_level"]].head(20),
-        use_container_width=True, hide_index=True,
+        width='stretch', hide_index=True,
     )
 
 
@@ -461,7 +461,7 @@ def page_pricing_studio(recs, state, filters):
     )
 
     # 库存决策区
-    if "inventory_status" in rec.columns:
+    if "inventory_status" in rec.index:
         st.markdown('<div class="section-title">Inventory Decision</div>', unsafe_allow_html=True)
         ic1, ic2, ic3, ic4 = st.columns(4)
         with ic1:
@@ -497,7 +497,6 @@ def page_pricing_studio(recs, state, filters):
     # 候选价格模拟图
     if state.demand_model and state.sales is not None:
         from src.optimizer import PriceOptimizer
-        from src.elasticity import ElasticityEstimator
 
         latest = state.sales.sort_values("week_num").groupby(
             ["sku_id", "region", "customer_tier"]
@@ -522,13 +521,13 @@ def page_pricing_studio(recs, state, filters):
                               title="Price vs Predicted Units",
                               color_discrete_sequence=[UI_COLORS["electric_blue"]])
                 fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig, width='stretch')
             with col2:
                 fig = px.line(sim_df, x="candidate_price", y="gross_profit",
                               title="Price vs Gross Profit",
                               color_discrete_sequence=[UI_COLORS["emerald"]])
                 fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig, width='stretch')
 
 
 def page_inventory_control_tower(state, inv, recs, filters):
@@ -569,7 +568,7 @@ def page_inventory_control_tower(state, inv, recs, filters):
                 color_discrete_sequence=[UI_COLORS["electric_blue"]],
             )
             fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
     with col2:
         if not inv_snap.empty and "inventory_status" in inv_snap.columns:
             val_by_status = inv_snap.groupby("inventory_status")["inventory_value"].sum().reset_index()
@@ -577,7 +576,7 @@ def page_inventory_control_tower(state, inv, recs, filters):
                          title="Inventory Value by Status",
                          color_discrete_sequence=[UI_COLORS["warning_amber"]])
             fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
 
     col3, col4 = st.columns(2)
     with col3:
@@ -586,7 +585,7 @@ def page_inventory_control_tower(state, inv, recs, filters):
                                title="Weeks-of-Cover Distribution",
                                color_discrete_sequence=[UI_COLORS["electric_blue"]])
             fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
     with col4:
         if not inv_snap.empty and "inventory_turns" in inv_snap.columns:
             fig = px.scatter(inv_snap, x="inventory_turns", y="unit_cost",
@@ -594,14 +593,14 @@ def page_inventory_control_tower(state, inv, recs, filters):
                              title="Margin vs Inventory Turns",
                              opacity=0.6)
             fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
 
     if "inventory_action" in recs.columns:
         action_dist = recs.drop_duplicates(["sku_id", "region"])["inventory_action"].value_counts()
         fig = px.pie(values=action_dist.values, names=action_dist.index,
                      title="Inventory Action Distribution")
         fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     # 决策矩阵
     if "inventory_status" in recs.columns and "pricing_action" in recs.columns:
@@ -610,7 +609,7 @@ def page_inventory_control_tower(state, inv, recs, filters):
         ).size().reset_index(name="count")
         if not matrix.empty:
             st.markdown("**Pricing vs Inventory Action Matrix**")
-            st.dataframe(matrix.head(50), use_container_width=True, hide_index=True)
+            st.dataframe(matrix.head(50), width='stretch', hide_index=True)
 
     # 数据表
     st.markdown("**Top Excess Inventory Candidates**")
@@ -621,11 +620,11 @@ def page_inventory_control_tower(state, inv, recs, filters):
         cols = [c for c in ["sku_id", "category", "region", "inventory_status", "excess_inventory_value",
                             "available_weeks_of_cover"] if c in excess.columns]
         st.dataframe(excess.nlargest(50, "excess_inventory_value")[cols] if len(excess) > 0 else pd.DataFrame(),
-                     use_container_width=True, hide_index=True)
+                     width='stretch', hide_index=True)
 
     if not transfers.empty:
         st.markdown("**Transfer Recommendations**")
-        st.dataframe(transfers.head(50), use_container_width=True, hide_index=True)
+        st.dataframe(transfers.head(50), width='stretch', hide_index=True)
 
     if "inventory_action" in recs.columns:
         manual = recs[recs.get("manual_review_required", False) == True]  # noqa: E712
@@ -633,7 +632,7 @@ def page_inventory_control_tower(state, inv, recs, filters):
             st.markdown("**Manual Review Queue**")
             show_cols = [c for c in ["sku_id", "region", "customer_tier", "pricing_action",
                         "inventory_action", "joint_confidence", "inventory_reason_code"] if c in manual.columns]
-            st.dataframe(manual[show_cols].head(50), use_container_width=True, hide_index=True)
+            st.dataframe(manual[show_cols].head(50), width='stretch', hide_index=True)
 
 
 def page_inventory(inv, recs, filters):
@@ -658,7 +657,7 @@ def page_backtest(state, recs, filters):
             unsafe_allow_html=True,
         )
 
-        st.dataframe(comparison, use_container_width=True)
+        st.dataframe(comparison, width='stretch')
 
         col1, col2 = st.columns(2)
         with col1:
@@ -669,7 +668,7 @@ def page_backtest(state, recs, filters):
                 color_discrete_sequence=[UI_COLORS["emerald"]],
             )
             fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
 
         with col2:
             fig = px.bar(
@@ -679,7 +678,7 @@ def page_backtest(state, recs, filters):
                 color_discrete_sequence=[UI_COLORS["electric_blue"]],
             )
             fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
 
     # Rollback
     st.markdown("### Rollback Simulator")
@@ -710,7 +709,7 @@ def page_backtest(state, recs, filters):
     with c4:
         metric_card("Unit Recovery", f"{summary.get('unit_recovery_pct', 0)*100:.0f}%")
 
-    st.dataframe(result["audit_table"].head(20), use_container_width=True, hide_index=True)
+    st.dataframe(result["audit_table"].head(20), width='stretch', hide_index=True)
 
 
 def page_ai_analyst(state, recs, sales, filters):
