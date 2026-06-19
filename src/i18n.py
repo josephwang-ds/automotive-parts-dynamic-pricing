@@ -53,6 +53,8 @@ _ZH = {
         "应用启动失败。请确认仓库已包含 outputs/ 与 data/ 部署文件。",
     "Language": "语言",
     "Filters": "筛选",
+    "Data Filters": "数据筛选",
+    "Pricing Policy": "定价策略",
     "Navigation": "导航",
     "Region": "区域",
     "Category": "品类",
@@ -63,6 +65,34 @@ _ZH = {
     "Max Price Move %": "最大调价幅度 %",
     "Confidence Threshold": "置信度阈值",
     "All": "全部",
+    # 目标函数显示名
+    "Maximize Gross Profit": "最大化毛利",
+    "Maximize Revenue": "最大化营收",
+    "Reduce Excess Inventory": "减少过剩库存",
+    "Balanced Objective": "平衡目标",
+    # 情景预设名
+    "Conservative": "保守",
+    "Recommended": "推荐",
+    "Margin Push": "毛利优先",
+    "Inventory Clearance": "清库存",
+    # 区块说明
+    "Choose which slice of the catalog to view.": "选择查看目录的哪个子集。",
+    "Adjust guardrails and objective — the recommendation set updates live.":
+        "调整护栏与目标,推荐结果实时更新。",
+    # 控件悬停提示
+    "Show only this sales region.": "只看这个销售区域。",
+    "Show only this product category.": "只看这个产品品类。",
+    "Retail / Trade / Fleet pricing segment.": "零售 / 批发 / 车队 定价层级。",
+    "Preset policy bundle — sets the objective, confidence and max-move below. You can still fine-tune them.":
+        "策略预设——一键设定下面的目标、置信度与调价上限,之后仍可微调。",
+    "How recommendations are ranked: by profit, revenue, or excess-inventory reduction.":
+        "推荐如何排序:按毛利、营收或去库存。",
+    "Keep only recommendations whose elasticity confidence is at least this. Higher = safer, fewer SKUs.":
+        "只保留弹性置信度不低于此值的推荐。越高越保守,SKU 越少。",
+    "Drop recommendations whose projected gross margin falls below this floor.":
+        "剔除预测毛利率低于该下限的推荐。",
+    "Keep only recommendations within this price-change limit; larger moves need manual review.":
+        "只保留调价幅度在此范围内的推荐;更大的调整需人工复核。",
     # 页面名（导航 + 标题共用）
     "Executive Command Center": "经营指挥中心",
     "Demand Model": "需求模型",
@@ -264,6 +294,7 @@ _EN_TPL = {
     ),
     "Required": "Required",
     "Standard": "Standard",
+    "policy_pass": "{n} / {total} SKUs meet the current policy",
 }
 
 _ZH_TPL = {
@@ -323,4 +354,5 @@ _ZH_TPL = {
     ),
     "Required": "需要",
     "Standard": "标准",
+    "policy_pass": "{n} / {total} 个 SKU 符合当前策略",
 }
