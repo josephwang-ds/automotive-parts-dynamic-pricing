@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 import pandas as pd
@@ -33,10 +34,20 @@ class PipelineState:
         self.inventory_analysis: dict = {}
 
 
-def load_data() -> tuple[pd.DataFrame, pd.DataFrame]:
+def _is_streamlit_cloud() -> bool:
+    """检测是否在 Streamlit Cloud 容器内运行。"""
+    return Path("/mount/src").exists() or os.getenv("STREAMLIT_RUNTIME_ENV") == "cloud"
+
+
+def load_data(deploy: bool = False) -> tuple[pd.DataFrame, pd.DataFrame]:
     """加载合成数据。"""
     products = pd.read_csv(DATA_DIR / "synthetic_products.csv")
-    sales = pd.read_csv(DATA_DIR / "synthetic_sales.csv", parse_dates=["week_start"])
+    app_sales = DATA_DIR / "synthetic_sales_app.csv"
+    if deploy and app_sales.exists():
+        sales_path = app_sales
+    else:
+        sales_path = DATA_DIR / "synthetic_sales.csv"
+    sales = pd.read_csv(sales_path, parse_dates=["week_start"])
     return products, sales
 
 
@@ -101,7 +112,7 @@ def _load_deploy_pipeline(scenario: str) -> PipelineState:
     state = PipelineState()
     meta_path = MODELS_DIR / "demand_model_metadata.json"
 
-    state.products, state.sales = load_data()
+    state.products, state.sales = load_data(deploy=True)
 
     state.demand_model = DemandModelTrainer.load_metadata(meta_path)
     state.recommendations = pd.read_csv(OUTPUTS_DIR / "recommendations.csv")
@@ -140,5 +151,11 @@ def get_or_run_pipeline(scenario: str = "Recommended") -> PipelineState:
     # stable cross-environment deployment format and is unnecessary here.
     if rec_path.exists() and meta_path.exists():
         return _load_deploy_pipeline(scenario)
+
+    if _is_streamlit_cloud():
+        raise FileNotFoundError(
+            "Streamlit Cloud 缺少部署产物。请确认仓库已提交 "
+            "outputs/recommendations.csv 与 models/demand_model_metadata.json。"
+        )
 
     return run_full_pipeline(scenario)

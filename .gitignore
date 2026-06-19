@@ -8,6 +8,10 @@ __pycache__/
 # 本地完整规模数据（851MB，超出 GitHub 限制）
 data/synthetic_sales_full.csv
 
+# 训练模型 pickle 不上传（跨 Python/sklearn 版本无法反序列化）
+models/*.joblib
+*.joblib
+
 # IDE
 .idea/
 .vscode/
