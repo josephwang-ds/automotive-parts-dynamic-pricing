@@ -21,7 +21,6 @@ from src.config import (
     SCENARIOS,
     UI_COLORS,
 )
-from src.pipeline import get_or_run_pipeline
 from src.utils import format_currency, format_pct
 
 # 页面配置
@@ -114,7 +113,14 @@ def synthetic_disclosure():
 
 @st.cache_resource
 def load_pipeline():
-    """加载流水线（缓存）。"""
+    """加载流水线（缓存）。部署环境走轻量路径，不导入 sklearn。"""
+    from src.runtime_stubs import deploy_artifacts_ready, load_deploy_state
+
+    if deploy_artifacts_ready():
+        return load_deploy_state()
+
+    from src.pipeline import get_or_run_pipeline
+
     return get_or_run_pipeline()
 
 
@@ -820,8 +826,13 @@ def page_governance():
 def main():
     synthetic_disclosure()
 
-    with st.spinner("Loading pipeline..."):
-        state = load_pipeline()
+    try:
+        with st.spinner("Loading pipeline..."):
+            state = load_pipeline()
+    except Exception as exc:
+        st.error("应用启动失败，请查看下方错误信息。")
+        st.exception(exc)
+        st.stop()
 
     st.sidebar.markdown("### Navigation")
     page = st.sidebar.radio(
