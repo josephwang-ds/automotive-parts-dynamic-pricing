@@ -1,0 +1,112 @@
+elasticity_segment,category,region,customer_tier,estimated_elasticity,sample_size,price_variation,standard_error,confidence_score,estimation_level,elasticity_class
+Brakes × Retail,Brakes,All,Retail,-0.3189553428261293,292,0.6335805935890038,0.03253764592432921,1.0,category_tier,Inelastic
+Brakes × Trade,Brakes,All,Trade,-0.39267173154940277,245,0.5948994024280486,0.03333016824706882,1.0,category_tier,Inelastic
+Brakes × Fleet,Brakes,All,Fleet,-0.24363920928815888,240,0.5900115082914059,0.03616963436906596,1.0,category_tier,Inelastic
+Filters × Retail,Filters,All,Retail,-0.1,123,1.1000317287420123,0.049802538507448466,0.615,category_tier,Moderate
+Filters × Trade,Filters,All,Trade,-0.1,110,1.142528741362076,0.04902397853130855,0.55,category_tier,Moderate
+Filters × Fleet,Filters,All,Fleet,-0.1,91,1.2662522350392151,0.04985243696179801,0.455,category_tier,Moderate
+Electrical × Retail,Electrical,All,Retail,-0.1,272,0.9993939122013408,0.04017133322818261,1.0,category_tier,Moderate
+Electrical × Trade,Electrical,All,Trade,-0.1,259,1.1429868059414299,0.04320489174861065,1.0,category_tier,Moderate
+Electrical × Fleet,Electrical,All,Fleet,-0.1,229,1.0568681991068463,0.04555435686095506,1.0,category_tier,Moderate
+Suspension × Retail,Suspension,All,Retail,-0.1,339,0.7361564776182277,0.0329663330751853,1.0,category_tier,Moderate
+Suspension × Trade,Suspension,All,Trade,-0.1,340,0.6697283552150106,0.03445910580407602,1.0,category_tier,Moderate
+Suspension × Fleet,Suspension,All,Fleet,-0.1,326,0.688199099542285,0.0330628055485341,1.0,category_tier,Moderate
+Fluids × Retail,Fluids,All,Retail,-0.1,300,0.6642478747294231,0.04128951430352295,1.0,category_tier,Moderate
+Fluids × Trade,Fluids,All,Trade,-0.1,281,0.6412776903795242,0.0428621426358394,1.0,category_tier,Moderate
+Fluids × Fleet,Fluids,All,Fleet,-0.1,266,0.6439273016690126,0.04632131098623338,1.0,category_tier,Moderate
+Tools × Retail,Tools,All,Retail,-0.1,750,0.6354462624765732,0.020744394675192752,1.0,category_tier,Moderate
+Tools × Trade,Tools,All,Trade,-0.1,717,0.6334024140646412,0.02205272869897431,1.0,category_tier,Moderate
+Tools × Fleet,Tools,All,Fleet,-0.1,729,0.6362636605614607,0.02054248698282912,1.0,category_tier,Moderate
+Batteries × Retail,Batteries,All,Retail,-0.1,366,1.0389967651017182,0.04191069779335312,1.0,category_tier,Moderate
+Batteries × Trade,Batteries,All,Trade,-0.1,359,1.0038243363964143,0.040825739158068614,1.0,category_tier,Moderate
+Batteries × Fleet,Batteries,All,Fleet,-0.1,293,1.060802427476793,0.046859353803204266,1.0,category_tier,Moderate
+Engine Components × Retail,Engine Components,All,Retail,-0.14399764218592012,340,0.781379120043052,0.042941483904578005,1.0,category_tier,Inelastic
+Engine Components × Trade,Engine Components,All,Trade,-0.1,308,0.8432459644406083,0.04469168507777942,1.0,category_tier,Moderate
+Engine Components × Fleet,Engine Components,All,Fleet,-0.1,300,0.7575209937122357,0.04776735850391302,1.0,category_tier,Moderate
+Brakes × Lower Mainland × Retail,Brakes,Lower Mainland,Retail,-0.12387341110984916,48,0.5796745024675822,0.06589054334660135,0.24,category_region_tier,Low confidence
+Brakes × Lower Mainland × Trade,Brakes,Lower Mainland,Trade,-0.10492089752296213,36,0.45056157765333843,0.06537675256451063,0.18,category_region_tier,Low confidence
+Brakes × Lower Mainland × Fleet,Brakes,Lower Mainland,Fleet,-0.1,32,0.37406616596134973,0.09200451260476651,0.16,category_region_tier,Low confidence
+Brakes × Vancouver Island × Retail,Brakes,Vancouver Island,Retail,-0.36101406180753753,87,0.4978398676091593,0.05958680383020151,0.435,category_region_tier,Inelastic
+Brakes × Vancouver Island × Trade,Brakes,Vancouver Island,Trade,-0.20262547698283181,74,0.5551704541446576,0.05890768250535842,0.37,category_region_tier,Low confidence
+Brakes × Vancouver Island × Fleet,Brakes,Vancouver Island,Fleet,-0.16230193067709694,63,0.5911778793222835,0.06668161268118185,0.315,category_region_tier,Low confidence
+Brakes × Interior × Retail,Brakes,Interior,Retail,-0.1581795469989295,68,0.6359794055750504,0.06442869798702805,0.34,category_region_tier,Low confidence
+Brakes × Interior × Trade,Brakes,Interior,Trade,-0.16517686343326962,55,0.5879281329115646,0.07496706325483167,0.275,category_region_tier,Low confidence
+Brakes × Interior × Fleet,Brakes,Interior,Fleet,-0.14989119649864985,63,0.6029599322894016,0.07263875001764687,0.315,category_region_tier,Low confidence
+Brakes × Northern BC × Retail,Brakes,Northern BC,Retail,-0.3587824329257199,89,0.7551367253480976,0.06404946651250644,0.445,category_region_tier,Inelastic
+Brakes × Northern BC × Trade,Brakes,Northern BC,Trade,-0.461688050466847,80,0.6932116340835557,0.0596816547375642,0.4,category_region_tier,Inelastic
+Brakes × Northern BC × Fleet,Brakes,Northern BC,Fleet,-0.2300468305005716,82,0.6288601466377274,0.06325811666449073,0.41,category_region_tier,Inelastic
+Filters × Vancouver Island × Retail,Filters,Vancouver Island,Retail,-0.1,39,1.037384883698793,0.09110595420552929,0.195,category_region_tier,Low confidence
+Filters × Northern BC × Retail,Filters,Northern BC,Retail,-0.10000000000000002,42,1.201885451557889,0.09073097615205625,0.21,category_region_tier,Low confidence
+Filters × Northern BC × Trade,Filters,Northern BC,Trade,-0.1,47,0.9746477455146274,0.08167929576082793,0.235,category_region_tier,Low confidence
+Filters × Northern BC × Fleet,Filters,Northern BC,Fleet,-0.10000000000000002,36,0.9427208599250534,0.082541965146451,0.18,category_region_tier,Low confidence
+Electrical × Lower Mainland × Retail,Electrical,Lower Mainland,Retail,-0.1,50,1.045039091480829,0.09387692532126779,0.25,category_region_tier,Low confidence
+Electrical × Lower Mainland × Trade,Electrical,Lower Mainland,Trade,-0.1,37,1.051073487566037,0.10545339649096307,0.185,category_region_tier,Low confidence
+Electrical × Vancouver Island × Retail,Electrical,Vancouver Island,Retail,-0.1,71,1.0671835610268188,0.06812428631190484,0.355,category_region_tier,Low confidence
+Electrical × Vancouver Island × Trade,Electrical,Vancouver Island,Trade,-0.1,78,1.1211868622708931,0.08607364128734038,0.39,category_region_tier,Low confidence
+Electrical × Vancouver Island × Fleet,Electrical,Vancouver Island,Fleet,-0.1,53,1.0639745225009842,0.10862718345371171,0.265,category_region_tier,Low confidence
+Electrical × Interior × Retail,Electrical,Interior,Retail,-0.1,54,0.9918371748748229,0.10103724387816014,0.27,category_region_tier,Low confidence
+Electrical × Interior × Trade,Electrical,Interior,Trade,-0.1,60,1.3060075678262129,0.07819182185006113,0.3,category_region_tier,Low confidence
+Electrical × Interior × Fleet,Electrical,Interior,Fleet,-0.1,55,1.1195961063557809,0.08049609742318022,0.275,category_region_tier,Low confidence
+Electrical × Northern BC × Retail,Electrical,Northern BC,Retail,-0.1,97,0.9375194316851744,0.06280896148536448,0.485,category_region_tier,Moderate
+Electrical × Northern BC × Trade,Electrical,Northern BC,Trade,-0.1,84,1.0514113719798863,0.07389814790834043,0.42,category_region_tier,Moderate
+Electrical × Northern BC × Fleet,Electrical,Northern BC,Fleet,-0.1,94,1.0681203996635515,0.06952316489115049,0.47,category_region_tier,Moderate
+Suspension × Lower Mainland × Retail,Suspension,Lower Mainland,Retail,-0.1,54,0.6980089883373957,0.08318026876229,0.27,category_region_tier,Low confidence
+Suspension × Lower Mainland × Trade,Suspension,Lower Mainland,Trade,-0.1,59,0.7230555392309742,0.08280879646162448,0.295,category_region_tier,Low confidence
+Suspension × Lower Mainland × Fleet,Suspension,Lower Mainland,Fleet,-0.1,51,0.7298418703143111,0.07148703838701179,0.255,category_region_tier,Low confidence
+Suspension × Vancouver Island × Retail,Suspension,Vancouver Island,Retail,-0.1,103,0.7422787545739035,0.06850560965428742,0.515,category_region_tier,Moderate
+Suspension × Vancouver Island × Trade,Suspension,Vancouver Island,Trade,-0.1,95,0.6951071572167422,0.06427033902053526,0.475,category_region_tier,Moderate
+Suspension × Vancouver Island × Fleet,Suspension,Vancouver Island,Fleet,-0.1,87,0.6570225850352792,0.05698719566455035,0.435,category_region_tier,Moderate
+Suspension × Interior × Retail,Suspension,Interior,Retail,-0.1,86,0.7321935393366189,0.05812761181677154,0.43,category_region_tier,Moderate
+Suspension × Interior × Trade,Suspension,Interior,Trade,-0.1,76,0.6637850511055425,0.06795604614972946,0.38,category_region_tier,Low confidence
+Suspension × Interior × Fleet,Suspension,Interior,Fleet,-0.1,84,0.6876566088704225,0.06618079583652643,0.42,category_region_tier,Moderate
+Suspension × Northern BC × Retail,Suspension,Northern BC,Retail,-0.10938316332847078,96,0.7634086435257276,0.05594567746580621,0.48,category_region_tier,Inelastic
+Suspension × Northern BC × Trade,Suspension,Northern BC,Trade,-0.1,110,0.6160336797441472,0.06289554788762376,0.55,category_region_tier,Moderate
+Suspension × Northern BC × Fleet,Suspension,Northern BC,Fleet,-0.1,104,0.6965227866811273,0.06351397249600153,0.52,category_region_tier,Moderate
+Fluids × Lower Mainland × Retail,Fluids,Lower Mainland,Retail,-0.1,52,0.724332417067481,0.10107685880571608,0.26,category_region_tier,Low confidence
+Fluids × Lower Mainland × Trade,Fluids,Lower Mainland,Trade,-0.10000000000000002,46,0.6133684217422093,0.11325105868527498,0.23,category_region_tier,Low confidence
+Fluids × Lower Mainland × Fleet,Fluids,Lower Mainland,Fleet,-0.1,33,0.5754057671132855,0.11223430510964844,0.165,category_region_tier,Low confidence
+Fluids × Vancouver Island × Retail,Fluids,Vancouver Island,Retail,-0.1,76,0.6949266434739109,0.07902312780969488,0.38,category_region_tier,Low confidence
+Fluids × Vancouver Island × Trade,Fluids,Vancouver Island,Trade,-0.1,74,0.6180835082401975,0.07687980495662722,0.37,category_region_tier,Low confidence
+Fluids × Vancouver Island × Fleet,Fluids,Vancouver Island,Fleet,-0.1,76,0.6692308695473447,0.08483446824049057,0.38,category_region_tier,Low confidence
+Fluids × Interior × Retail,Fluids,Interior,Retail,-0.1,79,0.6578452868387227,0.07989037847125882,0.395,category_region_tier,Low confidence
+Fluids × Interior × Trade,Fluids,Interior,Trade,-0.1,58,0.677678263470365,0.0903993061305994,0.29,category_region_tier,Low confidence
+Fluids × Interior × Fleet,Fluids,Interior,Fleet,-0.1,61,0.649012660663349,0.10304435409903052,0.305,category_region_tier,Low confidence
+Fluids × Northern BC × Retail,Fluids,Northern BC,Retail,-0.1,93,0.6127090028142118,0.07054581952609819,0.465,category_region_tier,Moderate
+Fluids × Northern BC × Trade,Fluids,Northern BC,Trade,-0.1,103,0.6431428289234233,0.06951261223304475,0.515,category_region_tier,Moderate
+Fluids × Northern BC × Fleet,Fluids,Northern BC,Fleet,-0.1,96,0.6269245722807665,0.07201443050682603,0.48,category_region_tier,Moderate
+Tools × Lower Mainland × Retail,Tools,Lower Mainland,Retail,-0.1,157,0.6525887596691938,0.045010557997321135,0.785,category_region_tier,Moderate
+Tools × Lower Mainland × Trade,Tools,Lower Mainland,Trade,-0.1,146,0.6388957205821151,0.04756685543747649,0.73,category_region_tier,Moderate
+Tools × Lower Mainland × Fleet,Tools,Lower Mainland,Fleet,-0.1,125,0.5708713686860871,0.04869059478852701,0.625,category_region_tier,Moderate
+Tools × Vancouver Island × Retail,Tools,Vancouver Island,Retail,-0.1,211,0.6501785403424676,0.03761063149478256,1.0,category_region_tier,Moderate
+Tools × Vancouver Island × Trade,Tools,Vancouver Island,Trade,-0.1,196,0.6397690648760498,0.040435244814046103,0.98,category_region_tier,Moderate
+Tools × Vancouver Island × Fleet,Tools,Vancouver Island,Fleet,-0.1,206,0.6414667351855469,0.038757344668853104,1.0,category_region_tier,Moderate
+Tools × Interior × Retail,Tools,Interior,Retail,-0.1,201,0.5865515540841671,0.04044222855808948,1.0,category_region_tier,Moderate
+Tools × Interior × Trade,Tools,Interior,Trade,-0.1,182,0.6481903491986851,0.04211455326306632,0.91,category_region_tier,Moderate
+Tools × Interior × Fleet,Tools,Interior,Fleet,-0.1,180,0.686223975987587,0.040782887781373185,0.9,category_region_tier,Moderate
+Tools × Northern BC × Retail,Tools,Northern BC,Retail,-0.1,181,0.6465471101670138,0.039294697762560456,0.905,category_region_tier,Moderate
+Tools × Northern BC × Trade,Tools,Northern BC,Trade,-0.1,193,0.6119129243163869,0.040472231010931586,0.965,category_region_tier,Moderate
+Tools × Northern BC × Fleet,Tools,Northern BC,Fleet,-0.1,218,0.6247546320541576,0.035163261390287366,1.0,category_region_tier,Moderate
+Batteries × Lower Mainland × Retail,Batteries,Lower Mainland,Retail,-0.1,67,1.1275330927923697,0.09759013422841993,0.335,category_region_tier,Low confidence
+Batteries × Lower Mainland × Trade,Batteries,Lower Mainland,Trade,-0.1,67,0.9390906463802366,0.06922835559507623,0.335,category_region_tier,Low confidence
+Batteries × Lower Mainland × Fleet,Batteries,Lower Mainland,Fleet,-0.1,56,1.1363779787941508,0.0886431459826177,0.28,category_region_tier,Low confidence
+Batteries × Vancouver Island × Retail,Batteries,Vancouver Island,Retail,-0.1,98,0.9907539071706962,0.08078946627967049,0.49,category_region_tier,Moderate
+Batteries × Vancouver Island × Trade,Batteries,Vancouver Island,Trade,-0.1,98,1.0681576807322717,0.08081072891707458,0.49,category_region_tier,Moderate
+Batteries × Vancouver Island × Fleet,Batteries,Vancouver Island,Fleet,-0.1,80,1.066006002936146,0.09500756925969686,0.4,category_region_tier,Moderate
+Batteries × Interior × Retail,Batteries,Interior,Retail,-0.1,96,1.0571333102855744,0.08365638393072136,0.48,category_region_tier,Moderate
+Batteries × Interior × Trade,Batteries,Interior,Trade,-0.1,87,0.9689781806080897,0.08042398960800062,0.435,category_region_tier,Moderate
+Batteries × Interior × Fleet,Batteries,Interior,Fleet,-0.1,61,1.0089830044583545,0.09869031640035629,0.305,category_region_tier,Low confidence
+Batteries × Northern BC × Retail,Batteries,Northern BC,Retail,-0.1,105,1.0108942058906538,0.07259812177793577,0.525,category_region_tier,Moderate
+Batteries × Northern BC × Trade,Batteries,Northern BC,Trade,-0.1,107,1.009752723241882,0.07853510900833367,0.535,category_region_tier,Moderate
+Batteries × Northern BC × Fleet,Batteries,Northern BC,Fleet,-0.1,96,1.0556735016358982,0.08245714476816962,0.48,category_region_tier,Moderate
+Engine Components × Lower Mainland × Retail,Engine Components,Lower Mainland,Retail,-0.11008799365889246,58,0.6803888654199371,0.0860684251812404,0.29,category_region_tier,Low confidence
+Engine Components × Lower Mainland × Trade,Engine Components,Lower Mainland,Trade,-0.1746636336109875,58,0.77911806673383,0.10653471890321876,0.29,category_region_tier,Low confidence
+Engine Components × Lower Mainland × Fleet,Engine Components,Lower Mainland,Fleet,-0.1300675642414782,50,0.6199581236518157,0.11618481618688892,0.25,category_region_tier,Low confidence
+Engine Components × Vancouver Island × Retail,Engine Components,Vancouver Island,Retail,-0.13842563280194253,92,0.7749036791705106,0.08696252364890139,0.46,category_region_tier,Inelastic
+Engine Components × Vancouver Island × Trade,Engine Components,Vancouver Island,Trade,-0.1,74,0.8321105741554696,0.10056701995536839,0.37,category_region_tier,Low confidence
+Engine Components × Vancouver Island × Fleet,Engine Components,Vancouver Island,Fleet,-0.10138109465023473,76,0.8073967519394019,0.09227130540301862,0.38,category_region_tier,Low confidence
+Engine Components × Interior × Retail,Engine Components,Interior,Retail,-0.1465085251659173,91,0.8331469984065173,0.08069296723009721,0.455,category_region_tier,Inelastic
+Engine Components × Interior × Trade,Engine Components,Interior,Trade,-0.15169951870645257,86,0.8746059839597721,0.07866922961353524,0.43,category_region_tier,Inelastic
+Engine Components × Interior × Fleet,Engine Components,Interior,Fleet,-0.11274108842292602,79,0.7093793311551151,0.09085508190264831,0.395,category_region_tier,Low confidence
+Engine Components × Northern BC × Retail,Engine Components,Northern BC,Retail,-0.14134904929132155,99,0.7984980708517724,0.08174891215580067,0.495,category_region_tier,Inelastic
+Engine Components × Northern BC × Trade,Engine Components,Northern BC,Trade,-0.1,90,0.8565888295353713,0.07522034981259161,0.45,category_region_tier,Moderate
+Engine Components × Northern BC × Fleet,Engine Components,Northern BC,Fleet,-0.1,95,0.8036006353925264,0.08667882422858814,0.475,category_region_tier,Moderate

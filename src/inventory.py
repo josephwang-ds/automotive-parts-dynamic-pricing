@@ -73,6 +73,46 @@ def analyze_inventory(
     }
 
 
+def inventory_analysis_from_metrics(inv_metrics: pd.DataFrame) -> dict:
+    """从预计算的 SKU×Region 库存指标构建分析摘要（部署快速路径）。"""
+    if inv_metrics.empty:
+        return {"latest_snapshot": pd.DataFrame(), "total_inventory_value": 0}
+
+    inv_snap = inv_metrics.copy()
+    inv_snap["inventory_value"] = inv_snap["on_hand_inventory"] * inv_snap["unit_cost"]
+    excess_statuses = ["OVERSTOCKED", "SLOW_MOVING", "OBSOLETE_RISK"]
+    stockout_statuses = ["STOCKOUT", "STOCKOUT_RISK", "UNDERSTOCKED"]
+    inv_snap["is_excess"] = inv_snap["inventory_status"].isin(excess_statuses)
+    inv_snap["is_stockout_risk"] = inv_snap["inventory_status"].isin(stockout_statuses)
+    inv_snap["is_slow_moving"] = inv_snap["inventory_status"] == "SLOW_MOVING"
+
+    total_value = inv_snap["inventory_value"].sum()
+    excess_value = inv_snap.loc[inv_snap["is_excess"], "excess_inventory_value"].sum()
+    stockout_risk_count = inv_snap["is_stockout_risk"].sum()
+    slow_count = inv_snap["is_slow_moving"].sum()
+    avg_woc = inv_snap["available_weeks_of_cover"].mean()
+    total_lost = inv_snap["lost_sales_estimate"].sum()
+    avg_turns = inv_snap["inventory_turns"].mean() if "inventory_turns" in inv_snap.columns else 0.0
+
+    return {
+        "latest_snapshot": inv_snap,
+        "total_inventory_value": total_value,
+        "excess_inventory_value": excess_value,
+        "stockout_risk_skus": int(stockout_risk_count),
+        "slow_moving_skus": int(slow_count),
+        "avg_weeks_of_cover": avg_woc,
+        "avg_inventory_turns": avg_turns,
+        "estimated_lost_sales": total_lost,
+        "status_distribution": inv_snap["inventory_status"].value_counts().to_dict(),
+        "excess_by_category": (
+            inv_snap[inv_snap["is_excess"]]
+            .groupby("category")["excess_inventory_value"]
+            .sum()
+            .to_dict()
+        ),
+    }
+
+
 def classify_inventory_action(row: pd.Series) -> str:
     """向后兼容：库存行动分类。"""
     from src.inventory_policy import determine_inventory_action

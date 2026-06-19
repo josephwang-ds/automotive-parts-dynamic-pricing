@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import Ridge
 
-from src.config import CATEGORIES, CUSTOMER_TIERS, REGIONS
+from src.config import CATEGORIES, CUSTOMER_TIERS, OUTPUTS_DIR, REGIONS
 from src.utils import classify_elasticity
 
 
@@ -217,3 +219,23 @@ class ElasticityEstimator:
             "elasticity_class": "Low confidence",
             "estimation_level": "global_prior",
         }
+
+    @classmethod
+    def from_estimates_csv(cls, path: Path | None = None) -> "ElasticityEstimator":
+        """从预计算的弹性 CSV 加载，供 Streamlit Cloud 快速启动。"""
+        path = path or OUTPUTS_DIR / "elasticity_estimates.csv"
+        est = cls()
+        est.estimates = pd.read_csv(path)
+        if "elasticity_class" not in est.estimates.columns:
+            est.estimates["elasticity_class"] = est.estimates.apply(
+                lambda r: classify_elasticity(
+                    r["estimated_elasticity"], r["confidence_score"]
+                ),
+                axis=1,
+            )
+        global_rows = est.estimates[est.estimates.get("estimation_level", "") == "global"]
+        if len(global_rows) > 0:
+            est.global_elasticity = float(global_rows.iloc[0]["estimated_elasticity"])
+        else:
+            est.global_elasticity = float(est.estimates["estimated_elasticity"].median())
+        return est

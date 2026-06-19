@@ -11,7 +11,7 @@ from src.config import DATA_DIR, MODELS_DIR, OUTPUTS_DIR, SCENARIOS
 from src.demand_model import DemandModelTrainer, train_all_models
 from src.elasticity import ElasticityEstimator
 from src.features import build_features
-from src.inventory import analyze_inventory
+from src.inventory import analyze_inventory, inventory_analysis_from_metrics
 from src.joint_optimizer import JointOptimizer
 
 
@@ -84,6 +84,7 @@ def run_full_pipeline(scenario: str = "Recommended") -> PipelineState:
     if not state.transfers.empty:
         state.transfers.to_csv(OUTPUTS_DIR / "transfer_recommendations.csv", index=False)
     state.inventory_metrics.to_csv(OUTPUTS_DIR / "inventory_metrics.csv", index=False)
+    state.elasticity_df.to_csv(OUTPUTS_DIR / "elasticity_estimates.csv", index=False)
 
     # 7. 回测
     backtest = BacktestEngine(state.recommendations, state.sales)
@@ -92,6 +93,40 @@ def run_full_pipeline(scenario: str = "Recommended") -> PipelineState:
         OUTPUTS_DIR / "backtest_results.csv"
     )
 
+    return state
+
+
+def _load_deploy_pipeline(scenario: str) -> PipelineState:
+    """部署快速路径：只加载预计算产物，避免在 Streamlit Cloud 上重算特征/弹性。"""
+    state = PipelineState()
+    meta_path = MODELS_DIR / "demand_model_metadata.json"
+
+    state.products, state.sales = load_data()
+
+    state.demand_model = DemandModelTrainer.load_metadata(meta_path)
+    state.recommendations = pd.read_csv(OUTPUTS_DIR / "recommendations.csv")
+    tr_path = OUTPUTS_DIR / "transfer_recommendations.csv"
+    inv_path = OUTPUTS_DIR / "inventory_metrics.csv"
+    el_path = OUTPUTS_DIR / "elasticity_estimates.csv"
+    state.transfers = pd.read_csv(tr_path) if tr_path.exists() else pd.DataFrame()
+    state.inventory_metrics = pd.read_csv(inv_path) if inv_path.exists() else pd.DataFrame()
+
+    if el_path.exists():
+        state.elasticity = ElasticityEstimator.from_estimates_csv(el_path)
+        state.elasticity_df = state.elasticity.estimates
+    else:
+        state.elasticity = ElasticityEstimator()
+        state.elasticity_df = state.elasticity.fit(state.sales, state.products)
+
+    state.inventory_analysis = inventory_analysis_from_metrics(state.inventory_metrics)
+
+    bt_path = OUTPUTS_DIR / "backtest_results.csv"
+    if bt_path.exists():
+        state.backtest_results = {
+            "strategy_comparison": pd.read_csv(bt_path, index_col=0),
+        }
+
+    state.model_results = {"hgb": {"metrics": state.demand_model.metrics}}
     return state
 
 
@@ -104,35 +139,6 @@ def get_or_run_pipeline(scenario: str = "Recommended") -> PipelineState:
     # scikit-learn joblib created under another Python/NumPy version is not a
     # stable cross-environment deployment format and is unnecessary here.
     if rec_path.exists() and meta_path.exists():
-        state = PipelineState()
-        state.products, state.sales = load_data()
-        state.features = build_features(state.sales, state.products)
-        state.demand_model = DemandModelTrainer.load_metadata(meta_path)
-        state.elasticity = ElasticityEstimator()
-        state.elasticity_df = state.elasticity.fit(state.sales, state.products)
-        state.recommendations = pd.read_csv(rec_path)
-        tr_path = OUTPUTS_DIR / "transfer_recommendations.csv"
-        inv_path = OUTPUTS_DIR / "inventory_metrics.csv"
-        state.transfers = pd.read_csv(tr_path) if tr_path.exists() else pd.DataFrame()
-        state.inventory_metrics = pd.read_csv(inv_path) if inv_path.exists() else pd.DataFrame()
-        scenario_cfg = SCENARIOS.get(scenario, SCENARIOS["Recommended"])
-        state.inventory_analysis = analyze_inventory(state.sales, state.products, scenario_cfg)
-
-        bt_path = OUTPUTS_DIR / "backtest_results.csv"
-        if bt_path.exists():
-            state.backtest_results = {
-                "strategy_comparison": pd.read_csv(bt_path, index_col=0),
-            }
-        else:
-            backtest = BacktestEngine(state.recommendations, state.sales)
-            state.backtest_results = backtest.run_backtest(state.transfers)
-
-        # 加载模型指标
-        if meta_path.exists():
-            state.model_results = {
-                "hgb": {"metrics": state.demand_model.metrics}
-            }
-
-        return state
+        return _load_deploy_pipeline(scenario)
 
     return run_full_pipeline(scenario)
