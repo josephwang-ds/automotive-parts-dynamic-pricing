@@ -111,9 +111,9 @@ def synthetic_disclosure():
     )
 
 
-@st.cache_resource
-def load_pipeline():
-    """加载流水线（缓存）。部署环境走轻量路径，不导入 sklearn。"""
+@st.cache_data(show_spinner=False)
+def load_app_state():
+    """加载应用状态（部署路径优先，无 sklearn）。"""
     from src.runtime_stubs import deploy_artifacts_ready, load_deploy_state
 
     if deploy_artifacts_ready():
@@ -138,14 +138,17 @@ def apply_sidebar_filters(recs, sales):
     confidence_threshold = st.sidebar.slider("Confidence Threshold", 0.0, 1.0, 0.4, 0.05)
 
     filters = {"region": region, "category": category, "customer_tier": tier}
-    filtered_recs = recs.copy()
-    filtered_sales = sales.copy()
+    mask = pd.Series(True, index=recs.index)
+    sales_mask = pd.Series(True, index=sales.index) if len(sales) else pd.Series(dtype=bool)
     for k, v in filters.items():
         if v != "All":
-            if k in filtered_recs.columns:
-                filtered_recs = filtered_recs[filtered_recs[k] == v]
-            if k in filtered_sales.columns:
-                filtered_sales = filtered_sales[filtered_sales[k] == v]
+            if k in recs.columns:
+                mask &= recs[k] == v
+            if k in sales.columns and len(sales):
+                sales_mask &= sales[k] == v
+
+    filtered_recs = recs[mask]
+    filtered_sales = sales[sales_mask] if len(sales) else sales
 
     return filtered_recs, filtered_sales, {
         **filters, "objective": objective, "scenario": scenario,
@@ -824,13 +827,14 @@ def page_governance():
 
 
 def main():
+    st.title("Parts Dynamic Pricing & Inventory AI")
     synthetic_disclosure()
 
     try:
-        with st.spinner("Loading pipeline..."):
-            state = load_pipeline()
+        with st.spinner("Loading data..."):
+            state = load_app_state()
     except Exception as exc:
-        st.error("应用启动失败，请查看下方错误信息。")
+        st.error("应用启动失败。请确认仓库已包含 outputs/ 与 data/ 部署文件。")
         st.exception(exc)
         st.stop()
 
@@ -874,5 +878,5 @@ def main():
         page_governance()
 
 
-if __name__ == "__main__":
-    main()
+# Streamlit 每次运行都会执行整个脚本，必须直接调用 main()
+main()
