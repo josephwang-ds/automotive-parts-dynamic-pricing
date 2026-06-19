@@ -1,4 +1,9 @@
-streamlit==1.58.0
-pandas==2.3.3
-numpy==2.2.6
-plotly==6.8.0
+# 注意：Streamlit Cloud 当前使用 Python 3.14，旧版本 numpy/pandas 没有 3.14 的
+# 预编译 wheel，锁死精确版本会导致云端从源码编译、卡在 build。
+# 因此这里用「下限锁定」：保证最低兼容版本，同时允许装到带 3.14 wheel 的新版本。
+# 若想精确复现版本，请在 Streamlit Cloud 的 App settings → Advanced 里把 Python 固定为 3.12，
+# 再把下面改成 == 精确版本即可。
+streamlit>=1.50,<2
+pandas>=2.2
+numpy>=2.0
+plotly>=6.7
