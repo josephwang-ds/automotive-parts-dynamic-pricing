@@ -823,37 +823,43 @@ def main():
     with st.spinner("Loading pipeline..."):
         state = load_pipeline()
 
+    st.sidebar.markdown("### Navigation")
+    page = st.sidebar.radio(
+        "Section",
+        [
+            "Executive Command Center",
+            "Demand Model",
+            "Elasticity Explorer",
+            "SKU Decision Workbench",
+            "Inventory Control Tower",
+            "Backtest & Rollback",
+            "AI Analyst",
+            "Data & Governance",
+        ],
+        label_visibility="collapsed",
+    )
+    st.sidebar.markdown("---")
+
     recs, sales, filters = apply_sidebar_filters(
         state.recommendations, state.sales
     )
 
-    tabs = st.tabs([
-        "Executive Command Center",
-        "Demand Model",
-        "Elasticity Explorer",
-        "SKU Decision Workbench",
-        "Inventory Control Tower",
-        "Backtest & Rollback",
-        "AI Analyst",
-        "Data & Governance",
-    ])
-
-    with tabs[0]:
+    if page == "Executive Command Center":
         page_executive(recs, sales, state.inventory_analysis,
                        state.backtest_results, filters)
-    with tabs[1]:
+    elif page == "Demand Model":
         page_demand_model(state, filters)
-    with tabs[2]:
+    elif page == "Elasticity Explorer":
         page_elasticity(state, filters)
-    with tabs[3]:
+    elif page == "SKU Decision Workbench":
         page_pricing_studio(recs, state, filters)
-    with tabs[4]:
+    elif page == "Inventory Control Tower":
         page_inventory_control_tower(state, state.inventory_analysis, recs, filters)
-    with tabs[5]:
+    elif page == "Backtest & Rollback":
         page_backtest(state, recs, filters)
-    with tabs[6]:
+    elif page == "AI Analyst":
         page_ai_analyst(state, recs, sales, filters)
-    with tabs[7]:
+    elif page == "Data & Governance":
         page_governance()
 
 

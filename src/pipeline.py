@@ -42,9 +42,18 @@ def _is_streamlit_cloud() -> bool:
 def load_data(deploy: bool = False) -> tuple[pd.DataFrame, pd.DataFrame]:
     """加载合成数据。"""
     products = pd.read_csv(DATA_DIR / "synthetic_products.csv")
-    app_sales = DATA_DIR / "synthetic_sales_app.csv"
-    if deploy and app_sales.exists():
-        sales_path = app_sales
+    if deploy:
+        for name in (
+            "synthetic_sales_latest.csv",
+            "synthetic_sales_app.csv",
+            "synthetic_sales.csv",
+        ):
+            candidate = DATA_DIR / name
+            if candidate.exists():
+                sales_path = candidate
+                break
+        else:
+            raise FileNotFoundError("未找到部署用销售数据文件。")
     else:
         sales_path = DATA_DIR / "synthetic_sales.csv"
     sales = pd.read_csv(sales_path, parse_dates=["week_start"])
