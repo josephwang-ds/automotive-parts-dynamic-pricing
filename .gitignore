@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+.env
+*.joblib.bak
+
+# 本地完整规模数据（851MB，超出 GitHub 限制）
+data/synthetic_sales_full.csv
+
+# IDE
+.idea/
+.vscode/

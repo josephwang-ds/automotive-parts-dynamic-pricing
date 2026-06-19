@@ -1,0 +1,35 @@
+{
+  "model_name": "HistGradientBoosting",
+  "model_type": "hgb",
+  "feature_count": 38,
+  "metrics": {
+    "val": {
+      "MAE": 7.632521696004667,
+      "RMSE": 12.493696719391483,
+      "WAPE": 0.18993245880515344,
+      "RMSLE": 0.2519507064594046,
+      "Bias": -0.27075396713956595,
+      "baseline_WAPE": 1.0,
+      "WAPE_improvement": 0.8100675411948466
+    },
+    "test": {
+      "MAE": 7.794868871101329,
+      "RMSE": 12.904801288152651,
+      "WAPE": 0.19128146545034316,
+      "RMSLE": 0.2537045779722142,
+      "Bias": -0.39136873227294267,
+      "baseline_WAPE": 1.0,
+      "WAPE_improvement": 0.8087185345496568
+    },
+    "baseline": {
+      "MAE": 40.75077976190476,
+      "RMSE": 53.73302794542044,
+      "WAPE": 1.0,
+      "RMSLE": 3.4907223935936478,
+      "Bias": -40.75077976190476
+    },
+    "model_name": "HistGradientBoosting",
+    "train_weeks": 78,
+    "val_weeks": 13
+  }
+}

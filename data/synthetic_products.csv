@@ -1,0 +1,501 @@
+sku_id,product_name,category,subcategory,brand_tier,private_label_flag,unit_cost,regular_retail_price,minimum_margin_pct,minimum_advertised_price,supplier,lead_time_days,case_pack,product_age_weeks,lifecycle_stage,base_demand,true_price_elasticity,seasonality_strength,inventory_holding_cost,obsolescence_risk,minimum_order_quantity
+SKU-00001,Brake Fluid - Mid-Tier #1,Brakes,Brake Fluid,Mid-Tier,False,430.01,680.71,0.109,664.94,ValueLine Parts,38,1,144,Decline,11.99,-0.667,0.0,18.167,0.279,12
+SKU-00002,Sockets - Mid-Tier #2,Tools,Sockets,Mid-Tier,False,173.06,215.58,0.183,200.95,Pacific Supply,40,12,165,Decline,24.3,-0.421,0.0,5.4823,0.145,12
+SKU-00003,Shocks - Premium #3,Suspension,Shocks,Premium,False,343.11,554.37,0.197,494.7,Pacific Supply,22,1,18,New,16.78,-1.041,0.0,16.6553,0.076,6
+SKU-00004,Diagnostic Tools - Economy #4,Tools,Diagnostic Tools,Economy,False,104.02,174.74,0.18,157.33,ValueLine Parts,11,12,89,Mature,4.35,-0.656,0.0,6.9918,0.203,1
+SKU-00005,Control Arms - Economy #5,Suspension,Control Arms,Economy,False,232.16,348.36,0.114,301.29,Pacific Supply,6,12,132,Decline,46.09,-0.832,0.0,13.4846,0.171,1
+SKU-00006,Power Steering - Premium #6,Fluids,Power Steering,Premium,False,221.18,290.24,0.141,278.9,Pacific Supply,30,1,63,Growth,23.95,-2.426,0.317,14.8266,0.203,6
+SKU-00007,Struts - Economy #7,Suspension,Struts,Economy,False,87.65,107.7,0.109,101.66,AutoParts Co,42,1,144,Decline,41.08,-0.977,0.0,5.4149,0.139,1
+SKU-00008,Shocks - Economy #8,Suspension,Shocks,Economy,False,184.1,231.18,0.112,225.41,ValueLine Parts,43,1,63,Mature,22.74,-0.664,0.0,11.6008,0.14,12
+SKU-00009,Sockets - Premium #9,Tools,Sockets,Premium,False,144.9,189.32,0.131,175.18,ValueLine Parts,30,1,94,Mature,18.27,-0.712,0.0,8.3518,0.179,1
+SKU-00010,Jacks - Mid-Tier #10,Tools,Jacks,Mid-Tier,False,155.79,213.14,0.114,184.03,ValueLine Parts,27,1,20,New,23.2,-0.506,0.0,8.6393,0.017,1
+SKU-00011,Fuel Filter - Mid-Tier #11,Filters,Fuel Filter,Mid-Tier,False,392.45,492.0,0.149,449.59,Northern Dist,25,6,35,Growth,46.47,-1.093,0.0,18.184,0.016,1
+SKU-00012,Car Battery - Premium #12,Batteries,Car Battery,Premium,False,279.25,353.17,0.167,313.11,Pacific Supply,7,6,179,Decline,58.71,-1.075,0.507,9.4422,0.021,24
+SKU-00013,Cabin Filter - Mid-Tier #13,Filters,Cabin Filter,Mid-Tier,False,415.75,690.88,0.132,672.83,Northern Dist,10,1,125,Mature,112.96,-2.064,0.0,9.4353,0.136,24
+SKU-00014,Spark Plugs - Economy #14,Engine Components,Spark Plugs,Economy,False,716.89,1054.39,0.132,1002.05,ValueLine Parts,6,12,178,Decline,31.15,-1.071,0.0,25.6271,0.282,12
+SKU-00015,Spark Plugs - Premium #15,Engine Components,Spark Plugs,Premium,False,139.56,180.87,0.16,174.3,Pacific Supply,23,6,58,Mature,77.8,-1.443,0.0,3.9961,0.014,1
+SKU-00016,Air Filter - Economy #16,Filters,Air Filter,Economy,False,65.31,95.58,0.169,88.46,ValueLine Parts,8,1,29,Mature,91.29,-2.2,0.0,4.9409,0.125,1
+SKU-00017,Belts - Mid-Tier #17,Engine Components,Belts,Mid-Tier,False,765.39,1030.61,0.192,879.35,Northern Dist,34,1,33,Growth,12.95,-1.156,0.0,59.6805,0.183,1
+SKU-00018,Gaskets - Mid-Tier #18,Engine Components,Gaskets,Mid-Tier,False,33.91,42.9,0.183,40.91,ValueLine Parts,28,24,161,Decline,43.4,-1.414,0.0,1.9053,0.13,24
+SKU-00019,Rotors - Mid-Tier #19,Brakes,Rotors,Mid-Tier,False,327.71,559.44,0.145,493.55,Northern Dist,43,1,198,Decline,65.69,-1.034,0.0,7.8629,0.182,1
+SKU-00020,Oil Filter - Mid-Tier #20,Filters,Oil Filter,Mid-Tier,False,76.22,133.41,0.117,118.34,Northern Dist,5,1,165,Decline,12.33,-2.27,0.0,1.7685,0.181,1
+SKU-00021,Transmission Fluid - Mid-Tier #21,Fluids,Transmission Fluid,Mid-Tier,False,162.41,237.52,0.188,228.17,AutoParts Co,29,6,100,Mature,20.47,-2.73,0.3,7.3045,0.024,1
+SKU-00022,Fuses - Premium #22,Electrical,Fuses,Premium,False,417.56,518.08,0.192,447.04,AutoParts Co,44,1,106,Mature,72.41,-0.572,0.0,27.8799,0.196,24
+SKU-00023,Power Steering - Premium #23,Fluids,Power Steering,Premium,False,270.35,396.9,0.186,361.24,Northern Dist,21,1,138,Decline,22.78,-2.184,0.256,12.1694,0.077,1
+SKU-00024,Wiring Harness - Mid-Tier #24,Electrical,Wiring Harness,Mid-Tier,False,192.83,303.74,0.13,295.65,Pacific Supply,25,24,75,Growth,27.61,-0.492,0.0,11.4069,0.243,24
+SKU-00025,Transmission Fluid - Economy #25,Fluids,Transmission Fluid,Economy,False,147.64,237.52,0.12,223.35,AutoParts Co,29,12,184,Decline,49.92,-1.423,0.238,3.7013,0.281,12
+SKU-00026,Fuel Filter - Economy #26,Filters,Fuel Filter,Economy,False,298.87,491.0,0.18,477.73,Northern Dist,28,1,191,Decline,20.46,-2.12,0.0,16.1082,0.176,1
+SKU-00027,Struts - Mid-Tier #27,Suspension,Struts,Mid-Tier,False,383.14,634.12,0.149,588.43,AutoParts Co,33,1,169,Decline,11.13,-0.648,0.0,22.786,0.131,24
+SKU-00028,Car Battery - Mid-Tier #28,Batteries,Car Battery,Mid-Tier,False,449.69,732.26,0.127,657.09,AutoParts Co,42,6,135,Decline,14.29,-1.454,0.259,19.3363,0.222,6
+SKU-00029,Cabin Filter - Private Label #29,Filters,Cabin Filter,Private Label,True,391.25,566.56,0.138,554.24,ValueLine Parts,39,6,169,Decline,103.56,-1.423,0.0,10.6871,0.181,1
+SKU-00030,Jacks - Mid-Tier #30,Tools,Jacks,Mid-Tier,False,99.18,142.46,0.144,126.68,Pacific Supply,44,1,6,New,3.65,-0.341,0.0,3.6731,0.253,24
+SKU-00031,Brake Pads - Private Label #31,Brakes,Brake Pads,Private Label,True,334.51,519.05,0.109,501.72,AutoParts Co,36,1,52,Growth,62.59,-1.18,0.0,24.9673,0.2,24
+SKU-00032,Brake Pads - Premium #32,Brakes,Brake Pads,Premium,False,304.93,505.19,0.124,485.2,ValueLine Parts,41,1,5,New,64.48,-1.16,0.0,18.8713,0.253,12
+SKU-00033,Shocks - Premium #33,Suspension,Shocks,Premium,False,66.84,97.75,0.175,91.09,AutoParts Co,5,1,91,Mature,59.3,-0.704,0.0,2.4227,0.216,6
+SKU-00034,Gaskets - Premium #34,Engine Components,Gaskets,Premium,False,53.03,91.23,0.171,79.6,Pacific Supply,44,6,123,Mature,16.32,-1.527,0.0,3.5554,0.195,6
+SKU-00035,Marine Battery - Premium #35,Batteries,Marine Battery,Premium,False,473.28,640.75,0.158,602.93,ValueLine Parts,32,1,90,Mature,13.58,-1.086,0.403,22.9305,0.045,24
+SKU-00036,Fuel Filter - Mid-Tier #36,Filters,Fuel Filter,Mid-Tier,False,216.81,330.99,0.163,299.06,ValueLine Parts,4,1,58,Growth,44.87,-1.887,0.0,10.504,0.075,6
+SKU-00037,Calipers - Mid-Tier #37,Brakes,Calipers,Mid-Tier,False,352.49,546.45,0.165,486.95,Northern Dist,25,1,71,Growth,50.83,-0.649,0.0,17.8939,0.224,6
+SKU-00038,Spark Plugs - Mid-Tier #38,Engine Components,Spark Plugs,Mid-Tier,False,643.9,875.94,0.184,800.82,ValueLine Parts,38,12,184,Decline,7.62,-1.507,0.0,23.7191,0.107,1
+SKU-00039,Shocks - Mid-Tier #39,Suspension,Shocks,Mid-Tier,False,372.63,456.63,0.183,438.98,AutoParts Co,31,1,142,Decline,48.87,-1.039,0.0,15.6114,0.288,1
+SKU-00040,Belts - Mid-Tier #40,Engine Components,Belts,Mid-Tier,False,570.22,797.2,0.164,678.73,Pacific Supply,9,12,155,Decline,42.96,-1.433,0.0,40.017,0.297,1
+SKU-00041,Gaskets - Economy #41,Engine Components,Gaskets,Economy,False,130.44,186.62,0.139,160.57,Pacific Supply,41,1,12,New,38.61,-0.996,0.0,4.0248,0.273,24
+SKU-00042,Calipers - Mid-Tier #42,Brakes,Calipers,Mid-Tier,False,247.65,374.29,0.149,322.24,Northern Dist,30,1,49,Mature,51.73,-1.029,0.0,16.289,0.027,12
+SKU-00043,Sockets - Mid-Tier #43,Tools,Sockets,Mid-Tier,False,255.68,370.71,0.177,356.16,ValueLine Parts,19,1,88,Mature,21.41,-0.548,0.0,12.7659,0.164,6
+SKU-00044,Brake Pads - Private Label #44,Brakes,Brake Pads,Private Label,True,317.26,410.92,0.134,359.52,Northern Dist,21,1,82,Mature,74.34,-1.183,0.0,17.7376,0.012,1
+SKU-00045,Struts - Economy #45,Suspension,Struts,Economy,False,318.72,574.36,0.162,523.86,ValueLine Parts,14,24,131,Decline,58.21,-0.767,0.0,21.3288,0.261,1
+SKU-00046,Calipers - Mid-Tier #46,Brakes,Calipers,Mid-Tier,False,278.79,433.31,0.197,423.78,ValueLine Parts,34,6,147,Decline,59.23,-0.998,0.0,7.6478,0.022,1
+SKU-00047,Power Steering - Mid-Tier #47,Fluids,Power Steering,Mid-Tier,False,492.84,709.68,0.198,641.2,AutoParts Co,14,24,131,Decline,45.33,-1.53,0.521,34.1809,0.021,1
+SKU-00048,Fuses - Premium #48,Electrical,Fuses,Premium,False,339.28,540.75,0.177,520.48,Pacific Supply,5,24,13,New,64.47,-0.687,0.0,19.4454,0.259,1
+SKU-00049,Shocks - Mid-Tier #49,Suspension,Shocks,Mid-Tier,False,340.26,419.04,0.14,404.97,AutoParts Co,35,24,53,Mature,29.15,-0.83,0.0,12.9083,0.181,6
+SKU-00050,Shocks - Private Label #50,Suspension,Shocks,Private Label,True,97.86,122.77,0.134,115.81,ValueLine Parts,20,6,57,Mature,25.12,-0.735,0.0,5.3326,0.299,1
+SKU-00051,Battery Charger - Mid-Tier #51,Batteries,Battery Charger,Mid-Tier,False,199.22,347.76,0.15,301.67,AutoParts Co,15,1,20,New,17.75,-1.398,0.207,11.5692,0.11,6
+SKU-00052,Bushings - Economy #52,Suspension,Bushings,Economy,False,272.72,366.97,0.19,323.14,Pacific Supply,25,24,192,Decline,72.91,-1.072,0.0,15.1209,0.199,12
+SKU-00053,Rotors - Premium #53,Brakes,Rotors,Premium,False,164.63,211.6,0.187,187.65,ValueLine Parts,39,1,53,Mature,36.19,-0.807,0.0,13.1181,0.206,1
+SKU-00054,Battery Charger - Economy #54,Batteries,Battery Charger,Economy,False,96.66,144.65,0.11,135.23,AutoParts Co,4,24,180,Decline,41.99,-0.749,0.373,2.5306,0.022,24
+SKU-00055,Brake Pads - Premium #55,Brakes,Brake Pads,Premium,False,230.28,338.32,0.131,289.81,Pacific Supply,40,12,128,Mature,6.72,-1.122,0.0,7.466,0.098,6
+SKU-00056,Shocks - Premium #56,Suspension,Shocks,Premium,False,60.47,103.01,0.1,94.36,Pacific Supply,21,6,85,Mature,27.98,-0.957,0.0,4.2615,0.086,12
+SKU-00057,Air Filter - Premium #57,Filters,Air Filter,Premium,False,242.53,381.62,0.123,340.78,AutoParts Co,11,1,98,Mature,88.27,-1.104,0.0,5.54,0.05,1
+SKU-00058,Spark Plugs - Premium #58,Engine Components,Spark Plugs,Premium,False,106.29,162.88,0.124,150.5,Pacific Supply,3,1,5,New,68.26,-1.128,0.0,6.0742,0.057,24
+SKU-00059,Pistons - Private Label #59,Engine Components,Pistons,Private Label,True,736.66,1056.45,0.16,1033.21,ValueLine Parts,26,12,147,Decline,26.84,-1.311,0.0,41.2854,0.073,6
+SKU-00060,Control Arms - Premium #60,Suspension,Control Arms,Premium,False,19.77,27.21,0.102,23.71,ValueLine Parts,16,1,66,Mature,59.61,-0.792,0.0,1.0998,0.047,24
+SKU-00061,Car Battery - Economy #61,Batteries,Car Battery,Economy,False,90.61,132.66,0.199,112.83,ValueLine Parts,27,24,112,Mature,47.6,-1.782,0.251,6.5985,0.165,1
+SKU-00062,Motor Oil - Premium #62,Fluids,Motor Oil,Premium,False,299.31,404.25,0.166,387.56,ValueLine Parts,13,6,57,Growth,20.04,-2.771,0.55,15.927,0.125,12
+SKU-00063,Battery Charger - Economy #63,Batteries,Battery Charger,Economy,False,285.63,464.27,0.198,419.93,AutoParts Co,20,1,188,Decline,64.09,-1.234,0.408,7.3248,0.268,12
+SKU-00064,Shocks - Premium #64,Suspension,Shocks,Premium,False,480.97,623.16,0.12,599.27,Pacific Supply,22,24,137,Decline,18.55,-0.661,0.0,34.9675,0.12,12
+SKU-00065,Control Arms - Economy #65,Suspension,Control Arms,Economy,False,366.91,602.87,0.157,520.64,ValueLine Parts,24,1,141,Decline,64.25,-0.667,0.0,11.8379,0.226,6
+SKU-00066,Brake Pads - Mid-Tier #66,Brakes,Brake Pads,Mid-Tier,False,361.06,622.14,0.139,554.63,Pacific Supply,20,1,195,Decline,47.32,-0.774,0.0,27.4849,0.146,12
+SKU-00067,Brake Pads - Mid-Tier #67,Brakes,Brake Pads,Mid-Tier,False,200.08,255.01,0.116,239.45,ValueLine Parts,11,1,8,New,21.0,-0.962,0.0,13.0473,0.266,1
+SKU-00068,Starter - Premium #68,Electrical,Starter,Premium,False,263.4,379.8,0.126,325.06,Northern Dist,23,24,43,Mature,52.9,-0.97,0.0,9.2575,0.095,1
+SKU-00069,Fuses - Private Label #69,Electrical,Fuses,Private Label,True,451.31,814.39,0.198,793.13,AutoParts Co,12,6,84,Mature,25.75,-1.421,0.0,11.6522,0.255,12
+SKU-00070,Coolant - Premium #70,Fluids,Coolant,Premium,False,130.36,167.83,0.185,155.4,ValueLine Parts,20,1,110,Mature,25.09,-1.624,0.349,8.6482,0.07,12
+SKU-00071,Power Steering - Premium #71,Fluids,Power Steering,Premium,False,448.58,565.75,0.126,543.14,Pacific Supply,39,12,131,Decline,37.09,-2.513,0.298,31.8851,0.264,12
+SKU-00072,Wiring Harness - Premium #72,Electrical,Wiring Harness,Premium,False,126.17,162.49,0.194,156.87,Pacific Supply,23,1,108,Mature,42.38,-0.645,0.0,6.5853,0.136,6
+SKU-00073,Alternator - Premium #73,Electrical,Alternator,Premium,False,476.36,690.53,0.195,601.63,AutoParts Co,39,1,192,Decline,21.75,-0.89,0.0,12.9271,0.276,1
+SKU-00074,Fuses - Mid-Tier #74,Electrical,Fuses,Mid-Tier,False,203.22,300.45,0.119,294.0,Pacific Supply,22,24,123,Mature,59.85,-0.6,0.0,15.2903,0.109,1
+SKU-00075,Motor Oil - Mid-Tier #75,Fluids,Motor Oil,Mid-Tier,False,398.26,610.95,0.175,582.34,ValueLine Parts,26,24,45,Growth,51.84,-2.461,0.201,14.6774,0.028,1
+SKU-00076,Bushings - Premium #76,Suspension,Bushings,Premium,False,317.98,445.41,0.192,397.08,Northern Dist,28,1,29,Growth,53.48,-0.792,0.0,24.4856,0.109,6
+SKU-00077,Motor Oil - Economy #77,Fluids,Motor Oil,Economy,False,423.77,523.73,0.145,505.94,ValueLine Parts,18,24,58,Growth,53.48,-1.601,0.321,17.7899,0.224,1
+SKU-00078,Bushings - Economy #78,Suspension,Bushings,Economy,False,256.92,446.75,0.142,417.32,Pacific Supply,21,1,114,Mature,33.84,-1.06,0.0,6.5523,0.204,1
+SKU-00079,Cabin Filter - Economy #79,Filters,Cabin Filter,Economy,False,14.78,20.2,0.12,19.21,AutoParts Co,39,1,151,Decline,24.23,-1.209,0.0,0.4186,0.092,1
+SKU-00080,Diagnostic Tools - Premium #80,Tools,Diagnostic Tools,Premium,False,214.9,381.9,0.161,337.28,Northern Dist,19,1,182,Decline,24.43,-0.487,0.0,4.5975,0.126,12
+SKU-00081,Diagnostic Tools - Economy #81,Tools,Diagnostic Tools,Economy,False,281.74,477.99,0.132,440.13,Northern Dist,19,24,90,Mature,6.86,-0.555,0.0,21.2523,0.255,24
+SKU-00082,Spark Plugs - Economy #82,Engine Components,Spark Plugs,Economy,False,394.87,566.72,0.124,529.22,Pacific Supply,27,1,150,Decline,22.11,-1.369,0.0,13.0826,0.247,6
+SKU-00083,Fuses - Premium #83,Electrical,Fuses,Premium,False,8.72,11.96,0.18,11.47,ValueLine Parts,7,1,141,Decline,11.02,-1.348,0.0,0.6969,0.066,24
+SKU-00084,Oil Filter - Economy #84,Filters,Oil Filter,Economy,False,466.79,840.79,0.107,729.76,AutoParts Co,30,1,86,Mature,107.33,-1.314,0.0,32.6528,0.061,1
+SKU-00085,Air Filter - Mid-Tier #85,Filters,Air Filter,Mid-Tier,False,252.88,398.4,0.165,390.02,Northern Dist,7,24,10,New,90.06,-1.001,0.0,9.8875,0.144,1
+SKU-00086,Shocks - Economy #86,Suspension,Shocks,Economy,False,179.9,296.19,0.183,283.38,AutoParts Co,34,12,14,New,27.08,-1.008,0.0,8.9006,0.269,24
+SKU-00087,Alternator - Private Label #87,Electrical,Alternator,Private Label,True,52.57,67.52,0.153,57.98,AutoParts Co,7,1,48,Growth,62.42,-1.442,0.0,3.1088,0.249,1
+SKU-00088,Oil Filter - Private Label #88,Filters,Oil Filter,Private Label,True,412.45,611.5,0.182,527.15,AutoParts Co,24,6,32,Mature,92.76,-1.908,0.0,19.7484,0.117,12
+SKU-00089,Shocks - Premium #89,Suspension,Shocks,Premium,False,376.99,478.48,0.109,417.67,ValueLine Parts,32,24,12,New,33.08,-1.177,0.0,10.6434,0.2,1
+SKU-00090,Bushings - Private Label #90,Suspension,Bushings,Private Label,True,487.92,835.01,0.119,733.73,Pacific Supply,33,1,81,Mature,24.55,-0.841,0.0,25.8864,0.25,6
+SKU-00091,Wiring Harness - Premium #91,Electrical,Wiring Harness,Premium,False,29.48,44.83,0.149,39.62,ValueLine Parts,9,1,54,Mature,45.78,-1.039,0.0,1.0684,0.161,1
+SKU-00092,Starter - Economy #92,Electrical,Starter,Economy,False,37.71,46.0,0.121,44.45,ValueLine Parts,40,1,114,Mature,15.41,-0.789,0.0,1.8314,0.281,6
+SKU-00093,Shocks - Premium #93,Suspension,Shocks,Premium,False,294.96,384.45,0.168,337.48,AutoParts Co,24,1,85,Mature,34.97,-1.231,0.0,8.2829,0.259,1
+SKU-00094,Starter - Premium #94,Electrical,Starter,Premium,False,181.9,243.02,0.161,213.06,ValueLine Parts,7,1,74,Mature,9.79,-0.523,0.0,10.4,0.045,1
+SKU-00095,Fuel Filter - Economy #95,Filters,Fuel Filter,Economy,False,410.81,605.95,0.2,518.54,Pacific Supply,41,12,16,New,73.45,-1.898,0.0,12.4149,0.294,1
+SKU-00096,Control Arms - Private Label #96,Suspension,Control Arms,Private Label,True,193.46,271.46,0.158,235.26,ValueLine Parts,7,12,100,Mature,17.07,-1.075,0.0,10.7099,0.114,24
+SKU-00097,Sockets - Mid-Tier #97,Tools,Sockets,Mid-Tier,False,279.13,491.3,0.139,438.63,Northern Dist,17,6,193,Decline,16.81,-0.574,0.0,10.9539,0.11,1
+SKU-00098,Control Arms - Premium #98,Suspension,Control Arms,Premium,False,362.94,507.65,0.121,468.64,Northern Dist,37,24,22,New,22.08,-0.771,0.0,20.2679,0.204,24
+SKU-00099,Spark Plugs - Private Label #99,Engine Components,Spark Plugs,Private Label,True,740.64,1115.97,0.1,954.17,Northern Dist,17,12,183,Decline,4.07,-1.056,0.0,52.6808,0.154,1
+SKU-00100,Struts - Economy #100,Suspension,Struts,Economy,False,168.7,289.5,0.137,267.34,Pacific Supply,35,1,5,New,14.53,-1.111,0.0,8.8043,0.29,6
+SKU-00101,Brake Fluid - Private Label #101,Brakes,Brake Fluid,Private Label,True,97.87,148.39,0.188,133.36,ValueLine Parts,13,6,80,Mature,39.58,-1.129,0.0,7.7247,0.186,24
+SKU-00102,Bushings - Mid-Tier #102,Suspension,Bushings,Mid-Tier,False,63.61,105.07,0.184,93.19,ValueLine Parts,24,6,76,Mature,3.87,-1.087,0.0,3.9061,0.057,6
+SKU-00103,Jacks - Mid-Tier #103,Tools,Jacks,Mid-Tier,False,26.43,38.01,0.152,33.37,AutoParts Co,24,24,116,Mature,3.32,-0.73,0.0,1.1708,0.245,6
+SKU-00104,Spark Plugs - Economy #104,Engine Components,Spark Plugs,Economy,False,514.7,730.94,0.143,624.71,Pacific Supply,43,6,19,New,79.5,-1.172,0.0,32.0904,0.098,1
+SKU-00105,Power Steering - Premium #105,Fluids,Power Steering,Premium,False,468.26,788.47,0.112,676.33,AutoParts Co,39,6,187,Decline,43.72,-1.464,0.566,20.5257,0.139,24
+SKU-00106,Brake Pads - Mid-Tier #106,Brakes,Brake Pads,Mid-Tier,False,98.73,132.92,0.196,114.61,Northern Dist,37,1,193,Decline,57.21,-0.593,0.0,6.9634,0.284,24
+SKU-00107,Wrenches - Economy #107,Tools,Wrenches,Economy,False,169.9,294.31,0.197,277.13,Pacific Supply,11,1,93,Mature,9.68,-0.559,0.0,4.3129,0.032,6
+SKU-00108,Battery Charger - Private Label #108,Batteries,Battery Charger,Private Label,True,308.05,380.07,0.116,333.23,Northern Dist,42,24,91,Mature,19.06,-0.727,0.406,10.5296,0.024,24
+SKU-00109,Alternator - Premium #109,Electrical,Alternator,Premium,False,101.59,152.43,0.191,140.21,AutoParts Co,39,6,160,Decline,64.45,-0.811,0.0,7.2991,0.285,1
+SKU-00110,Alternator - Premium #110,Electrical,Alternator,Premium,False,221.73,392.68,0.138,373.12,Northern Dist,16,1,21,New,16.26,-0.905,0.0,13.3861,0.136,12
+SKU-00111,Car Battery - Economy #111,Batteries,Car Battery,Economy,False,88.59,156.22,0.119,134.97,Northern Dist,14,24,108,Mature,41.64,-1.253,0.375,4.3566,0.149,24
+SKU-00112,Bushings - Mid-Tier #112,Suspension,Bushings,Mid-Tier,False,117.84,181.9,0.105,177.82,Pacific Supply,22,12,17,New,71.95,-0.972,0.0,8.1702,0.198,1
+SKU-00113,Diagnostic Tools - Mid-Tier #113,Tools,Diagnostic Tools,Mid-Tier,False,259.03,398.75,0.135,373.28,ValueLine Parts,29,12,186,Decline,11.2,-0.464,0.0,13.0411,0.224,6
+SKU-00114,Control Arms - Economy #114,Suspension,Control Arms,Economy,False,69.92,91.23,0.163,86.41,AutoParts Co,43,12,46,Growth,10.64,-0.674,0.0,2.2277,0.094,1
+SKU-00115,Wiring Harness - Private Label #115,Electrical,Wiring Harness,Private Label,True,381.47,606.67,0.118,543.88,AutoParts Co,13,1,161,Decline,23.33,-0.974,0.0,10.5425,0.17,24
+SKU-00116,Wrenches - Mid-Tier #116,Tools,Wrenches,Mid-Tier,False,228.18,380.34,0.145,363.86,AutoParts Co,22,1,17,New,5.23,-0.68,0.0,7.8621,0.228,1
+SKU-00117,Air Filter - Mid-Tier #117,Filters,Air Filter,Mid-Tier,False,69.79,99.48,0.13,89.33,ValueLine Parts,29,6,109,Mature,64.77,-2.146,0.0,5.027,0.3,6
+SKU-00118,Coolant - Private Label #118,Fluids,Coolant,Private Label,True,396.77,570.44,0.108,486.05,Pacific Supply,26,12,178,Decline,40.56,-2.036,0.363,27.852,0.042,6
+SKU-00119,Wrenches - Economy #119,Tools,Wrenches,Economy,False,298.52,510.89,0.189,455.13,Pacific Supply,21,1,150,Decline,23.53,-0.599,0.0,15.947,0.096,1
+SKU-00120,Oil Filter - Premium #120,Filters,Oil Filter,Premium,False,474.9,667.72,0.183,626.7,ValueLine Parts,41,12,42,Growth,39.12,-2.212,0.0,28.8086,0.246,1
+SKU-00121,Shocks - Mid-Tier #121,Suspension,Shocks,Mid-Tier,False,482.44,644.49,0.143,584.05,ValueLine Parts,27,1,156,Decline,62.2,-1.123,0.0,33.8227,0.072,12
+SKU-00122,Calipers - Private Label #122,Brakes,Calipers,Private Label,True,24.13,31.59,0.152,30.18,Pacific Supply,34,1,115,Mature,32.83,-1.138,0.0,0.756,0.067,1
+SKU-00123,Coolant - Mid-Tier #123,Fluids,Coolant,Mid-Tier,False,431.6,667.5,0.169,652.67,Pacific Supply,44,12,131,Decline,74.02,-2.141,0.298,28.1724,0.038,6
+SKU-00124,Shocks - Premium #124,Suspension,Shocks,Premium,False,234.59,316.22,0.18,306.1,AutoParts Co,13,1,43,Growth,23.38,-0.738,0.0,17.9761,0.127,1
+SKU-00125,Spark Plugs - Economy #125,Engine Components,Spark Plugs,Economy,False,47.39,61.05,0.164,58.11,ValueLine Parts,13,24,80,Mature,68.38,-1.431,0.0,1.5951,0.025,24
+SKU-00126,Marine Battery - Economy #126,Batteries,Marine Battery,Economy,False,381.18,485.36,0.178,471.77,ValueLine Parts,34,1,63,Growth,70.38,-0.999,0.411,24.7619,0.093,24
+SKU-00127,Shocks - Premium #127,Suspension,Shocks,Premium,False,253.92,371.46,0.158,334.82,ValueLine Parts,35,12,192,Decline,21.24,-0.749,0.0,15.4074,0.162,12
+SKU-00128,Air Filter - Private Label #128,Filters,Air Filter,Private Label,True,362.31,633.21,0.198,567.21,AutoParts Co,6,6,159,Decline,118.53,-1.543,0.0,26.2792,0.092,6
+SKU-00129,Power Steering - Mid-Tier #129,Fluids,Power Steering,Mid-Tier,False,490.09,842.88,0.13,800.84,Northern Dist,22,1,50,Mature,66.71,-2.261,0.21,30.736,0.173,12
+SKU-00130,Struts - Mid-Tier #130,Suspension,Struts,Mid-Tier,False,433.22,533.75,0.14,519.27,Northern Dist,13,6,14,New,60.48,-1.264,0.0,28.0571,0.267,24
+SKU-00131,Alternator - Mid-Tier #131,Electrical,Alternator,Mid-Tier,False,390.74,518.46,0.123,442.52,Northern Dist,18,12,90,Mature,51.57,-0.446,0.0,20.2781,0.148,1
+SKU-00132,Shocks - Premium #132,Suspension,Shocks,Premium,False,444.59,739.96,0.135,684.63,AutoParts Co,40,12,129,Mature,77.84,-1.201,0.0,17.7524,0.059,24
+SKU-00133,Alternator - Premium #133,Electrical,Alternator,Premium,False,64.45,80.49,0.199,69.19,ValueLine Parts,6,12,107,Mature,47.26,-1.354,0.0,3.7287,0.266,1
+SKU-00134,Sockets - Economy #134,Tools,Sockets,Economy,False,113.63,163.79,0.117,156.18,ValueLine Parts,38,12,106,Mature,6.91,-0.67,0.0,6.95,0.258,1
+SKU-00135,Spark Plugs - Economy #135,Engine Components,Spark Plugs,Economy,False,188.97,298.06,0.191,264.78,Pacific Supply,21,6,52,Growth,50.51,-1.145,0.0,10.8493,0.049,1
+SKU-00136,Jacks - Economy #136,Tools,Jacks,Economy,False,142.35,200.62,0.109,176.33,ValueLine Parts,37,1,136,Decline,6.69,-0.58,0.0,9.3418,0.147,6
+SKU-00137,Coolant - Economy #137,Fluids,Coolant,Economy,False,464.35,675.7,0.153,627.23,AutoParts Co,17,1,27,Growth,39.56,-1.62,0.569,22.3349,0.289,6
+SKU-00138,Control Arms - Premium #138,Suspension,Control Arms,Premium,False,52.12,63.57,0.143,60.39,ValueLine Parts,9,1,39,Growth,46.46,-0.787,0.0,1.5658,0.192,24
+SKU-00139,Air Filter - Economy #139,Filters,Air Filter,Economy,False,209.07,340.01,0.123,329.05,ValueLine Parts,33,1,34,Mature,34.63,-1.75,0.0,7.3229,0.086,12
+SKU-00140,Power Steering - Private Label #140,Fluids,Power Steering,Private Label,True,265.75,410.45,0.186,398.66,AutoParts Co,15,24,198,Decline,43.23,-2.474,0.533,21.0307,0.296,6
+SKU-00141,Pistons - Economy #141,Engine Components,Pistons,Economy,False,270.26,402.03,0.156,368.15,Pacific Supply,36,1,84,Mature,60.44,-1.091,0.0,10.7673,0.047,6
+SKU-00142,Cabin Filter - Mid-Tier #142,Filters,Cabin Filter,Mid-Tier,False,117.79,191.54,0.155,163.34,ValueLine Parts,14,12,170,Decline,82.15,-2.025,0.0,2.744,0.179,1
+SKU-00143,Car Battery - Economy #143,Batteries,Car Battery,Economy,False,81.92,124.83,0.144,113.29,ValueLine Parts,26,1,92,Mature,71.66,-1.721,0.204,6.0813,0.169,12
+SKU-00144,Fuel Filter - Economy #144,Filters,Fuel Filter,Economy,False,363.78,552.73,0.195,505.32,Northern Dist,4,1,43,Growth,34.69,-2.05,0.0,22.8034,0.015,1
+SKU-00145,Starter - Economy #145,Electrical,Starter,Economy,False,307.15,503.27,0.181,474.34,Pacific Supply,32,1,173,Decline,49.07,-1.387,0.0,6.9272,0.075,6
+SKU-00146,Shocks - Premium #146,Suspension,Shocks,Premium,False,413.09,724.64,0.12,703.51,Northern Dist,42,6,85,Mature,74.15,-1.287,0.0,27.1735,0.291,1
+SKU-00147,Fuel Filter - Private Label #147,Filters,Fuel Filter,Private Label,True,277.41,347.24,0.185,322.86,Pacific Supply,30,12,98,Mature,26.89,-1.578,0.0,6.7968,0.222,1
+SKU-00148,Marine Battery - Mid-Tier #148,Batteries,Marine Battery,Mid-Tier,False,159.55,285.81,0.173,256.65,Northern Dist,42,6,96,Mature,19.13,-1.608,0.386,5.2515,0.259,12
+SKU-00149,Sockets - Private Label #149,Tools,Sockets,Private Label,True,191.32,335.77,0.126,315.65,AutoParts Co,39,1,110,Mature,17.18,-0.306,0.0,4.6442,0.148,12
+SKU-00150,Car Battery - Mid-Tier #150,Batteries,Car Battery,Mid-Tier,False,423.62,623.36,0.184,566.03,Northern Dist,23,1,59,Mature,11.04,-0.752,0.554,12.3534,0.209,1
+SKU-00151,Oil Filter - Mid-Tier #151,Filters,Oil Filter,Mid-Tier,False,74.19,105.85,0.141,97.15,AutoParts Co,16,6,87,Mature,51.11,-2.081,0.0,1.9675,0.014,6
+SKU-00152,Air Filter - Mid-Tier #152,Filters,Air Filter,Mid-Tier,False,406.1,565.61,0.153,524.41,ValueLine Parts,20,12,93,Mature,47.93,-2.467,0.0,27.1962,0.283,1
+SKU-00153,Alternator - Economy #153,Electrical,Alternator,Economy,False,383.1,515.54,0.179,480.59,ValueLine Parts,18,1,196,Decline,5.3,-0.478,0.0,20.2351,0.053,12
+SKU-00154,Alternator - Premium #154,Electrical,Alternator,Premium,False,228.99,386.49,0.132,352.62,AutoParts Co,8,1,197,Decline,39.04,-0.424,0.0,17.5693,0.087,1
+SKU-00155,Marine Battery - Premium #155,Batteries,Marine Battery,Premium,False,214.71,377.43,0.15,368.47,Northern Dist,8,1,176,Decline,69.04,-1.515,0.379,15.3149,0.123,1
+SKU-00156,Power Steering - Premium #156,Fluids,Power Steering,Premium,False,154.19,189.98,0.139,166.43,Pacific Supply,14,6,195,Decline,16.14,-1.712,0.47,6.3112,0.218,1
+SKU-00157,Struts - Mid-Tier #157,Suspension,Struts,Mid-Tier,False,427.05,641.63,0.121,620.46,AutoParts Co,26,1,149,Decline,40.58,-1.06,0.0,14.6512,0.227,1
+SKU-00158,Air Filter - Private Label #158,Filters,Air Filter,Private Label,True,305.23,485.88,0.171,475.71,ValueLine Parts,25,12,162,Decline,67.11,-1.988,0.0,17.333,0.014,1
+SKU-00159,Brake Fluid - Mid-Tier #159,Brakes,Brake Fluid,Mid-Tier,False,24.58,31.08,0.124,27.52,Pacific Supply,20,1,73,Growth,31.53,-1.177,0.0,0.9916,0.105,1
+SKU-00160,Calipers - Premium #160,Brakes,Calipers,Premium,False,379.54,686.97,0.193,628.95,AutoParts Co,35,1,8,New,26.54,-0.828,0.0,26.8169,0.27,12
+SKU-00161,Air Filter - Economy #161,Filters,Air Filter,Economy,False,404.17,548.61,0.193,473.05,ValueLine Parts,8,1,91,Mature,82.19,-1.009,0.0,26.7606,0.242,24
+SKU-00162,Transmission Fluid - Premium #162,Fluids,Transmission Fluid,Premium,False,141.58,199.92,0.104,181.58,AutoParts Co,39,1,171,Decline,32.63,-2.376,0.37,10.4238,0.134,1
+SKU-00163,Car Battery - Mid-Tier #163,Batteries,Car Battery,Mid-Tier,False,211.78,282.18,0.15,245.42,Northern Dist,43,1,123,Mature,34.25,-1.413,0.53,16.5583,0.238,6
+SKU-00164,Gaskets - Premium #164,Engine Components,Gaskets,Premium,False,152.58,254.69,0.158,225.21,Pacific Supply,26,1,168,Decline,10.98,-0.856,0.0,3.5903,0.183,12
+SKU-00165,Fuel Filter - Premium #165,Filters,Fuel Filter,Premium,False,258.56,344.66,0.166,298.28,ValueLine Parts,17,12,55,Growth,74.64,-1.094,0.0,12.0384,0.055,12
+SKU-00166,Calipers - Mid-Tier #166,Brakes,Calipers,Mid-Tier,False,436.9,633.41,0.192,545.62,Northern Dist,42,1,199,Decline,74.51,-1.12,0.0,18.0483,0.141,1
+SKU-00167,Sockets - Premium #167,Tools,Sockets,Premium,False,87.19,138.49,0.107,118.41,Pacific Supply,36,24,24,New,3.26,-0.473,0.0,5.6596,0.264,6
+SKU-00168,Fuel Filter - Mid-Tier #168,Filters,Fuel Filter,Mid-Tier,False,270.9,366.16,0.106,328.79,Pacific Supply,29,1,66,Growth,38.81,-2.118,0.0,11.0319,0.165,1
+SKU-00169,Pistons - Mid-Tier #169,Engine Components,Pistons,Mid-Tier,False,773.64,1139.27,0.191,1085.93,Pacific Supply,25,24,143,Decline,56.47,-1.553,0.0,36.7499,0.037,6
+SKU-00170,Motor Oil - Economy #170,Fluids,Motor Oil,Economy,False,256.3,410.29,0.187,382.29,AutoParts Co,4,1,28,Mature,67.71,-1.82,0.548,8.4518,0.26,6
+SKU-00171,Marine Battery - Mid-Tier #171,Batteries,Marine Battery,Mid-Tier,False,98.11,134.68,0.17,118.06,ValueLine Parts,14,1,100,Mature,61.61,-1.697,0.28,7.6844,0.215,6
+SKU-00172,Motor Oil - Mid-Tier #172,Fluids,Motor Oil,Mid-Tier,False,24.56,39.4,0.104,33.51,AutoParts Co,23,24,64,Mature,61.01,-1.633,0.389,0.9696,0.161,6
+SKU-00173,Coolant - Mid-Tier #173,Fluids,Coolant,Mid-Tier,False,449.57,815.4,0.108,733.87,Pacific Supply,7,12,153,Decline,24.42,-2.511,0.27,22.3784,0.277,24
+SKU-00174,Brake Fluid - Mid-Tier #174,Brakes,Brake Fluid,Mid-Tier,False,44.74,59.73,0.199,52.39,Pacific Supply,23,12,17,New,46.74,-1.061,0.0,1.9061,0.25,6
+SKU-00175,Alternator - Mid-Tier #175,Electrical,Alternator,Mid-Tier,False,346.43,591.61,0.137,546.53,AutoParts Co,42,1,67,Growth,58.77,-1.424,0.0,21.9722,0.029,24
+SKU-00176,Battery Charger - Premium #176,Batteries,Battery Charger,Premium,False,16.76,20.82,0.185,18.33,ValueLine Parts,23,1,167,Decline,35.25,-1.197,0.518,1.3298,0.054,6
+SKU-00177,Power Steering - Premium #177,Fluids,Power Steering,Premium,False,241.44,415.78,0.167,390.45,Pacific Supply,14,1,166,Decline,30.59,-2.379,0.409,9.5644,0.099,12
+SKU-00178,Fuses - Premium #178,Electrical,Fuses,Premium,False,436.69,664.24,0.113,624.52,Northern Dist,3,1,75,Growth,13.75,-0.568,0.0,28.7059,0.296,1
+SKU-00179,Alternator - Economy #179,Electrical,Alternator,Economy,False,40.57,61.46,0.176,55.11,Northern Dist,19,1,64,Mature,22.09,-1.488,0.0,1.1131,0.171,12
+SKU-00180,Motor Oil - Economy #180,Fluids,Motor Oil,Economy,False,446.81,741.67,0.125,684.02,Northern Dist,31,24,159,Decline,27.72,-2.324,0.573,20.113,0.166,24
+SKU-00181,Belts - Premium #181,Engine Components,Belts,Premium,False,431.56,538.23,0.193,466.16,ValueLine Parts,9,24,151,Decline,9.56,-1.442,0.0,27.4222,0.03,1
+SKU-00182,Diagnostic Tools - Economy #182,Tools,Diagnostic Tools,Economy,False,219.73,332.05,0.132,312.34,Pacific Supply,21,12,127,Mature,16.94,-0.322,0.0,17.5476,0.057,12
+SKU-00183,Brake Pads - Mid-Tier #183,Brakes,Brake Pads,Mid-Tier,False,243.28,365.46,0.105,329.85,Northern Dist,29,12,152,Decline,53.27,-0.792,0.0,14.2301,0.239,12
+SKU-00184,Power Steering - Economy #184,Fluids,Power Steering,Economy,False,55.09,73.82,0.153,71.12,AutoParts Co,12,1,109,Mature,9.05,-1.714,0.437,3.8368,0.182,12
+SKU-00185,Gaskets - Mid-Tier #185,Engine Components,Gaskets,Mid-Tier,False,694.0,1110.93,0.152,997.47,AutoParts Co,9,1,157,Decline,17.06,-1.56,0.0,53.1941,0.156,24
+SKU-00186,Fuel Filter - Mid-Tier #186,Filters,Fuel Filter,Mid-Tier,False,408.79,570.54,0.177,544.5,AutoParts Co,19,1,24,New,115.5,-2.334,0.0,30.822,0.266,1
+SKU-00187,Jacks - Mid-Tier #187,Tools,Jacks,Mid-Tier,False,248.54,362.63,0.103,340.43,ValueLine Parts,28,24,101,Mature,2.28,-0.325,0.0,18.9447,0.164,12
+SKU-00188,Diagnostic Tools - Mid-Tier #188,Tools,Diagnostic Tools,Mid-Tier,False,42.57,56.22,0.184,48.85,Pacific Supply,9,1,94,Mature,6.16,-0.687,0.0,1.7916,0.192,6
+SKU-00189,Fuses - Premium #189,Electrical,Fuses,Premium,False,457.15,793.21,0.183,739.32,Northern Dist,25,1,124,Mature,55.86,-0.818,0.0,35.4225,0.18,1
+SKU-00190,Car Battery - Premium #190,Batteries,Car Battery,Premium,False,257.32,376.72,0.144,336.85,Pacific Supply,10,6,77,Growth,31.27,-1.525,0.588,9.6849,0.168,1
+SKU-00191,Air Filter - Economy #191,Filters,Air Filter,Economy,False,475.25,639.64,0.169,545.78,Pacific Supply,7,12,54,Growth,84.61,-2.106,0.0,24.2351,0.185,1
+SKU-00192,Struts - Premium #192,Suspension,Struts,Premium,False,329.22,597.28,0.102,550.98,Pacific Supply,25,1,12,New,66.49,-0.774,0.0,20.3469,0.259,12
+SKU-00193,Spark Plugs - Private Label #193,Engine Components,Spark Plugs,Private Label,True,672.24,841.06,0.119,715.33,Pacific Supply,11,1,173,Decline,14.95,-1.244,0.0,29.6742,0.233,12
+SKU-00194,Pistons - Premium #194,Engine Components,Pistons,Premium,False,732.39,920.04,0.141,894.76,ValueLine Parts,31,6,131,Decline,34.07,-0.839,0.0,47.7574,0.019,6
+SKU-00195,Brake Pads - Economy #195,Brakes,Brake Pads,Economy,False,120.11,187.62,0.135,181.1,Pacific Supply,6,1,107,Mature,62.29,-0.627,0.0,5.9641,0.067,1
+SKU-00196,Marine Battery - Private Label #196,Batteries,Marine Battery,Private Label,True,439.35,783.28,0.123,760.67,Pacific Supply,17,1,165,Decline,34.95,-1.172,0.424,15.1483,0.034,1
+SKU-00197,Coolant - Private Label #197,Fluids,Coolant,Private Label,True,316.93,466.53,0.143,424.72,ValueLine Parts,44,6,52,Growth,57.9,-2.465,0.504,22.7478,0.094,24
+SKU-00198,Belts - Economy #198,Engine Components,Belts,Economy,False,680.15,1232.46,0.142,1178.0,ValueLine Parts,41,1,146,Decline,37.32,-1.004,0.0,36.6791,0.041,1
+SKU-00199,Car Battery - Economy #199,Batteries,Car Battery,Economy,False,201.29,282.08,0.125,257.8,ValueLine Parts,19,1,80,Mature,7.47,-0.914,0.43,11.4447,0.14,1
+SKU-00200,Struts - Mid-Tier #200,Suspension,Struts,Mid-Tier,False,252.99,365.32,0.182,345.93,Northern Dist,38,1,96,Mature,64.45,-1.061,0.0,13.9046,0.093,1
+SKU-00201,Battery Charger - Premium #201,Batteries,Battery Charger,Premium,False,337.34,449.12,0.151,437.14,ValueLine Parts,10,1,15,New,78.98,-1.381,0.55,23.337,0.019,24
+SKU-00202,Bushings - Economy #202,Suspension,Bushings,Economy,False,268.71,375.67,0.181,353.97,Pacific Supply,12,1,174,Decline,71.61,-0.972,0.0,15.7379,0.292,1
+SKU-00203,Brake Pads - Premium #203,Brakes,Brake Pads,Premium,False,74.05,126.01,0.123,115.35,AutoParts Co,24,6,83,Mature,45.41,-0.506,0.0,5.0685,0.113,12
+SKU-00204,Struts - Economy #204,Suspension,Struts,Economy,False,393.43,502.4,0.139,485.36,AutoParts Co,17,6,36,Growth,45.29,-1.298,0.0,18.7282,0.063,1
+SKU-00205,Calipers - Economy #205,Brakes,Calipers,Economy,False,289.77,364.55,0.184,318.16,Pacific Supply,10,1,172,Decline,63.06,-0.665,0.0,9.0407,0.154,24
+SKU-00206,Brake Fluid - Economy #206,Brakes,Brake Fluid,Economy,False,419.5,525.57,0.188,501.22,Northern Dist,25,1,48,Mature,54.58,-0.591,0.0,31.524,0.039,12
+SKU-00207,Coolant - Premium #207,Fluids,Coolant,Premium,False,472.68,675.47,0.168,648.01,AutoParts Co,12,12,59,Mature,71.22,-1.214,0.22,19.5139,0.198,6
+SKU-00208,Motor Oil - Premium #208,Fluids,Motor Oil,Premium,False,62.89,79.4,0.164,71.12,Northern Dist,42,1,54,Mature,55.57,-2.453,0.416,4.4118,0.032,1
+SKU-00209,Control Arms - Private Label #209,Suspension,Control Arms,Private Label,True,424.07,639.15,0.163,572.63,ValueLine Parts,3,1,151,Decline,79.86,-0.824,0.0,10.0412,0.183,12
+SKU-00210,Rotors - Mid-Tier #210,Brakes,Rotors,Mid-Tier,False,366.86,476.21,0.117,407.56,Pacific Supply,4,1,51,Mature,5.12,-0.589,0.0,13.5562,0.183,6
+SKU-00211,Starter - Private Label #211,Electrical,Starter,Private Label,True,147.47,231.64,0.105,225.68,Northern Dist,13,1,186,Decline,38.29,-0.421,0.0,10.1387,0.224,1
+SKU-00212,Fuel Filter - Mid-Tier #212,Filters,Fuel Filter,Mid-Tier,False,414.07,651.71,0.164,609.01,AutoParts Co,36,1,92,Mature,15.02,-2.094,0.0,19.1691,0.081,6
+SKU-00213,Car Battery - Mid-Tier #213,Batteries,Car Battery,Mid-Tier,False,120.11,149.64,0.177,134.52,Pacific Supply,14,24,58,Mature,27.03,-1.382,0.503,7.1648,0.135,1
+SKU-00214,Wrenches - Mid-Tier #214,Tools,Wrenches,Mid-Tier,False,105.55,133.3,0.141,115.45,AutoParts Co,4,12,93,Mature,23.34,-0.595,0.0,5.0098,0.016,12
+SKU-00215,Shocks - Premium #215,Suspension,Shocks,Premium,False,112.31,150.58,0.14,138.35,AutoParts Co,15,1,28,Growth,44.87,-1.299,0.0,5.9416,0.074,6
+SKU-00216,Rotors - Premium #216,Brakes,Rotors,Premium,False,67.8,86.87,0.198,80.81,Northern Dist,6,1,188,Decline,78.96,-0.773,0.0,2.1859,0.191,24
+SKU-00217,Coolant - Mid-Tier #217,Fluids,Coolant,Mid-Tier,False,465.97,597.62,0.2,537.43,ValueLine Parts,28,12,62,Growth,73.98,-1.762,0.427,13.4903,0.165,1
+SKU-00218,Wrenches - Premium #218,Tools,Wrenches,Premium,False,258.5,318.86,0.171,312.46,Northern Dist,5,1,93,Mature,17.18,-0.796,0.0,15.7788,0.181,6
+SKU-00219,Struts - Economy #219,Suspension,Struts,Economy,False,299.18,391.63,0.156,377.79,Pacific Supply,32,1,158,Decline,27.08,-0.833,0.0,10.3749,0.013,1
+SKU-00220,Pistons - Economy #220,Engine Components,Pistons,Economy,False,241.21,341.14,0.132,325.37,AutoParts Co,35,1,47,Mature,13.98,-0.834,0.0,18.0432,0.16,1
+SKU-00221,Air Filter - Premium #221,Filters,Air Filter,Premium,False,10.85,14.41,0.191,13.74,AutoParts Co,41,6,182,Decline,38.29,-1.045,0.0,0.4256,0.092,1
+SKU-00222,Power Steering - Mid-Tier #222,Fluids,Power Steering,Mid-Tier,False,327.15,416.54,0.193,381.44,Northern Dist,39,1,39,Mature,57.38,-1.489,0.486,12.0041,0.039,12
+SKU-00223,Jacks - Premium #223,Tools,Jacks,Premium,False,32.3,48.08,0.116,44.68,ValueLine Parts,39,6,185,Decline,14.17,-0.405,0.0,1.5625,0.2,1
+SKU-00224,Fuel Filter - Premium #224,Filters,Fuel Filter,Premium,False,415.46,629.87,0.124,596.45,Northern Dist,7,1,195,Decline,74.9,-2.373,0.0,27.0257,0.095,1
+SKU-00225,Fuses - Economy #225,Electrical,Fuses,Economy,False,350.6,470.75,0.171,458.16,Pacific Supply,19,1,118,Mature,20.3,-1.399,0.0,22.6277,0.148,1
+SKU-00226,Motor Oil - Premium #226,Fluids,Motor Oil,Premium,False,137.13,233.26,0.16,209.73,AutoParts Co,44,1,65,Growth,21.8,-1.536,0.292,7.8256,0.011,12
+SKU-00227,Alternator - Economy #227,Electrical,Alternator,Economy,False,192.96,338.26,0.176,307.19,ValueLine Parts,31,24,45,Growth,52.12,-0.676,0.0,6.7383,0.267,6
+SKU-00228,Brake Fluid - Economy #228,Brakes,Brake Fluid,Economy,False,309.23,450.64,0.162,391.93,AutoParts Co,28,12,131,Decline,23.05,-1.049,0.0,10.7206,0.266,6
+SKU-00229,Starter - Mid-Tier #229,Electrical,Starter,Mid-Tier,False,207.8,269.56,0.173,244.84,ValueLine Parts,25,12,108,Mature,65.63,-1.482,0.0,14.9918,0.273,12
+SKU-00230,Alternator - Economy #230,Electrical,Alternator,Economy,False,137.31,180.65,0.111,169.04,Northern Dist,16,24,123,Mature,61.35,-0.641,0.0,6.4833,0.169,1
+SKU-00231,Battery Charger - Private Label #231,Batteries,Battery Charger,Private Label,True,458.45,776.47,0.196,706.99,AutoParts Co,42,24,55,Growth,22.1,-1.748,0.268,14.5444,0.288,12
+SKU-00232,Car Battery - Economy #232,Batteries,Car Battery,Economy,False,169.08,261.95,0.119,254.59,Northern Dist,30,1,129,Mature,21.9,-1.468,0.484,9.7976,0.056,6
+SKU-00233,Battery Charger - Mid-Tier #233,Batteries,Battery Charger,Mid-Tier,False,140.05,180.43,0.133,161.14,AutoParts Co,13,1,16,New,17.05,-1.3,0.417,8.5898,0.284,1
+SKU-00234,Shocks - Premium #234,Suspension,Shocks,Premium,False,26.26,42.0,0.176,40.3,AutoParts Co,18,1,180,Decline,62.6,-1.26,0.0,0.7978,0.299,1
+SKU-00235,Brake Pads - Economy #235,Brakes,Brake Pads,Economy,False,321.55,517.35,0.171,497.48,AutoParts Co,36,1,69,Growth,29.6,-1.071,0.0,10.0222,0.106,1
+SKU-00236,Brake Fluid - Private Label #236,Brakes,Brake Fluid,Private Label,True,159.49,287.47,0.196,249.68,AutoParts Co,32,1,15,New,48.86,-0.7,0.0,4.9942,0.032,1
+SKU-00237,Marine Battery - Private Label #237,Batteries,Marine Battery,Private Label,True,337.63,537.55,0.198,504.3,ValueLine Parts,29,24,29,Growth,2.34,-1.756,0.403,11.9656,0.153,24
+SKU-00238,Oil Filter - Premium #238,Filters,Oil Filter,Premium,False,364.87,621.9,0.114,551.92,Pacific Supply,32,1,15,New,70.88,-2.207,0.0,15.7927,0.171,12
+SKU-00239,Motor Oil - Premium #239,Fluids,Motor Oil,Premium,False,466.24,758.86,0.192,735.46,ValueLine Parts,12,1,106,Mature,34.5,-1.761,0.201,12.3876,0.038,12
+SKU-00240,Alternator - Economy #240,Electrical,Alternator,Economy,False,297.16,380.75,0.175,341.2,AutoParts Co,16,24,141,Decline,23.89,-1.486,0.0,20.4185,0.23,1
+SKU-00241,Wiring Harness - Premium #241,Electrical,Wiring Harness,Premium,False,404.88,635.44,0.119,593.66,Pacific Supply,18,1,36,Growth,42.43,-0.968,0.0,12.0878,0.048,6
+SKU-00242,Spark Plugs - Mid-Tier #242,Engine Components,Spark Plugs,Mid-Tier,False,720.64,1078.8,0.192,959.04,Pacific Supply,36,6,59,Growth,28.95,-1.508,0.0,34.8461,0.292,24
+SKU-00243,Transmission Fluid - Mid-Tier #243,Fluids,Transmission Fluid,Mid-Tier,False,247.04,305.02,0.18,263.29,Northern Dist,15,1,57,Growth,8.19,-2.306,0.478,12.0123,0.108,1
+SKU-00244,Air Filter - Economy #244,Filters,Air Filter,Economy,False,476.01,608.59,0.196,564.36,AutoParts Co,23,1,41,Mature,100.18,-1.538,0.0,18.7689,0.041,6
+SKU-00245,Jacks - Premium #245,Tools,Jacks,Premium,False,41.86,54.47,0.164,50.75,AutoParts Co,29,12,11,New,9.47,-0.589,0.0,2.2915,0.153,1
+SKU-00246,Shocks - Economy #246,Suspension,Shocks,Economy,False,251.0,363.45,0.103,353.46,ValueLine Parts,44,1,193,Decline,21.96,-1.077,0.0,5.7333,0.028,12
+SKU-00247,Oil Filter - Mid-Tier #247,Filters,Oil Filter,Mid-Tier,False,40.42,71.16,0.194,65.54,Pacific Supply,39,1,89,Mature,91.12,-1.575,0.0,1.0159,0.1,1
+SKU-00248,Brake Fluid - Economy #248,Brakes,Brake Fluid,Economy,False,401.67,611.52,0.185,552.11,Northern Dist,12,1,89,Mature,41.5,-0.606,0.0,14.6603,0.018,24
+SKU-00249,Brake Pads - Mid-Tier #249,Brakes,Brake Pads,Mid-Tier,False,178.92,263.76,0.188,234.22,Pacific Supply,11,1,40,Mature,14.29,-0.835,0.0,8.9782,0.205,24
+SKU-00250,Car Battery - Economy #250,Batteries,Car Battery,Economy,False,199.39,245.82,0.112,210.18,Northern Dist,26,24,119,Mature,40.65,-1.438,0.343,12.0983,0.203,6
+SKU-00251,Car Battery - Mid-Tier #251,Batteries,Car Battery,Mid-Tier,False,294.65,447.14,0.131,399.27,Northern Dist,25,1,68,Growth,36.4,-1.037,0.557,21.0114,0.057,1
+SKU-00252,Transmission Fluid - Premium #252,Fluids,Transmission Fluid,Premium,False,458.12,657.11,0.195,583.04,Northern Dist,11,6,87,Mature,73.95,-1.414,0.423,24.2523,0.284,12
+SKU-00253,Coolant - Mid-Tier #253,Fluids,Coolant,Mid-Tier,False,73.45,116.33,0.197,99.31,ValueLine Parts,6,12,173,Decline,7.83,-1.615,0.244,4.3246,0.03,6
+SKU-00254,Marine Battery - Private Label #254,Batteries,Marine Battery,Private Label,True,439.61,731.92,0.152,646.08,ValueLine Parts,8,6,106,Mature,9.86,-1.243,0.464,10.2266,0.097,6
+SKU-00255,Motor Oil - Economy #255,Fluids,Motor Oil,Economy,False,394.46,490.3,0.185,471.62,Northern Dist,31,1,57,Growth,14.03,-2.252,0.411,28.6805,0.278,6
+SKU-00256,Battery Charger - Mid-Tier #256,Batteries,Battery Charger,Mid-Tier,False,492.38,653.83,0.108,603.52,Northern Dist,28,1,114,Mature,27.14,-1.438,0.203,15.3975,0.022,1
+SKU-00257,Belts - Private Label #257,Engine Components,Belts,Private Label,True,549.68,892.73,0.133,854.18,Northern Dist,4,1,163,Decline,2.08,-1.046,0.0,43.6731,0.237,1
+SKU-00258,Spark Plugs - Premium #258,Engine Components,Spark Plugs,Premium,False,371.89,612.85,0.101,543.88,AutoParts Co,29,1,180,Decline,63.86,-0.999,0.0,14.363,0.29,1
+SKU-00259,Marine Battery - Mid-Tier #259,Batteries,Marine Battery,Mid-Tier,False,278.4,392.43,0.155,355.62,ValueLine Parts,14,1,88,Mature,74.7,-0.891,0.426,17.3483,0.253,24
+SKU-00260,Transmission Fluid - Economy #260,Fluids,Transmission Fluid,Economy,False,339.81,549.37,0.121,502.56,Northern Dist,28,1,141,Decline,2.19,-1.859,0.542,23.4406,0.218,1
+SKU-00261,Diagnostic Tools - Mid-Tier #261,Tools,Diagnostic Tools,Mid-Tier,False,133.0,199.71,0.1,186.5,Northern Dist,28,12,9,New,20.44,-0.441,0.0,4.879,0.288,12
+SKU-00262,Wrenches - Private Label #262,Tools,Wrenches,Private Label,True,230.28,351.33,0.117,323.45,ValueLine Parts,7,6,197,Decline,21.84,-0.417,0.0,11.5964,0.135,1
+SKU-00263,Wrenches - Premium #263,Tools,Wrenches,Premium,False,153.05,189.69,0.102,172.91,Northern Dist,32,6,127,Mature,6.48,-0.718,0.0,4.4793,0.098,1
+SKU-00264,Gaskets - Private Label #264,Engine Components,Gaskets,Private Label,True,277.42,400.41,0.148,392.28,Pacific Supply,39,6,110,Mature,68.45,-1.508,0.0,11.275,0.161,6
+SKU-00265,Starter - Economy #265,Electrical,Starter,Economy,False,251.65,441.47,0.162,404.77,Northern Dist,40,1,122,Mature,72.55,-0.718,0.0,19.7296,0.246,12
+SKU-00266,Car Battery - Economy #266,Batteries,Car Battery,Economy,False,156.85,255.34,0.114,227.23,AutoParts Co,37,1,98,Mature,27.14,-1.31,0.355,10.1508,0.031,1
+SKU-00267,Brake Fluid - Economy #267,Brakes,Brake Fluid,Economy,False,203.84,326.18,0.192,311.21,Pacific Supply,21,12,26,Mature,24.82,-0.927,0.0,8.0892,0.244,6
+SKU-00268,Rotors - Private Label #268,Brakes,Rotors,Private Label,True,435.38,748.55,0.195,678.92,AutoParts Co,24,24,12,New,12.14,-0.999,0.0,33.1468,0.011,1
+SKU-00269,Motor Oil - Premium #269,Fluids,Motor Oil,Premium,False,103.48,136.33,0.166,121.68,ValueLine Parts,21,1,7,New,49.0,-1.816,0.478,3.0614,0.103,1
+SKU-00270,Gaskets - Mid-Tier #270,Engine Components,Gaskets,Mid-Tier,False,671.7,1050.32,0.156,1013.63,AutoParts Co,10,1,125,Mature,52.13,-1.062,0.0,52.3312,0.184,1
+SKU-00271,Marine Battery - Mid-Tier #271,Batteries,Marine Battery,Mid-Tier,False,35.6,59.53,0.122,56.83,Pacific Supply,30,1,130,Decline,4.36,-1.212,0.526,0.8227,0.229,1
+SKU-00272,Alternator - Premium #272,Electrical,Alternator,Premium,False,430.29,581.69,0.121,517.82,ValueLine Parts,6,6,80,Mature,26.78,-1.277,0.0,19.373,0.265,1
+SKU-00273,Motor Oil - Premium #273,Fluids,Motor Oil,Premium,False,454.63,784.26,0.168,691.14,AutoParts Co,40,1,70,Growth,31.64,-2.128,0.43,25.7545,0.096,1
+SKU-00274,Fuses - Private Label #274,Electrical,Fuses,Private Label,True,164.41,246.98,0.128,211.65,ValueLine Parts,20,12,158,Decline,15.34,-0.688,0.0,5.1079,0.037,6
+SKU-00275,Coolant - Private Label #275,Fluids,Coolant,Private Label,True,309.49,431.63,0.104,400.57,Northern Dist,14,1,158,Decline,60.65,-2.652,0.369,7.0697,0.017,1
+SKU-00276,Control Arms - Premium #276,Suspension,Control Arms,Premium,False,289.16,455.2,0.106,395.98,ValueLine Parts,21,24,177,Decline,54.27,-1.068,0.0,20.8357,0.23,12
+SKU-00277,Pistons - Economy #277,Engine Components,Pistons,Economy,False,669.25,1074.53,0.18,1043.92,Northern Dist,9,1,36,Growth,68.38,-1.22,0.0,46.3011,0.242,24
+SKU-00278,Gaskets - Economy #278,Engine Components,Gaskets,Economy,False,750.3,1304.56,0.157,1207.1,Pacific Supply,33,24,52,Mature,21.89,-1.466,0.0,34.8686,0.071,12
+SKU-00279,Shocks - Private Label #279,Suspension,Shocks,Private Label,True,257.82,324.03,0.172,285.96,Pacific Supply,39,1,153,Decline,17.62,-0.687,0.0,13.0694,0.141,1
+SKU-00280,Marine Battery - Mid-Tier #280,Batteries,Marine Battery,Mid-Tier,False,134.52,180.59,0.193,157.38,Pacific Supply,13,12,95,Mature,27.5,-0.713,0.235,9.0669,0.159,1
+SKU-00281,Air Filter - Economy #281,Filters,Air Filter,Economy,False,317.17,560.14,0.196,525.69,ValueLine Parts,28,1,95,Mature,87.49,-1.273,0.0,20.7687,0.289,12
+SKU-00282,Rotors - Private Label #282,Brakes,Rotors,Private Label,True,116.96,172.43,0.193,168.09,Northern Dist,32,1,167,Decline,29.22,-1.11,0.0,4.6183,0.017,1
+SKU-00283,Car Battery - Mid-Tier #283,Batteries,Car Battery,Mid-Tier,False,328.28,509.12,0.178,460.24,AutoParts Co,14,1,29,Growth,26.37,-1.499,0.271,9.6668,0.203,12
+SKU-00284,Jacks - Economy #284,Tools,Jacks,Economy,False,54.2,81.17,0.106,73.54,AutoParts Co,31,12,187,Decline,7.72,-0.605,0.0,3.5832,0.192,24
+SKU-00285,Calipers - Premium #285,Brakes,Calipers,Premium,False,362.85,539.27,0.127,481.36,Northern Dist,20,6,128,Mature,39.12,-0.545,0.0,16.2646,0.146,1
+SKU-00286,Alternator - Economy #286,Electrical,Alternator,Economy,False,24.77,40.92,0.128,38.41,AutoParts Co,28,1,90,Mature,52.9,-0.793,0.0,1.2509,0.222,24
+SKU-00287,Jacks - Premium #287,Tools,Jacks,Premium,False,135.84,182.33,0.137,164.25,AutoParts Co,21,1,55,Mature,17.95,-0.498,0.0,6.5472,0.018,24
+SKU-00288,Wrenches - Private Label #288,Tools,Wrenches,Private Label,True,175.68,234.08,0.162,213.18,Northern Dist,44,6,71,Growth,3.88,-0.615,0.0,3.5339,0.286,6
+SKU-00289,Oil Filter - Mid-Tier #289,Filters,Oil Filter,Mid-Tier,False,360.15,628.47,0.171,572.08,AutoParts Co,20,1,48,Mature,112.18,-1.038,0.0,10.2814,0.202,6
+SKU-00290,Transmission Fluid - Private Label #290,Fluids,Transmission Fluid,Private Label,True,311.94,423.82,0.14,367.6,ValueLine Parts,32,1,106,Mature,13.18,-2.492,0.524,13.2456,0.204,6
+SKU-00291,Brake Fluid - Private Label #291,Brakes,Brake Fluid,Private Label,True,275.77,460.67,0.151,419.99,Pacific Supply,19,6,59,Growth,25.78,-0.594,0.0,14.5306,0.202,12
+SKU-00292,Struts - Private Label #292,Suspension,Struts,Private Label,True,176.27,308.81,0.121,284.97,AutoParts Co,41,6,46,Mature,12.83,-0.924,0.0,9.7242,0.158,6
+SKU-00293,Wrenches - Mid-Tier #293,Tools,Wrenches,Mid-Tier,False,112.67,174.75,0.15,150.66,AutoParts Co,37,1,185,Decline,15.6,-0.763,0.0,8.214,0.071,12
+SKU-00294,Brake Fluid - Mid-Tier #294,Brakes,Brake Fluid,Mid-Tier,False,215.58,384.24,0.194,362.31,AutoParts Co,44,1,175,Decline,48.28,-1.152,0.0,5.6827,0.125,24
+SKU-00295,Starter - Premium #295,Electrical,Starter,Premium,False,348.93,467.7,0.134,403.04,AutoParts Co,5,1,134,Decline,35.7,-0.952,0.0,26.9482,0.052,24
+SKU-00296,Transmission Fluid - Premium #296,Fluids,Transmission Fluid,Premium,False,105.14,130.57,0.114,119.36,AutoParts Co,12,1,42,Growth,36.4,-1.757,0.432,2.556,0.074,1
+SKU-00297,Air Filter - Private Label #297,Filters,Air Filter,Private Label,True,498.15,896.76,0.142,771.65,AutoParts Co,38,1,5,New,20.48,-2.015,0.0,20.1152,0.062,12
+SKU-00298,Sockets - Private Label #298,Tools,Sockets,Private Label,True,168.44,218.67,0.15,190.2,AutoParts Co,42,6,73,Mature,5.14,-0.719,0.0,9.0804,0.169,1
+SKU-00299,Sockets - Mid-Tier #299,Tools,Sockets,Mid-Tier,False,220.56,290.16,0.119,258.51,ValueLine Parts,32,6,147,Decline,16.65,-0.349,0.0,10.7637,0.273,1
+SKU-00300,Motor Oil - Economy #300,Fluids,Motor Oil,Economy,False,275.34,350.08,0.139,311.83,Northern Dist,34,12,73,Growth,66.08,-1.445,0.377,20.7824,0.149,1
+SKU-00301,Coolant - Premium #301,Fluids,Coolant,Premium,False,136.21,188.92,0.172,183.9,Northern Dist,10,1,39,Growth,66.6,-1.73,0.54,10.5161,0.125,6
+SKU-00302,Marine Battery - Economy #302,Batteries,Marine Battery,Economy,False,84.97,128.4,0.112,122.31,ValueLine Parts,10,12,193,Decline,56.23,-1.491,0.564,4.9985,0.132,1
+SKU-00303,Spark Plugs - Premium #303,Engine Components,Spark Plugs,Premium,False,526.38,791.52,0.116,719.17,Pacific Supply,22,6,69,Mature,26.15,-1.304,0.0,39.6856,0.166,1
+SKU-00304,Motor Oil - Premium #304,Fluids,Motor Oil,Premium,False,54.97,89.6,0.184,78.33,AutoParts Co,29,1,18,New,27.21,-2.449,0.436,4.0849,0.096,12
+SKU-00305,Transmission Fluid - Mid-Tier #305,Fluids,Transmission Fluid,Mid-Tier,False,156.39,271.98,0.11,256.36,ValueLine Parts,28,12,119,Mature,42.45,-1.635,0.329,10.3606,0.155,1
+SKU-00306,Car Battery - Mid-Tier #306,Batteries,Car Battery,Mid-Tier,False,433.27,590.17,0.148,574.61,Northern Dist,9,1,56,Mature,32.05,-0.922,0.599,21.1247,0.242,6
+SKU-00307,Power Steering - Economy #307,Fluids,Power Steering,Economy,False,315.27,447.45,0.151,409.96,Northern Dist,29,1,28,Mature,57.32,-2.767,0.518,16.3116,0.02,1
+SKU-00308,Control Arms - Mid-Tier #308,Suspension,Control Arms,Mid-Tier,False,20.46,32.29,0.144,29.19,Pacific Supply,21,1,96,Mature,43.95,-1.125,0.0,1.1223,0.012,6
+SKU-00309,Bushings - Premium #309,Suspension,Bushings,Premium,False,228.21,298.7,0.152,264.78,Pacific Supply,32,1,66,Mature,21.41,-0.698,0.0,10.0981,0.166,12
+SKU-00310,Bushings - Economy #310,Suspension,Bushings,Economy,False,497.86,672.48,0.179,620.18,ValueLine Parts,30,12,192,Decline,78.9,-0.872,0.0,31.6365,0.047,24
+SKU-00311,Gaskets - Mid-Tier #311,Engine Components,Gaskets,Mid-Tier,False,649.33,819.98,0.113,704.4,AutoParts Co,28,24,50,Mature,45.08,-1.205,0.0,23.8874,0.161,24
+SKU-00312,Brake Pads - Premium #312,Brakes,Brake Pads,Premium,False,55.67,72.81,0.181,62.89,ValueLine Parts,34,1,177,Decline,60.2,-0.77,0.0,1.3192,0.14,1
+SKU-00313,Wrenches - Economy #313,Tools,Wrenches,Economy,False,143.07,181.25,0.157,158.43,AutoParts Co,15,1,70,Mature,5.36,-0.461,0.0,5.7325,0.054,24
+SKU-00314,Cabin Filter - Economy #314,Filters,Cabin Filter,Economy,False,92.35,137.9,0.126,134.72,Northern Dist,5,6,175,Decline,95.03,-2.451,0.0,3.9764,0.262,1
+SKU-00315,Control Arms - Economy #315,Suspension,Control Arms,Economy,False,392.59,658.26,0.148,603.06,Pacific Supply,16,1,86,Mature,68.65,-0.797,0.0,12.4633,0.242,1
+SKU-00316,Starter - Premium #316,Electrical,Starter,Premium,False,267.72,452.59,0.107,386.49,Northern Dist,43,12,33,Mature,23.76,-0.988,0.0,9.9025,0.247,24
+SKU-00317,Gaskets - Mid-Tier #317,Engine Components,Gaskets,Mid-Tier,False,656.09,1082.89,0.176,1060.99,ValueLine Parts,39,1,28,Mature,18.51,-1.217,0.0,29.0549,0.258,24
+SKU-00318,Wiring Harness - Premium #318,Electrical,Wiring Harness,Premium,False,180.91,276.7,0.113,267.45,ValueLine Parts,12,6,141,Decline,72.96,-1.328,0.0,10.1825,0.034,24
+SKU-00319,Alternator - Premium #319,Electrical,Alternator,Premium,False,297.0,493.84,0.14,448.32,Northern Dist,37,1,199,Decline,55.67,-0.852,0.0,18.661,0.299,1
+SKU-00320,Wiring Harness - Premium #320,Electrical,Wiring Harness,Premium,False,278.99,383.73,0.194,357.47,AutoParts Co,13,12,6,New,64.25,-0.928,0.0,5.631,0.19,24
+SKU-00321,Bushings - Economy #321,Suspension,Bushings,Economy,False,427.55,599.8,0.182,552.78,AutoParts Co,40,6,137,Decline,17.72,-0.867,0.0,10.0594,0.225,1
+SKU-00322,Car Battery - Premium #322,Batteries,Car Battery,Premium,False,470.16,586.42,0.147,562.51,ValueLine Parts,24,6,184,Decline,3.42,-1.723,0.21,12.9979,0.046,24
+SKU-00323,Jacks - Premium #323,Tools,Jacks,Premium,False,285.65,465.86,0.188,427.45,AutoParts Co,27,1,113,Mature,16.74,-0.384,0.0,21.0092,0.211,24
+SKU-00324,Gaskets - Mid-Tier #324,Engine Components,Gaskets,Mid-Tier,False,209.37,310.78,0.166,303.71,ValueLine Parts,27,1,65,Growth,39.08,-1.004,0.0,9.6138,0.092,1
+SKU-00325,Spark Plugs - Mid-Tier #325,Engine Components,Spark Plugs,Mid-Tier,False,480.62,620.81,0.172,543.45,AutoParts Co,15,1,48,Growth,26.97,-0.883,0.0,23.2121,0.254,6
+SKU-00326,Gaskets - Premium #326,Engine Components,Gaskets,Premium,False,473.96,618.97,0.176,567.88,Northern Dist,10,1,63,Growth,36.25,-1.077,0.0,13.9442,0.236,12
+SKU-00327,Diagnostic Tools - Economy #327,Tools,Diagnostic Tools,Economy,False,92.84,133.86,0.16,129.78,ValueLine Parts,32,12,76,Growth,2.25,-0.612,0.0,2.696,0.085,24
+SKU-00328,Battery Charger - Premium #328,Batteries,Battery Charger,Premium,False,6.11,8.96,0.13,7.83,Pacific Supply,18,6,108,Mature,19.82,-1.125,0.437,0.1728,0.079,1
+SKU-00329,Alternator - Mid-Tier #329,Electrical,Alternator,Mid-Tier,False,451.47,758.09,0.137,701.13,ValueLine Parts,16,1,161,Decline,20.43,-0.876,0.0,17.2042,0.022,1
+SKU-00330,Alternator - Private Label #330,Electrical,Alternator,Private Label,True,59.27,85.12,0.138,77.77,AutoParts Co,38,6,176,Decline,3.58,-0.89,0.0,3.509,0.202,24
+SKU-00331,Wiring Harness - Mid-Tier #331,Electrical,Wiring Harness,Mid-Tier,False,78.74,118.89,0.104,113.8,Pacific Supply,11,24,132,Decline,27.52,-1.037,0.0,2.4012,0.054,6
+SKU-00332,Air Filter - Private Label #332,Filters,Air Filter,Private Label,True,121.56,211.23,0.128,197.34,Pacific Supply,25,24,133,Decline,82.0,-2.439,0.0,8.4739,0.291,1
+SKU-00333,Struts - Economy #333,Suspension,Struts,Economy,False,396.25,524.97,0.186,465.35,AutoParts Co,44,6,38,Growth,43.62,-0.757,0.0,28.144,0.299,12
+SKU-00334,Brake Pads - Mid-Tier #334,Brakes,Brake Pads,Mid-Tier,False,242.06,352.53,0.186,334.96,ValueLine Parts,22,1,57,Growth,50.21,-1.187,0.0,10.614,0.129,1
+SKU-00335,Car Battery - Economy #335,Batteries,Car Battery,Economy,False,164.09,248.26,0.152,239.34,AutoParts Co,39,1,119,Mature,25.42,-1.666,0.372,10.7957,0.081,12
+SKU-00336,Calipers - Economy #336,Brakes,Calipers,Economy,False,426.03,684.94,0.156,646.68,ValueLine Parts,26,12,85,Mature,20.28,-0.723,0.0,16.6268,0.2,12
+SKU-00337,Marine Battery - Mid-Tier #337,Batteries,Marine Battery,Mid-Tier,False,49.58,77.45,0.187,67.26,AutoParts Co,31,1,184,Decline,4.31,-1.397,0.596,2.0492,0.09,12
+SKU-00338,Spark Plugs - Economy #338,Engine Components,Spark Plugs,Economy,False,74.98,117.98,0.1,110.65,Northern Dist,33,1,53,Mature,62.04,-1.4,0.0,4.6656,0.297,1
+SKU-00339,Spark Plugs - Mid-Tier #339,Engine Components,Spark Plugs,Mid-Tier,False,145.11,226.15,0.176,193.32,Northern Dist,6,24,184,Decline,25.67,-1.157,0.0,4.3192,0.116,6
+SKU-00340,Battery Charger - Economy #340,Batteries,Battery Charger,Economy,False,44.14,64.17,0.108,60.2,Northern Dist,35,1,41,Mature,78.54,-0.93,0.469,3.3001,0.197,6
+SKU-00341,Fuel Filter - Premium #341,Filters,Fuel Filter,Premium,False,250.89,402.75,0.12,353.4,Pacific Supply,3,1,174,Decline,46.46,-1.033,0.0,14.3974,0.278,12
+SKU-00342,Belts - Economy #342,Engine Components,Belts,Economy,False,688.58,904.6,0.111,883.36,AutoParts Co,31,12,131,Decline,25.68,-0.909,0.0,27.1216,0.093,6
+SKU-00343,Motor Oil - Mid-Tier #343,Fluids,Motor Oil,Mid-Tier,False,226.07,331.62,0.122,322.34,ValueLine Parts,14,24,184,Decline,10.52,-1.778,0.449,9.0101,0.067,1
+SKU-00344,Starter - Mid-Tier #344,Electrical,Starter,Mid-Tier,False,166.35,222.76,0.165,190.88,ValueLine Parts,12,6,57,Mature,15.72,-1.126,0.0,3.3362,0.147,1
+SKU-00345,Shocks - Mid-Tier #345,Suspension,Shocks,Mid-Tier,False,497.43,869.58,0.122,774.19,ValueLine Parts,31,1,43,Mature,11.85,-0.975,0.0,22.3863,0.262,6
+SKU-00346,Spark Plugs - Mid-Tier #346,Engine Components,Spark Plugs,Mid-Tier,False,555.18,969.64,0.145,834.67,Northern Dist,37,24,25,New,33.86,-1.137,0.0,40.2471,0.089,1
+SKU-00347,Wrenches - Mid-Tier #347,Tools,Wrenches,Mid-Tier,False,95.16,148.28,0.114,128.18,AutoParts Co,42,1,141,Decline,23.66,-0.734,0.0,6.2429,0.224,12
+SKU-00348,Belts - Mid-Tier #348,Engine Components,Belts,Mid-Tier,False,688.13,1104.05,0.147,973.54,Pacific Supply,31,1,72,Mature,33.2,-1.018,0.0,33.5185,0.162,6
+SKU-00349,Pistons - Private Label #349,Engine Components,Pistons,Private Label,True,287.01,399.11,0.113,354.65,Pacific Supply,6,1,102,Mature,15.05,-1.531,0.0,19.4061,0.081,1
+SKU-00350,Coolant - Mid-Tier #350,Fluids,Coolant,Mid-Tier,False,100.93,138.85,0.159,127.17,Northern Dist,14,24,180,Decline,36.85,-2.562,0.417,2.4435,0.108,12
+SKU-00351,Diagnostic Tools - Mid-Tier #351,Tools,Diagnostic Tools,Mid-Tier,False,131.86,179.51,0.192,160.59,ValueLine Parts,10,1,177,Decline,17.36,-0.682,0.0,3.6752,0.195,6
+SKU-00352,Oil Filter - Economy #352,Filters,Oil Filter,Economy,False,146.53,183.01,0.104,166.1,AutoParts Co,25,1,48,Mature,31.63,-1.574,0.0,7.173,0.278,1
+SKU-00353,Cabin Filter - Mid-Tier #353,Filters,Cabin Filter,Mid-Tier,False,494.77,616.62,0.193,564.34,ValueLine Parts,31,1,98,Mature,58.22,-1.744,0.0,29.4532,0.175,12
+SKU-00354,Cabin Filter - Economy #354,Filters,Cabin Filter,Economy,False,201.68,246.31,0.145,209.56,ValueLine Parts,14,12,143,Decline,19.01,-2.388,0.0,7.7681,0.299,12
+SKU-00355,Pistons - Mid-Tier #355,Engine Components,Pistons,Mid-Tier,False,697.05,949.79,0.175,824.22,Pacific Supply,34,1,93,Mature,3.31,-1.052,0.0,53.898,0.102,1
+SKU-00356,Fuel Filter - Mid-Tier #356,Filters,Fuel Filter,Mid-Tier,False,422.11,685.98,0.144,601.7,AutoParts Co,20,12,40,Growth,90.27,-2.431,0.0,19.4908,0.178,6
+SKU-00357,Cabin Filter - Economy #357,Filters,Cabin Filter,Economy,False,256.32,452.83,0.143,385.84,Northern Dist,18,12,145,Decline,70.76,-2.145,0.0,9.3503,0.203,1
+SKU-00358,Diagnostic Tools - Mid-Tier #358,Tools,Diagnostic Tools,Mid-Tier,False,132.99,218.89,0.191,202.95,AutoParts Co,16,12,84,Mature,18.76,-0.65,0.0,3.2478,0.013,24
+SKU-00359,Car Battery - Premium #359,Batteries,Car Battery,Premium,False,440.07,623.99,0.127,565.2,Pacific Supply,20,1,5,New,12.76,-1.366,0.462,29.2759,0.068,1
+SKU-00360,Wrenches - Premium #360,Tools,Wrenches,Premium,False,285.63,410.99,0.163,350.58,Pacific Supply,14,24,161,Decline,22.27,-0.661,0.0,17.0615,0.043,12
+SKU-00361,Coolant - Premium #361,Fluids,Coolant,Premium,False,224.05,345.51,0.143,304.67,Northern Dist,27,12,51,Growth,45.24,-1.687,0.289,9.6902,0.115,6
+SKU-00362,Fuel Filter - Economy #362,Filters,Fuel Filter,Economy,False,173.45,295.06,0.185,254.98,Pacific Supply,12,24,120,Mature,119.97,-1.457,0.0,8.07,0.088,1
+SKU-00363,Jacks - Mid-Tier #363,Tools,Jacks,Mid-Tier,False,159.32,274.68,0.179,251.29,AutoParts Co,44,6,178,Decline,18.04,-0.656,0.0,11.5931,0.045,1
+SKU-00364,Sockets - Premium #364,Tools,Sockets,Premium,False,125.41,221.62,0.132,211.85,ValueLine Parts,19,6,46,Mature,10.79,-0.426,0.0,4.5832,0.265,1
+SKU-00365,Sockets - Mid-Tier #365,Tools,Sockets,Mid-Tier,False,153.21,244.55,0.129,231.96,ValueLine Parts,30,1,133,Decline,16.14,-0.485,0.0,6.4084,0.22,24
+SKU-00366,Jacks - Private Label #366,Tools,Jacks,Private Label,True,184.64,333.06,0.153,317.77,Northern Dist,12,1,40,Mature,17.59,-0.502,0.0,6.3285,0.294,12
+SKU-00367,Wrenches - Premium #367,Tools,Wrenches,Premium,False,84.25,116.6,0.171,101.52,Pacific Supply,17,1,16,New,6.66,-0.72,0.0,3.5576,0.102,6
+SKU-00368,Calipers - Economy #368,Brakes,Calipers,Economy,False,40.05,54.53,0.187,50.48,Northern Dist,11,12,125,Mature,38.28,-0.912,0.0,2.9974,0.274,24
+SKU-00369,Car Battery - Mid-Tier #369,Batteries,Car Battery,Mid-Tier,False,84.51,114.66,0.133,106.9,ValueLine Parts,14,12,43,Growth,2.54,-1.591,0.542,3.4921,0.183,1
+SKU-00370,Fuel Filter - Mid-Tier #370,Filters,Fuel Filter,Mid-Tier,False,179.83,275.02,0.122,257.47,Northern Dist,35,12,37,Growth,58.35,-1.35,0.0,11.1698,0.127,12
+SKU-00371,Oil Filter - Mid-Tier #371,Filters,Oil Filter,Mid-Tier,False,106.16,170.15,0.12,151.07,Pacific Supply,28,24,157,Decline,58.12,-1.74,0.0,7.4732,0.265,6
+SKU-00372,Sockets - Economy #372,Tools,Sockets,Economy,False,106.8,161.78,0.103,137.67,Pacific Supply,28,1,128,Mature,13.6,-0.374,0.0,7.8758,0.065,1
+SKU-00373,Power Steering - Economy #373,Fluids,Power Steering,Economy,False,124.17,159.34,0.132,143.68,ValueLine Parts,29,24,33,Growth,66.79,-2.407,0.264,4.1636,0.132,6
+SKU-00374,Power Steering - Economy #374,Fluids,Power Steering,Economy,False,140.97,209.87,0.155,194.83,Pacific Supply,9,1,27,Growth,14.57,-2.711,0.321,7.1581,0.191,24
+SKU-00375,Rotors - Mid-Tier #375,Brakes,Rotors,Mid-Tier,False,254.07,343.09,0.134,311.82,ValueLine Parts,19,1,121,Mature,19.42,-0.846,0.0,7.3606,0.111,24
+SKU-00376,Diagnostic Tools - Mid-Tier #376,Tools,Diagnostic Tools,Mid-Tier,False,29.7,52.28,0.141,49.77,AutoParts Co,34,24,38,Mature,10.89,-0.592,0.0,1.2433,0.298,1
+SKU-00377,Calipers - Economy #377,Brakes,Calipers,Economy,False,323.51,542.38,0.186,500.74,AutoParts Co,34,12,136,Decline,49.92,-0.994,0.0,15.2154,0.058,24
+SKU-00378,Wiring Harness - Economy #378,Electrical,Wiring Harness,Economy,False,90.02,137.49,0.175,133.6,AutoParts Co,28,12,103,Mature,74.26,-1.372,0.0,2.0908,0.157,12
+SKU-00379,Jacks - Mid-Tier #379,Tools,Jacks,Mid-Tier,False,172.97,257.85,0.104,233.9,ValueLine Parts,42,1,157,Decline,8.19,-0.693,0.0,5.7375,0.149,1
+SKU-00380,Battery Charger - Premium #380,Batteries,Battery Charger,Premium,False,24.74,32.61,0.184,30.35,Pacific Supply,16,1,102,Mature,26.88,-1.181,0.572,1.8247,0.15,24
+SKU-00381,Power Steering - Mid-Tier #381,Fluids,Power Steering,Mid-Tier,False,330.92,415.6,0.147,365.0,AutoParts Co,6,1,73,Growth,47.98,-2.7,0.382,26.2989,0.282,6
+SKU-00382,Fuel Filter - Economy #382,Filters,Fuel Filter,Economy,False,368.08,510.46,0.175,442.13,Northern Dist,38,24,85,Mature,78.83,-2.002,0.0,11.213,0.024,1
+SKU-00383,Oil Filter - Premium #383,Filters,Oil Filter,Premium,False,254.58,375.84,0.166,338.27,Northern Dist,33,6,51,Growth,12.49,-2.495,0.0,18.7613,0.176,12
+SKU-00384,Motor Oil - Premium #384,Fluids,Motor Oil,Premium,False,339.09,582.32,0.197,528.51,ValueLine Parts,13,12,137,Decline,60.76,-2.249,0.417,10.2452,0.143,1
+SKU-00385,Alternator - Premium #385,Electrical,Alternator,Premium,False,30.78,54.1,0.107,46.5,AutoParts Co,35,24,174,Decline,77.09,-1.004,0.0,1.3631,0.14,1
+SKU-00386,Control Arms - Mid-Tier #386,Suspension,Control Arms,Mid-Tier,False,65.72,82.94,0.156,71.56,ValueLine Parts,21,24,11,New,39.48,-1.228,0.0,1.3319,0.066,1
+SKU-00387,Brake Pads - Economy #387,Brakes,Brake Pads,Economy,False,458.14,644.91,0.141,607.91,AutoParts Co,32,1,146,Decline,10.4,-0.761,0.0,24.689,0.05,24
+SKU-00388,Alternator - Mid-Tier #388,Electrical,Alternator,Mid-Tier,False,233.08,362.11,0.151,317.28,Northern Dist,5,1,63,Mature,39.39,-1.387,0.0,15.9059,0.228,1
+SKU-00389,Power Steering - Economy #389,Fluids,Power Steering,Economy,False,214.34,304.11,0.119,284.22,AutoParts Co,13,1,82,Mature,71.08,-1.864,0.347,8.5035,0.262,1
+SKU-00390,Spark Plugs - Private Label #390,Engine Components,Spark Plugs,Private Label,True,663.68,1128.94,0.138,1070.62,Northern Dist,10,6,100,Mature,58.14,-1.138,0.0,51.4057,0.098,12
+SKU-00391,Pistons - Mid-Tier #391,Engine Components,Pistons,Mid-Tier,False,107.58,176.92,0.155,157.45,Pacific Supply,25,24,149,Decline,36.97,-1.113,0.0,6.4645,0.231,24
+SKU-00392,Coolant - Premium #392,Fluids,Coolant,Premium,False,134.83,169.6,0.155,157.68,Pacific Supply,29,1,198,Decline,28.16,-1.638,0.205,5.0794,0.063,24
+SKU-00393,Belts - Mid-Tier #393,Engine Components,Belts,Mid-Tier,False,290.63,448.72,0.135,404.52,ValueLine Parts,35,1,19,New,33.74,-1.568,0.0,7.3207,0.194,24
+SKU-00394,Marine Battery - Premium #394,Batteries,Marine Battery,Premium,False,77.46,117.83,0.192,106.86,Pacific Supply,13,1,12,New,61.74,-1.422,0.497,3.2122,0.235,1
+SKU-00395,Wiring Harness - Economy #395,Electrical,Wiring Harness,Economy,False,415.57,557.68,0.134,477.1,Northern Dist,18,1,142,Decline,25.25,-0.544,0.0,26.349,0.227,1
+SKU-00396,Diagnostic Tools - Private Label #396,Tools,Diagnostic Tools,Private Label,True,202.46,314.26,0.19,305.05,Pacific Supply,30,1,43,Growth,20.66,-0.502,0.0,5.7764,0.271,1
+SKU-00397,Bushings - Private Label #397,Suspension,Bushings,Private Label,True,216.79,356.38,0.183,317.55,ValueLine Parts,27,6,100,Mature,4.36,-1.198,0.0,12.7934,0.208,1
+SKU-00398,Wiring Harness - Premium #398,Electrical,Wiring Harness,Premium,False,415.37,545.94,0.17,519.65,AutoParts Co,35,6,145,Decline,20.56,-1.292,0.0,13.0616,0.142,1
+SKU-00399,Fuses - Mid-Tier #399,Electrical,Fuses,Mid-Tier,False,196.9,354.24,0.146,321.08,Pacific Supply,7,1,64,Growth,55.65,-1.047,0.0,11.993,0.068,12
+SKU-00400,Control Arms - Mid-Tier #400,Suspension,Control Arms,Mid-Tier,False,366.03,505.4,0.116,444.47,Northern Dist,16,6,32,Growth,62.43,-0.727,0.0,23.2936,0.146,1
+SKU-00401,Alternator - Private Label #401,Electrical,Alternator,Private Label,True,78.14,107.84,0.138,98.53,AutoParts Co,8,6,9,New,74.73,-0.636,0.0,6.0198,0.247,12
+SKU-00402,Spark Plugs - Mid-Tier #402,Engine Components,Spark Plugs,Mid-Tier,False,533.27,756.7,0.173,652.23,AutoParts Co,42,12,121,Mature,17.93,-0.936,0.0,14.7982,0.245,1
+SKU-00403,Fuel Filter - Economy #403,Filters,Fuel Filter,Economy,False,480.46,643.23,0.183,576.18,Pacific Supply,24,12,134,Decline,73.19,-1.694,0.0,14.6411,0.28,12
+SKU-00404,Motor Oil - Economy #404,Fluids,Motor Oil,Economy,False,100.0,124.56,0.169,107.67,AutoParts Co,36,1,38,Mature,6.31,-2.63,0.524,5.1103,0.038,1
+SKU-00405,Wiring Harness - Premium #405,Electrical,Wiring Harness,Premium,False,472.52,618.55,0.168,536.08,Pacific Supply,30,24,22,New,46.7,-1.269,0.0,10.1854,0.01,1
+SKU-00406,Fuses - Private Label #406,Electrical,Fuses,Private Label,True,456.73,784.41,0.114,708.77,ValueLine Parts,12,24,75,Growth,53.73,-0.68,0.0,32.7136,0.083,1
+SKU-00407,Pistons - Mid-Tier #407,Engine Components,Pistons,Mid-Tier,False,218.82,282.8,0.151,244.52,ValueLine Parts,23,1,70,Growth,15.14,-1.099,0.0,14.6955,0.182,6
+SKU-00408,Calipers - Mid-Tier #408,Brakes,Calipers,Mid-Tier,False,166.92,211.22,0.198,184.37,Northern Dist,26,6,109,Mature,13.36,-1.065,0.0,5.8378,0.135,6
+SKU-00409,Control Arms - Mid-Tier #409,Suspension,Control Arms,Mid-Tier,False,458.05,621.26,0.12,605.17,Pacific Supply,37,6,147,Decline,67.63,-0.733,0.0,18.6908,0.253,1
+SKU-00410,Marine Battery - Economy #410,Batteries,Marine Battery,Economy,False,187.85,229.16,0.196,211.16,AutoParts Co,43,12,62,Growth,44.95,-1.142,0.316,11.319,0.142,12
+SKU-00411,Belts - Premium #411,Engine Components,Belts,Premium,False,157.36,245.4,0.188,218.25,Northern Dist,13,1,71,Growth,74.5,-1.334,0.0,4.1027,0.061,24
+SKU-00412,Pistons - Economy #412,Engine Components,Pistons,Economy,False,171.4,294.2,0.115,250.79,AutoParts Co,8,1,52,Mature,27.43,-1.199,0.0,10.3876,0.257,24
+SKU-00413,Diagnostic Tools - Economy #413,Tools,Diagnostic Tools,Economy,False,107.44,171.51,0.172,166.98,Pacific Supply,20,1,17,New,15.73,-0.516,0.0,7.2488,0.18,6
+SKU-00414,Brake Fluid - Economy #414,Brakes,Brake Fluid,Economy,False,458.05,646.69,0.157,589.62,Pacific Supply,40,1,115,Mature,7.25,-0.828,0.0,24.2233,0.171,24
+SKU-00415,Brake Pads - Mid-Tier #415,Brakes,Brake Pads,Mid-Tier,False,217.43,345.92,0.105,326.0,Northern Dist,39,1,185,Decline,50.92,-0.999,0.0,10.0947,0.252,24
+SKU-00416,Power Steering - Mid-Tier #416,Fluids,Power Steering,Mid-Tier,False,159.33,246.35,0.161,209.73,AutoParts Co,5,6,17,New,59.32,-1.828,0.507,7.2139,0.062,1
+SKU-00417,Belts - Premium #417,Engine Components,Belts,Premium,False,541.58,722.97,0.171,619.05,Pacific Supply,5,1,37,Mature,63.15,-1.15,0.0,31.0666,0.076,12
+SKU-00418,Power Steering - Mid-Tier #418,Fluids,Power Steering,Mid-Tier,False,95.45,164.15,0.144,152.13,Northern Dist,41,12,19,New,24.52,-2.223,0.281,2.6722,0.227,12
+SKU-00419,Sockets - Premium #419,Tools,Sockets,Premium,False,52.06,68.2,0.17,60.25,Northern Dist,31,1,72,Mature,21.85,-0.354,0.0,2.7565,0.16,12
+SKU-00420,Gaskets - Mid-Tier #420,Engine Components,Gaskets,Mid-Tier,False,308.64,526.91,0.137,459.74,ValueLine Parts,5,6,36,Growth,3.18,-1.133,0.0,20.4196,0.269,1
+SKU-00421,Wiring Harness - Premium #421,Electrical,Wiring Harness,Premium,False,269.54,457.63,0.175,406.3,ValueLine Parts,27,1,118,Mature,68.62,-1.364,0.0,18.7116,0.038,24
+SKU-00422,Brake Fluid - Mid-Tier #422,Brakes,Brake Fluid,Mid-Tier,False,210.2,364.96,0.184,312.95,ValueLine Parts,26,1,152,Decline,62.24,-0.769,0.0,12.8564,0.04,24
+SKU-00423,Shocks - Economy #423,Suspension,Shocks,Economy,False,498.39,628.13,0.11,596.25,AutoParts Co,35,24,64,Mature,64.44,-1.255,0.0,29.4204,0.104,6
+SKU-00424,Belts - Mid-Tier #424,Engine Components,Belts,Mid-Tier,False,551.04,953.08,0.116,928.11,AutoParts Co,18,1,62,Mature,73.3,-1.11,0.0,32.192,0.238,12
+SKU-00425,Fuses - Economy #425,Electrical,Fuses,Economy,False,38.48,49.94,0.195,48.74,AutoParts Co,16,12,49,Growth,61.25,-0.436,0.0,0.9679,0.187,1
+SKU-00426,Cabin Filter - Premium #426,Filters,Cabin Filter,Premium,False,31.31,39.22,0.191,37.13,ValueLine Parts,18,24,100,Mature,55.46,-1.102,0.0,1.2866,0.226,12
+SKU-00427,Battery Charger - Private Label #427,Batteries,Battery Charger,Private Label,True,125.19,184.73,0.122,157.92,Northern Dist,19,24,134,Decline,58.47,-1.021,0.235,9.9727,0.145,1
+SKU-00428,Marine Battery - Economy #428,Batteries,Marine Battery,Economy,False,440.22,733.65,0.181,667.76,ValueLine Parts,35,1,51,Mature,12.33,-0.898,0.246,22.5228,0.273,12
+SKU-00429,Transmission Fluid - Mid-Tier #429,Fluids,Transmission Fluid,Mid-Tier,False,209.9,319.68,0.176,295.18,Northern Dist,17,12,70,Mature,66.77,-1.986,0.225,10.6683,0.032,12
+SKU-00430,Jacks - Mid-Tier #430,Tools,Jacks,Mid-Tier,False,100.57,131.38,0.135,118.68,AutoParts Co,10,1,144,Decline,18.3,-0.452,0.0,2.9673,0.209,1
+SKU-00431,Wrenches - Mid-Tier #431,Tools,Wrenches,Mid-Tier,False,206.22,278.89,0.133,260.74,AutoParts Co,6,1,49,Mature,12.36,-0.525,0.0,8.789,0.107,12
+SKU-00432,Wiring Harness - Mid-Tier #432,Electrical,Wiring Harness,Mid-Tier,False,445.15,786.71,0.122,678.94,ValueLine Parts,39,1,115,Mature,79.6,-0.636,0.0,15.614,0.023,1
+SKU-00433,Power Steering - Mid-Tier #433,Fluids,Power Steering,Mid-Tier,False,259.29,386.83,0.125,359.06,Northern Dist,18,12,60,Mature,54.5,-2.751,0.333,16.3178,0.047,1
+SKU-00434,Cabin Filter - Mid-Tier #434,Filters,Cabin Filter,Mid-Tier,False,64.12,82.4,0.117,75.16,ValueLine Parts,14,1,128,Mature,88.37,-1.589,0.0,2.1422,0.238,1
+SKU-00435,Diagnostic Tools - Mid-Tier #435,Tools,Diagnostic Tools,Mid-Tier,False,89.26,114.83,0.184,98.87,Northern Dist,25,1,170,Decline,21.34,-0.317,0.0,5.9473,0.044,1
+SKU-00436,Marine Battery - Premium #436,Batteries,Marine Battery,Premium,False,417.46,513.72,0.114,489.94,AutoParts Co,29,6,107,Mature,70.75,-1.289,0.454,11.6976,0.289,1
+SKU-00437,Motor Oil - Mid-Tier #437,Fluids,Motor Oil,Mid-Tier,False,139.92,186.89,0.159,178.24,ValueLine Parts,32,1,159,Decline,24.85,-1.557,0.386,9.0684,0.098,1
+SKU-00438,Coolant - Economy #438,Fluids,Coolant,Economy,False,409.55,702.38,0.105,687.64,AutoParts Co,26,1,37,Growth,21.45,-2.404,0.307,17.8671,0.2,1
+SKU-00439,Pistons - Economy #439,Engine Components,Pistons,Economy,False,135.23,225.52,0.104,199.44,Northern Dist,35,6,109,Mature,30.73,-1.554,0.0,5.5203,0.142,6
+SKU-00440,Bushings - Mid-Tier #440,Suspension,Bushings,Mid-Tier,False,322.33,479.25,0.108,448.98,AutoParts Co,9,24,12,New,3.13,-1.084,0.0,12.4497,0.211,6
+SKU-00441,Oil Filter - Economy #441,Filters,Oil Filter,Economy,False,146.81,225.04,0.18,202.56,Northern Dist,31,1,148,Decline,116.59,-2.43,0.0,9.5928,0.11,24
+SKU-00442,Oil Filter - Mid-Tier #442,Filters,Oil Filter,Mid-Tier,False,271.92,455.78,0.134,426.94,Northern Dist,42,24,134,Decline,51.58,-1.951,0.0,7.2042,0.209,6
+SKU-00443,Diagnostic Tools - Private Label #443,Tools,Diagnostic Tools,Private Label,True,122.24,184.31,0.182,177.3,Pacific Supply,26,1,103,Mature,14.66,-0.391,0.0,2.8919,0.155,12
+SKU-00444,Diagnostic Tools - Economy #444,Tools,Diagnostic Tools,Economy,False,231.62,367.58,0.101,342.36,Pacific Supply,37,6,171,Decline,4.75,-0.74,0.0,17.8177,0.294,12
+SKU-00445,Power Steering - Premium #445,Fluids,Power Steering,Premium,False,439.8,740.94,0.187,644.41,ValueLine Parts,5,1,115,Mature,15.56,-2.613,0.347,12.0798,0.016,24
+SKU-00446,Belts - Private Label #446,Engine Components,Belts,Private Label,True,191.68,271.88,0.145,231.3,ValueLine Parts,25,1,175,Decline,79.74,-0.977,0.0,8.3506,0.038,1
+SKU-00447,Starter - Mid-Tier #447,Electrical,Starter,Mid-Tier,False,218.76,325.13,0.185,285.88,AutoParts Co,12,12,75,Growth,46.5,-1.47,0.0,16.0151,0.194,24
+SKU-00448,Struts - Mid-Tier #448,Suspension,Struts,Mid-Tier,False,169.55,289.78,0.149,254.83,AutoParts Co,5,1,34,Growth,73.65,-1.098,0.0,5.2525,0.245,1
+SKU-00449,Calipers - Economy #449,Brakes,Calipers,Economy,False,182.08,227.19,0.186,198.78,Northern Dist,31,12,26,Growth,9.47,-1.177,0.0,9.0123,0.08,24
+SKU-00450,Alternator - Premium #450,Electrical,Alternator,Premium,False,62.66,95.87,0.161,93.61,AutoParts Co,25,1,146,Decline,7.08,-1.088,0.0,1.7781,0.17,12
+SKU-00451,Wrenches - Economy #451,Tools,Wrenches,Economy,False,137.44,245.88,0.198,213.13,Northern Dist,23,1,187,Decline,10.18,-0.616,0.0,10.5998,0.129,1
+SKU-00452,Marine Battery - Premium #452,Batteries,Marine Battery,Premium,False,432.26,527.22,0.106,473.11,AutoParts Co,16,6,79,Mature,28.65,-1.044,0.227,8.7858,0.165,1
+SKU-00453,Brake Pads - Mid-Tier #453,Brakes,Brake Pads,Mid-Tier,False,322.39,516.47,0.126,461.1,ValueLine Parts,9,1,57,Growth,16.29,-1.027,0.0,10.1096,0.055,12
+SKU-00454,Rotors - Economy #454,Brakes,Rotors,Economy,False,326.83,534.73,0.133,518.36,Pacific Supply,33,1,129,Mature,64.77,-0.687,0.0,12.0868,0.133,1
+SKU-00455,Oil Filter - Mid-Tier #455,Filters,Oil Filter,Mid-Tier,False,26.35,32.18,0.193,30.24,Pacific Supply,38,6,184,Decline,108.07,-1.657,0.0,1.4795,0.143,24
+SKU-00456,Alternator - Private Label #456,Electrical,Alternator,Private Label,True,215.26,301.44,0.143,272.9,Northern Dist,18,24,140,Decline,57.13,-0.41,0.0,9.8692,0.021,1
+SKU-00457,Gaskets - Economy #457,Engine Components,Gaskets,Economy,False,174.77,280.34,0.172,247.86,Northern Dist,12,1,157,Decline,67.5,-1.102,0.0,5.5385,0.151,12
+SKU-00458,Brake Pads - Economy #458,Brakes,Brake Pads,Economy,False,78.61,112.98,0.199,103.46,Pacific Supply,10,1,85,Mature,45.59,-0.851,0.0,4.767,0.125,1
+SKU-00459,Rotors - Premium #459,Brakes,Rotors,Premium,False,423.79,522.38,0.175,469.96,AutoParts Co,30,6,180,Decline,14.12,-0.781,0.0,26.1635,0.067,6
+SKU-00460,Struts - Premium #460,Suspension,Struts,Premium,False,284.7,364.72,0.151,315.39,AutoParts Co,21,1,91,Mature,26.3,-0.96,0.0,21.2033,0.152,6
+SKU-00461,Pistons - Premium #461,Engine Components,Pistons,Premium,False,78.57,111.23,0.167,106.67,Northern Dist,20,1,193,Decline,15.83,-1.147,0.0,5.3036,0.058,6
+SKU-00462,Rotors - Private Label #462,Brakes,Rotors,Private Label,True,310.05,431.96,0.183,378.66,Pacific Supply,41,6,187,Decline,29.85,-0.899,0.0,18.3094,0.042,24
+SKU-00463,Belts - Premium #463,Engine Components,Belts,Premium,False,127.95,158.88,0.17,144.41,AutoParts Co,10,1,40,Mature,4.91,-0.929,0.0,6.1005,0.074,12
+SKU-00464,Power Steering - Premium #464,Fluids,Power Steering,Premium,False,364.94,478.14,0.166,453.03,ValueLine Parts,19,1,9,New,62.04,-2.705,0.307,25.6618,0.173,1
+SKU-00465,Marine Battery - Private Label #465,Batteries,Marine Battery,Private Label,True,170.58,294.36,0.172,285.74,ValueLine Parts,16,12,189,Decline,12.27,-0.801,0.518,10.0066,0.091,6
+SKU-00466,Pistons - Mid-Tier #466,Engine Components,Pistons,Mid-Tier,False,146.23,234.0,0.109,219.98,ValueLine Parts,9,1,44,Growth,57.33,-0.921,0.0,11.2775,0.054,24
+SKU-00467,Cabin Filter - Mid-Tier #467,Filters,Cabin Filter,Mid-Tier,False,268.09,426.05,0.149,395.39,Pacific Supply,18,1,50,Mature,75.73,-2.154,0.0,18.9787,0.178,1
+SKU-00468,Shocks - Mid-Tier #468,Suspension,Shocks,Mid-Tier,False,479.02,701.85,0.147,664.66,Pacific Supply,9,6,52,Growth,28.28,-1.035,0.0,34.6724,0.273,12
+SKU-00469,Brake Fluid - Mid-Tier #469,Brakes,Brake Fluid,Mid-Tier,False,145.61,224.79,0.195,212.32,Northern Dist,29,24,148,Decline,62.26,-0.854,0.0,9.5801,0.136,12
+SKU-00470,Fuses - Mid-Tier #470,Electrical,Fuses,Mid-Tier,False,471.67,690.74,0.147,618.4,Pacific Supply,8,24,101,Mature,42.56,-0.797,0.0,19.5935,0.135,24
+SKU-00471,Oil Filter - Mid-Tier #471,Filters,Oil Filter,Mid-Tier,False,352.52,605.62,0.105,591.41,Pacific Supply,31,24,169,Decline,42.57,-1.444,0.0,13.2137,0.144,6
+SKU-00472,Wrenches - Economy #472,Tools,Wrenches,Economy,False,64.4,110.44,0.128,95.72,Northern Dist,29,24,174,Decline,4.28,-0.312,0.0,1.8033,0.184,1
+SKU-00473,Brake Fluid - Economy #473,Brakes,Brake Fluid,Economy,False,81.98,122.42,0.181,106.62,AutoParts Co,9,1,24,New,42.92,-1.055,0.0,5.202,0.289,1
+SKU-00474,Air Filter - Premium #474,Filters,Air Filter,Premium,False,13.91,22.61,0.143,22.0,Pacific Supply,11,1,131,Decline,59.48,-1.699,0.0,0.8548,0.109,24
+SKU-00475,Transmission Fluid - Economy #475,Fluids,Transmission Fluid,Economy,False,392.51,491.65,0.102,425.22,Pacific Supply,16,1,29,Growth,34.07,-2.168,0.377,29.4381,0.184,12
+SKU-00476,Shocks - Mid-Tier #476,Suspension,Shocks,Mid-Tier,False,427.89,643.69,0.149,623.36,ValueLine Parts,12,1,103,Mature,65.4,-0.713,0.0,26.2749,0.146,1
+SKU-00477,Calipers - Economy #477,Brakes,Calipers,Economy,False,151.18,203.43,0.149,180.15,Northern Dist,7,12,197,Decline,38.82,-0.733,0.0,7.6537,0.217,24
+SKU-00478,Oil Filter - Economy #478,Filters,Oil Filter,Economy,False,136.97,204.47,0.186,180.43,ValueLine Parts,19,1,148,Decline,105.29,-1.396,0.0,10.89,0.175,12
+SKU-00479,Motor Oil - Premium #479,Fluids,Motor Oil,Premium,False,396.21,561.51,0.125,502.66,Pacific Supply,3,24,23,New,69.74,-1.588,0.494,29.0462,0.084,1
+SKU-00480,Sockets - Private Label #480,Tools,Sockets,Private Label,True,204.47,346.13,0.116,332.36,AutoParts Co,18,1,8,New,12.33,-0.794,0.0,15.3129,0.105,6
+SKU-00481,Wiring Harness - Private Label #481,Electrical,Wiring Harness,Private Label,True,387.63,479.15,0.194,410.18,Northern Dist,3,1,178,Decline,63.34,-0.852,0.0,11.9244,0.228,1
+SKU-00482,Oil Filter - Economy #482,Filters,Oil Filter,Economy,False,327.36,428.97,0.13,418.66,AutoParts Co,17,1,96,Mature,34.15,-1.827,0.0,12.4925,0.018,24
+SKU-00483,Calipers - Premium #483,Brakes,Calipers,Premium,False,140.66,254.79,0.17,218.25,AutoParts Co,42,6,103,Mature,11.59,-0.886,0.0,7.0807,0.225,1
+SKU-00484,Spark Plugs - Private Label #484,Engine Components,Spark Plugs,Private Label,True,221.89,375.04,0.104,346.06,Pacific Supply,13,1,52,Growth,69.35,-1.023,0.0,5.4835,0.056,24
+SKU-00485,Air Filter - Private Label #485,Filters,Air Filter,Private Label,True,76.57,131.2,0.123,119.24,AutoParts Co,42,12,25,New,58.2,-1.971,0.0,4.1743,0.155,12
+SKU-00486,Power Steering - Economy #486,Fluids,Power Steering,Economy,False,268.58,415.89,0.161,376.92,Pacific Supply,43,1,180,Decline,36.6,-1.8,0.503,18.5976,0.185,24
+SKU-00487,Transmission Fluid - Premium #487,Fluids,Transmission Fluid,Premium,False,242.11,322.59,0.1,314.74,Northern Dist,15,12,68,Growth,56.05,-1.418,0.374,19.3618,0.111,12
+SKU-00488,Fuel Filter - Premium #488,Filters,Fuel Filter,Premium,False,200.05,245.37,0.111,217.23,AutoParts Co,12,6,56,Mature,105.26,-2.26,0.0,4.1223,0.217,1
+SKU-00489,Struts - Mid-Tier #489,Suspension,Struts,Mid-Tier,False,60.25,108.76,0.113,98.27,AutoParts Co,27,12,188,Decline,22.82,-0.704,0.0,2.1931,0.011,1
+SKU-00490,Control Arms - Private Label #490,Suspension,Control Arms,Private Label,True,322.7,487.03,0.12,458.29,Northern Dist,39,6,6,New,6.72,-0.826,0.0,21.7977,0.086,6
+SKU-00491,Shocks - Economy #491,Suspension,Shocks,Economy,False,397.97,556.0,0.102,531.74,Pacific Supply,6,1,150,Decline,51.0,-1.156,0.0,9.6785,0.017,24
+SKU-00492,Spark Plugs - Economy #492,Engine Components,Spark Plugs,Economy,False,542.17,799.4,0.152,718.66,Pacific Supply,20,1,65,Mature,63.47,-1.12,0.0,39.5849,0.049,1
+SKU-00493,Battery Charger - Mid-Tier #493,Batteries,Battery Charger,Mid-Tier,False,359.24,596.43,0.148,521.87,Pacific Supply,23,1,6,New,27.01,-0.871,0.404,21.9076,0.05,1
+SKU-00494,Bushings - Premium #494,Suspension,Bushings,Premium,False,231.38,360.6,0.189,334.35,Pacific Supply,17,1,178,Decline,19.37,-0.723,0.0,16.9274,0.172,24
+SKU-00495,Struts - Mid-Tier #495,Suspension,Struts,Mid-Tier,False,34.1,58.89,0.182,53.55,Pacific Supply,23,12,146,Decline,11.61,-1.104,0.0,1.8209,0.078,1
+SKU-00496,Coolant - Premium #496,Fluids,Coolant,Premium,False,231.95,337.84,0.117,310.51,Northern Dist,38,24,195,Decline,14.27,-1.83,0.262,13.4113,0.192,1
+SKU-00497,Bushings - Economy #497,Suspension,Bushings,Economy,False,421.09,646.64,0.145,582.73,Pacific Supply,16,1,80,Mature,12.09,-1.035,0.0,18.2613,0.02,1
+SKU-00498,Alternator - Mid-Tier #498,Electrical,Alternator,Mid-Tier,False,404.05,599.95,0.185,572.05,AutoParts Co,3,24,151,Decline,78.21,-1.392,0.0,27.2939,0.106,6
+SKU-00499,Wiring Harness - Mid-Tier #499,Electrical,Wiring Harness,Mid-Tier,False,35.0,42.8,0.109,36.93,Northern Dist,7,12,21,New,37.53,-0.828,0.0,0.7353,0.089,1
+SKU-00500,Marine Battery - Mid-Tier #500,Batteries,Marine Battery,Mid-Tier,False,45.33,75.01,0.189,67.79,Northern Dist,41,24,182,Decline,5.43,-1.532,0.436,1.7695,0.196,12
