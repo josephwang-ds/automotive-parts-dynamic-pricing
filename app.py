@@ -27,6 +27,11 @@ from src.utils import format_currency, format_pct
 t = i18n.t
 tf = i18n.tf
 
+
+def t_opt(x):
+    """数据值下拉：只翻译 'All'，其余保持英文（品类/区域等需与数据匹配）。"""
+    return t("All") if x == "All" else x
+
 # 页面配置
 st.set_page_config(
     page_title="Parts Dynamic Pricing AI",
@@ -157,19 +162,49 @@ def apply_policy(recs, objective, margin_floor, max_move_frac, confidence):
     return df
 
 
-def apply_sidebar_filters(recs, sales):
-    """侧边栏分两区：数据筛选（选子集）+ 定价策略（调护栏与目标，实时生效）。"""
-    # ── 数据筛选 ──
-    st.sidebar.markdown(f"### {t('Data Filters')}")
-    st.sidebar.caption(t("Choose which slice of the catalog to view."))
-    region = st.sidebar.selectbox(t("Region"), ["All"] + REGIONS, format_func=t,
-                                  help=t("Show only this sales region."))
-    category = st.sidebar.selectbox(t("Category"), ["All"] + CATEGORIES, format_func=t,
-                                    help=t("Show only this product category."))
-    tier = st.sidebar.selectbox(t("Customer Tier"), ["All"] + CUSTOMER_TIERS, format_func=t,
-                                help=t("Retail / Trade / Fleet pricing segment."))
+# 使用「数据筛选」的页面（依赖推荐表 / 销售明细）
+DATA_FILTER_PAGES = {
+    "Executive Command Center", "SKU Decision Workbench",
+    "Inventory Control Tower", "Backtest & Rollback", "AI Analyst",
+}
+# 使用「定价策略」的页面（依赖按护栏过滤后的推荐表）
+PRICING_POLICY_PAGES = DATA_FILTER_PAGES
 
-    filters = {"region": region, "category": category, "customer_tier": tier}
+
+def _default_filters():
+    return {
+        "region": "All", "category": "All", "customer_tier": "All",
+        "objective": "balanced", "scenario": "Recommended",
+        "margin_floor": 0.15, "max_move": 10, "confidence_threshold": 0.4,
+    }
+
+
+def apply_sidebar_filters(recs, sales, page):
+    """侧边栏分层：仅在相关页面显示对应控件，避免在无关页面「调了没反应」。
+
+    - 数据筛选 / 定价策略 都放在可折叠区块里。
+    - 当前页面用不到的控件直接不渲染，并给出一句说明。
+    """
+    use_filters = page in DATA_FILTER_PAGES
+    use_policy = page in PRICING_POLICY_PAGES
+
+    if not use_filters and not use_policy:
+        st.sidebar.caption(t("This page shows global model/data — sidebar filters don't apply here."))
+        return recs, sales, _default_filters()
+
+    # ── 数据筛选（可折叠）──
+    filters = {"region": "All", "category": "All", "customer_tier": "All"}
+    if use_filters:
+        with st.sidebar.expander(t("Data Filters"), expanded=True):
+            st.caption(t("Choose which slice of the catalog to view."))
+            filters["region"] = st.selectbox(t("Region"), ["All"] + REGIONS, format_func=t_opt,
+                                             help=t("Show only this sales region."))
+            filters["category"] = st.selectbox(t("Category"), ["All"] + CATEGORIES, format_func=t_opt,
+                                               help=t("Show only this product category."))
+            filters["customer_tier"] = st.selectbox(t("Customer Tier"), ["All"] + CUSTOMER_TIERS,
+                                                    format_func=t_opt,
+                                                    help=t("Retail / Trade / Fleet pricing segment."))
+
     mask = pd.Series(True, index=recs.index)
     sales_mask = pd.Series(True, index=sales.index) if len(sales) else pd.Series(dtype=bool)
     for k, v in filters.items():
@@ -181,46 +216,50 @@ def apply_sidebar_filters(recs, sales):
     data_recs = recs[mask]
     filtered_sales = sales[sales_mask] if len(sales) else sales
 
-    # ── 定价策略（情景 = 一键预设，下面的控件可微调）──
-    st.sidebar.markdown(f"### {t('Pricing Policy')}")
-    st.sidebar.caption(t("Adjust guardrails and objective — the recommendation set updates live."))
-    scenario_keys = list(SCENARIOS.keys())
-    scenario_default = scenario_keys.index("Recommended") if "Recommended" in scenario_keys else 0
-    scenario = st.sidebar.selectbox(
-        t("Scenario"), scenario_keys, index=scenario_default, format_func=t,
-        help=t("Preset policy bundle — sets the objective, confidence and max-move below. "
-               "You can still fine-tune them."),
-    )
-    cfg = SCENARIOS[scenario]
-    obj_keys = list(OBJECTIVES.keys())
-    obj_default = obj_keys.index(cfg["objective"]) if cfg.get("objective") in obj_keys else len(obj_keys) - 1
-    objective = st.sidebar.selectbox(
-        t("Pricing Objective"), obj_keys, index=obj_default,
-        format_func=lambda x: t(OBJECTIVES[x]),
-        help=t("How recommendations are ranked: by profit, revenue, or excess-inventory reduction."),
-        key=f"obj_{scenario}",
-    )
-    confidence_threshold = st.sidebar.slider(
-        t("Confidence Threshold"), 0.0, 1.0, float(cfg.get("confidence_threshold", 0.4)), 0.05,
-        help=t("Keep only recommendations whose elasticity confidence is at least this. "
-               "Higher = safer, fewer SKUs."),
-        key=f"ct_{scenario}",
-    )
-    margin_floor = st.sidebar.slider(
-        t("Margin Floor"), 0.05, 0.35, 0.15, 0.01,
-        help=t("Drop recommendations whose projected gross margin falls below this floor."),
-        key=f"mf_{scenario}",
-    )
-    max_move = st.sidebar.slider(
-        t("Max Price Move %"), 1, 15, int(round(cfg.get("max_price_move_pct", 0.10) * 100)),
-        help=t("Keep only recommendations within this price-change limit; "
-               "larger moves need manual review."),
-        key=f"mm_{scenario}",
-    )
+    # ── 定价策略（可折叠；情景 = 一键预设，下面可微调）──
+    objective, scenario = "balanced", "Recommended"
+    margin_floor, max_move, confidence_threshold = 0.15, 10, 0.4
+    if use_policy:
+        with st.sidebar.expander(t("Pricing Policy"), expanded=True):
+            st.caption(t("Adjust guardrails and objective — the recommendation set updates live."))
+            scenario_keys = list(SCENARIOS.keys())
+            scenario_default = scenario_keys.index("Recommended") if "Recommended" in scenario_keys else 0
+            scenario = st.selectbox(
+                t("Scenario"), scenario_keys, index=scenario_default, format_func=t,
+                help=t("Preset policy bundle — sets the objective, confidence and max-move below. "
+                       "You can still fine-tune them."),
+            )
+            cfg = SCENARIOS[scenario]
+            obj_keys = list(OBJECTIVES.keys())
+            obj_default = obj_keys.index(cfg["objective"]) if cfg.get("objective") in obj_keys else len(obj_keys) - 1
+            objective = st.selectbox(
+                t("Pricing Objective"), obj_keys, index=obj_default,
+                format_func=lambda x: t(OBJECTIVES[x]),
+                help=t("How recommendations are ranked: by profit, revenue, or excess-inventory reduction."),
+                key=f"obj_{scenario}",
+            )
+            confidence_threshold = st.slider(
+                t("Confidence Threshold"), 0.0, 1.0, float(cfg.get("confidence_threshold", 0.4)), 0.05,
+                help=t("Keep only recommendations whose elasticity confidence is at least this. "
+                       "Higher = safer, fewer SKUs."),
+                key=f"ct_{scenario}",
+            )
+            margin_floor = st.slider(
+                t("Margin Floor"), 0.05, 0.35, 0.15, 0.01,
+                help=t("Drop recommendations whose projected gross margin falls below this floor."),
+                key=f"mf_{scenario}",
+            )
+            max_move = st.slider(
+                t("Max Price Move %"), 1, 15, int(round(cfg.get("max_price_move_pct", 0.10) * 100)),
+                help=t("Keep only recommendations within this price-change limit; "
+                       "larger moves need manual review."),
+                key=f"mm_{scenario}",
+            )
 
-    # 真正作用到推荐表，并显示通过率
-    actionable = apply_policy(data_recs, objective, margin_floor, max_move / 100, confidence_threshold)
-    st.sidebar.caption(tf("policy_pass", n=f"{len(actionable):,}", total=f"{len(data_recs):,}"))
+        actionable = apply_policy(data_recs, objective, margin_floor, max_move / 100, confidence_threshold)
+        st.sidebar.caption(tf("policy_pass", n=f"{len(actionable):,}", total=f"{len(data_recs):,}"))
+    else:
+        actionable = data_recs
 
     return actionable, filtered_sales, {
         **filters, "objective": objective, "scenario": scenario,
@@ -423,14 +462,14 @@ def page_elasticity(state, filters):
 
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        sel_cat = st.selectbox(t("Category"), ["All"] + CATEGORIES, key="el_cat", format_func=t)
+        sel_cat = st.selectbox(t("Category"), ["All"] + CATEGORIES, key="el_cat", format_func=t_opt)
     with col2:
-        sel_region = st.selectbox(t("Region"), ["All"] + REGIONS, key="el_region", format_func=t)
+        sel_region = st.selectbox(t("Region"), ["All"] + REGIONS, key="el_region", format_func=t_opt)
     with col3:
-        sel_tier = st.selectbox(t("Customer Tier"), ["All"] + CUSTOMER_TIERS, key="el_tier", format_func=t)
+        sel_tier = st.selectbox(t("Customer Tier"), ["All"] + CUSTOMER_TIERS, key="el_tier", format_func=t_opt)
     with col4:
         sku_list = state.products["sku_id"].tolist()[:100]
-        sel_sku = st.selectbox("SKU", ["All"] + sku_list, key="el_sku", format_func=t)
+        sel_sku = st.selectbox("SKU", ["All"] + sku_list, key="el_sku", format_func=t_opt)
 
     filtered = el_df.copy()
     if sel_cat != "All":
@@ -915,7 +954,7 @@ def main():
     st.sidebar.markdown("---")
 
     recs, sales, filters = apply_sidebar_filters(
-        state.recommendations, state.sales
+        state.recommendations, state.sales, page
     )
 
     if page == "Executive Command Center":

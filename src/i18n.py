@@ -79,6 +79,8 @@ _ZH = {
     "Choose which slice of the catalog to view.": "选择查看目录的哪个子集。",
     "Adjust guardrails and objective — the recommendation set updates live.":
         "调整护栏与目标,推荐结果实时更新。",
+    "This page shows global model/data — sidebar filters don't apply here.":
+        "本页展示全局模型/数据,侧边栏筛选对其不起作用。",
     # 控件悬停提示
     "Show only this sales region.": "只看这个销售区域。",
     "Show only this product category.": "只看这个产品品类。",
