@@ -4,6 +4,18 @@ A complete SKU-level dynamic pricing decision system for automotive parts retail
 
 > **The public demo uses a representative synthetic sample. The workflow is designed for production catalogs containing millions of SKUs.**
 
+## In one sentence
+
+**English —** Instead of guessing "what a part is worth," this system predicts *how many units will sell at each possible price*, then picks the price that best meets a business goal (profit, revenue, or clearing excess stock) — while respecting margin floors, stockout risk, and a human-approval step.
+
+**中文 —** 这个项目不是去猜"一个零件值多少钱",而是预测*每个候选价格下能卖出多少件*,再结合毛利底线、缺货风险和库存情况,挑出最符合经营目标(利润 / 营收 / 去库存)的价格——所有建议都需人工审批后才能上线。
+
+## Who is this for / what it demonstrates
+
+This is a portfolio project built to show an end-to-end data-science workflow: synthetic data generation, demand forecasting, causal elasticity estimation, constrained optimization, inventory policy, backtesting, and a polished decision dashboard. No real company data is used. The UI ships **bilingual (English / 中文)** — switch from the language selector at the top of the sidebar.
+
+**Tech stack:** Python · pandas / NumPy · scikit-learn (HistGradientBoosting) · Plotly · Streamlit · pytest.
+
 ## Executive Summary
 
 This system does **not** predict "what a part should cost." Instead, it predicts **how many units will sell at each candidate price** and computes the resulting revenue, gross profit, margin, inventory, and stockout risk. Recommendations are constrained by nine business guardrails and require human approval before implementation.
@@ -12,7 +24,7 @@ This system does **not** predict "what a part should cost." Instead, it predicts
 - **Demand model**: HistGradientBoostingRegressor with stockout-adjusted targets
 - **Elasticity**: Log-log regression on exogenous price-test observations
 - **Optimization**: 4 objectives, 31 candidate prices per SKU, 9 guardrails
-- **UI**: 8-page Streamlit dashboard with AI Analyst
+- **UI**: 8-page Streamlit dashboard with AI Analyst, bilingual EN / 中文
 
 ## Business Problem
 
@@ -36,22 +48,33 @@ Automotive parts retailers manage thousands of SKUs across regions and customer 
 
 ## Quick Start
 
+**Just want to see the demo?** The repo ships with precomputed recommendation artifacts in `outputs/`, so the dashboard runs straight away — no data generation or model training (and no scikit-learn) required:
+
 ```bash
 cd parts-dynamic-pricing-ai
-pip install -r requirements.txt
+pip install -r requirements.txt   # streamlit, pandas, numpy, plotly only
+streamlit run app.py              # switch EN / 中文 from the sidebar
+```
 
-# Generate synthetic data
+**Want to rebuild everything from scratch?** Install the dev dependencies and run the full pipeline (this trains the models and regenerates the artifacts):
+
+```bash
+pip install -r requirements-dev.txt          # adds scikit-learn, joblib, pytest
+
+# 1) Generate synthetic data
 python data/generate_synthetic_data.py
 
-# Train models and generate recommendations
+# 2) Train models and generate recommendations
 python -c "from src.pipeline import run_full_pipeline; run_full_pipeline()"
 
-# Launch dashboard
+# 3) Launch dashboard
 streamlit run app.py
 
-# Run tests
+# 4) Run tests
 pytest tests/ -v
 ```
+
+> **Deployment note:** `requirements.txt` is intentionally minimal (no scikit-learn) and pinned to exact versions, because the deployed app loads the precomputed `outputs/` artifacts via a lightweight runtime path rather than training on the fly. The full 851 MB sales file is git-ignored; the app reads a representative sample.
 
 ## Synthetic Data Design
 
@@ -136,9 +159,20 @@ Compares four policies over the 13-week test period:
 
 Results are **modeled/simulated estimates**, not proven business impact. A production implementation requires controlled price experiments.
 
-## UI Overview
+## UI Overview — what each page shows
 
-8 tabs: Executive Command Center, Demand Model, Elasticity Explorer, Pricing Studio, Inventory & Markdown, Backtest & Rollback, AI Analyst, Data & Governance.
+The dashboard has 8 pages (sidebar navigation). A language selector at the top of the sidebar switches the whole UI between **English** and **中文**.
+
+| Page | In plain terms |
+|---|---|
+| **Executive Command Center** | The headline numbers: revenue, gross profit, modeled profit lift, inventory health, and where the biggest opportunity is. |
+| **Demand Model** | How well the forecasting model predicts unit sales (accuracy metrics, actual-vs-predicted, error by category). |
+| **Elasticity Explorer** | How price-sensitive each category/region/tier is — the heatmap shows where customers react most to price. |
+| **SKU Decision Workbench** | Drill into one part: current vs recommended price, why, the price→units→profit curve, and the linked inventory action. |
+| **Inventory Control Tower** | Stock health across the catalog — excess, stockout risk, weeks of cover, transfer and replenishment candidates. |
+| **Backtest & Rollback** | Compares pricing strategies over a held-out period, plus a slider to simulate rolling back part of the changes. |
+| **AI Analyst** | Ask plain-language questions; a local, deterministic analyst answers from the data (no external LLM calls). |
+| **Data & Governance** | The data model, metric definitions, approval workflow, and production-monitoring checklist. |
 
 Modern B2B analytics design with custom CSS, metric cards, status pills, and Plotly charts.
 
