@@ -8,11 +8,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import numpy as np
 import pandas as pd
 import plotly.express as px
-import plotly.graph_objects as go
 import streamlit as st
 
 from src import i18n
-from src.ai_analyst import SUGGESTED_QUESTIONS, generate_answer
 from src.backtest import RollbackSimulator
 from src.config import (
     CATEGORIES,
@@ -165,7 +163,7 @@ def apply_policy(recs, objective, margin_floor, max_move_frac, confidence):
 # 使用「数据筛选」的页面（依赖推荐表 / 销售明细）
 DATA_FILTER_PAGES = {
     "Executive Command Center", "SKU Decision Workbench",
-    "Inventory Control Tower", "Backtest & Rollback", "AI Analyst",
+    "Inventory Control Tower", "Backtest & Rollback",
 }
 # 使用「定价策略」的页面（依赖按护栏过滤后的推荐表）
 PRICING_POLICY_PAGES = DATA_FILTER_PAGES
@@ -352,168 +350,6 @@ def page_executive(recs, sales, inv, bt, filters):
         ] if len(recs) > 0 else pd.DataFrame()
         st.markdown(f"**{t('Top Approval Candidates')}**")
         st.dataframe(top_candidates, width='stretch', hide_index=True)
-
-
-def page_demand_model(state, filters):
-    """Demand Model 页面。"""
-    section_title("Demand Forecasting Model")
-
-    metrics = {}
-    if state.demand_model:
-        metrics = state.demand_model.metrics
-    elif state.model_results:
-        hgb = state.model_results.get("hgb", {})
-        metrics = hgb.get("metrics", {})
-
-    test_m = metrics.get("test", {})
-    st.markdown(
-        '<div class="callout">'
-        + tf("model_info",
-             name=metrics.get("model_name", "HistGradientBoosting"),
-             train=metrics.get("train_weeks", 78),
-             val=metrics.get("val_weeks", 13))
-        + '</div>',
-        unsafe_allow_html=True,
-    )
-
-    c1, c2, c3, c4, c5, c6 = st.columns(6)
-    with c1:
-        metric_card("MAE", f"{test_m.get('MAE', 0):.2f}")
-    with c2:
-        metric_card("RMSE", f"{test_m.get('RMSE', 0):.2f}")
-    with c3:
-        metric_card("WAPE", f"{test_m.get('WAPE', 0):.3f}")
-    with c4:
-        metric_card("RMSLE", f"{test_m.get('RMSLE', 0):.4f}")
-    with c5:
-        metric_card("Bias", f"{test_m.get('Bias', 0):.2f}")
-    with c6:
-        imp = test_m.get("WAPE_improvement", 0)
-        metric_card("Baseline Improvement", f"{imp*100:.1f}%")
-
-    # 模型比较
-    if state.model_results:
-        comparison = []
-        for mt, result in state.model_results.items():
-            m = result.get("metrics", {}).get("test", {})
-            comparison.append({
-                "Model": result.get("metrics", {}).get("model_name", mt),
-                "MAE": m.get("MAE", 0),
-                "RMSE": m.get("RMSE", 0),
-                "WAPE": m.get("WAPE", 0),
-                "WAPE Improvement": m.get("WAPE_improvement", 0),
-            })
-        if comparison:
-            st.markdown(f"**{t('Model Comparison')}**")
-            st.dataframe(pd.DataFrame(comparison), width='stretch', hide_index=True)
-
-    # 测试集预测图
-    if state.model_results and "hgb" in state.model_results:
-        preds = state.model_results["hgb"].get("test_predictions")
-        if preds is not None and len(preds) > 0:
-            col1, col2 = st.columns(2)
-            with col1:
-                fig = px.scatter(
-                    preds, x="actual", y="predicted",
-                    opacity=0.3, title=t("Actual vs Predicted"),
-                    color_discrete_sequence=[UI_COLORS["electric_blue"]],
-                )
-                fig.add_trace(go.Scatter(
-                    x=[0, preds["actual"].max()], y=[0, preds["actual"].max()],
-                    mode="lines", line=dict(dash="dash", color="gray"),
-                ))
-                fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-                st.plotly_chart(fig, width='stretch')
-
-            with col2:
-                preds["residual"] = preds["actual"] - preds["predicted"]
-                fig = px.histogram(
-                    preds, x="residual", nbins=50,
-                    title=t("Residual Distribution"),
-                    color_discrete_sequence=[UI_COLORS["electric_blue"]],
-                )
-                fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-                st.plotly_chart(fig, width='stretch')
-
-            # 按品类误差
-            err_by_cat = preds.groupby("category").apply(
-                lambda g: np.mean(np.abs(g["actual"] - g["predicted"]))
-            ).reset_index(name="MAE")
-            fig = px.bar(err_by_cat, x="category", y="MAE",
-                         title=t("Error by Category"),
-                         color_discrete_sequence=[UI_COLORS["warning_amber"]])
-            fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-            st.plotly_chart(fig, width='stretch')
-
-    st.markdown(
-        f'<div class="callout">{tf("limitations")}</div>',
-        unsafe_allow_html=True,
-    )
-
-
-def page_elasticity(state, filters):
-    """Elasticity Explorer。"""
-    section_title("Price Elasticity Explorer")
-
-    el_df = state.elasticity_df
-    if el_df.empty:
-        st.warning(t("Elasticity estimates not available."))
-        return
-
-    col1, col2, col3, col4 = st.columns(4)
-    with col1:
-        sel_cat = st.selectbox(t("Category"), ["All"] + CATEGORIES, key="el_cat", format_func=t_opt)
-    with col2:
-        sel_region = st.selectbox(t("Region"), ["All"] + REGIONS, key="el_region", format_func=t_opt)
-    with col3:
-        sel_tier = st.selectbox(t("Customer Tier"), ["All"] + CUSTOMER_TIERS, key="el_tier", format_func=t_opt)
-    with col4:
-        sku_list = state.products["sku_id"].tolist()[:100]
-        sel_sku = st.selectbox("SKU", ["All"] + sku_list, key="el_sku", format_func=t_opt)
-
-    filtered = el_df.copy()
-    if sel_cat != "All":
-        filtered = filtered[filtered["category"] == sel_cat]
-    if sel_tier != "All":
-        filtered = filtered[filtered["customer_tier"] == sel_tier]
-
-    # 热力图
-    heatmap_data = el_df[el_df["estimation_level"] == "category_tier"].pivot_table(
-        index="category", columns="customer_tier",
-        values="estimated_elasticity", aggfunc="first",
-    )
-    if not heatmap_data.empty:
-        fig = px.imshow(
-            heatmap_data, title=t("Elasticity Heatmap: Category × Tier"),
-            color_continuous_scale="RdYlGn_r", aspect="auto",
-        )
-        fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-        st.plotly_chart(fig, width='stretch')
-
-    if len(filtered) > 0:
-        row = filtered.iloc[0]
-        c1, c2, c3, c4, c5 = st.columns(5)
-        with c1:
-            metric_card("Elasticity", f"{row['estimated_elasticity']:.3f}")
-        with c2:
-            metric_card("Confidence", f"{row.get('confidence_score', 0):.2f}")
-        with c3:
-            metric_card("Sample Size", f"{row.get('sample_size', 0):,}")
-        with c4:
-            metric_card("Price Variation", f"{row.get('price_variation', 0):.4f}")
-        with c5:
-            metric_card("Segment", row.get("elasticity_class", "N/A"))
-
-    st.markdown(
-        f'<div class="callout">{tf("elasticity_distinction")}</div>',
-        unsafe_allow_html=True,
-    )
-
-    st.dataframe(
-        filtered[["elasticity_segment", "estimated_elasticity", "confidence_score",
-                   "sample_size", "elasticity_class", "estimation_level"]].head(20),
-        width='stretch', hide_index=True,
-    )
 
 
 def page_pricing_studio(recs, state, filters):
@@ -735,11 +571,6 @@ def page_inventory_control_tower(state, inv, recs, filters):
             st.dataframe(manual[show_cols].head(50), width='stretch', hide_index=True)
 
 
-def page_inventory(inv, recs, filters):
-    """向后兼容别名。"""
-    pass
-
-
 def page_backtest(state, recs, filters):
     """Backtest & Rollback。"""
     section_title("Backtest & Rollback Simulator")
@@ -808,112 +639,58 @@ def page_backtest(state, recs, filters):
     st.dataframe(result["audit_table"].head(20), width='stretch', hide_index=True)
 
 
-def page_ai_analyst(state, recs, sales, filters):
-    """AI Analyst。"""
-    section_title("AI Analyst (Local Deterministic)")
-
-    st.markdown(f"**{t('Suggested Questions:')}**")
-    cols = st.columns(3)
-    for i, q in enumerate(SUGGESTED_QUESTIONS):
-        with cols[i % 3]:
-            if st.button(q, key=f"sq_{i}"):
-                st.session_state["ai_question"] = q
-
-    question = st.text_input(
-        t("Ask a question"),
-        value=st.session_state.get("ai_question", ""),
-        placeholder=t("e.g., Where is the largest modeled margin opportunity?"),
-    )
-
-    if st.button(t("Analyze")) or st.session_state.get("ai_question"):
-        if question:
-            model_metrics = {}
-            if state.demand_model:
-                model_metrics = state.demand_model.metrics
-            elif state.model_results:
-                model_metrics = state.model_results.get("hgb", {}).get("metrics", {})
-
-            result = generate_answer(
-                question=question,
-                filtered_data={
-                    "recommendations": recs,
-                    "sales": sales,
-                    "elasticity": state.elasticity_df,
-                    "products": state.products,
-                    "transfers": getattr(state, "transfers", pd.DataFrame()),
-                    "inventory_metrics": getattr(state, "inventory_metrics", pd.DataFrame()),
-                },
-                model_metrics=model_metrics,
-                active_filters=filters,
-                provider="local",
-            )
-
-            st.markdown(f'<div class="callout"><strong>{t("Answer:")}</strong> {result["answer"]}</div>',
-                         unsafe_allow_html=True)
-            st.markdown(f"**{t('Intent:')}** {result['intent']} | **{t('Provider:')}** {result['provider']}")
-            st.markdown(f"**{t('Active Filters:')}** {result['active_filters']}")
-
-            if result.get("evidence"):
-                st.markdown(f"**{t('Evidence Used:')}**")
-                for e in result["evidence"]:
-                    st.markdown(f"- {e}")
-
-            st.markdown(f"**{t('Caveat:')}** {result['caveat']}")
-
-            if result.get("metric_definitions"):
-                st.markdown(f"**{t('Metric Definitions:')}**")
-                for k, v in result["metric_definitions"].items():
-                    st.markdown(f"- **{k}:** {v}")
+def render_model_quality_fold(state):
+    """折叠：需求模型关键质量指标（从原 Demand Model 页精简而来）。"""
+    metrics = {}
+    if state.demand_model:
+        metrics = state.demand_model.metrics
+    elif state.model_results:
+        metrics = state.model_results.get("hgb", {}).get("metrics", {})
+    test_m = metrics.get("test", {})
+    if not test_m:
+        return
+    with st.expander(t("Demand model quality")):
+        st.caption(tf("model_info",
+                      name=metrics.get("model_name", "HistGradientBoosting"),
+                      train=metrics.get("train_weeks", 78),
+                      val=metrics.get("val_weeks", 13)))
+        m1, m2, m3 = st.columns(3)
+        with m1:
+            metric_card("MAE", f"{test_m.get('MAE', 0):.2f}")
+        with m2:
+            metric_card("WAPE", f"{test_m.get('WAPE', 0):.3f}")
+        with m3:
+            metric_card("Baseline Improvement", f"{test_m.get('WAPE_improvement', 0)*100:.1f}%")
 
 
-def page_governance():
-    """Data & Governance。"""
-    section_title("Data & Governance")
+def render_elasticity_fold(state):
+    """折叠：价格弹性概览（从原 Elasticity 页精简为一张表，不再用热力图）。"""
+    el_df = getattr(state, "elasticity_df", None)
+    if el_df is None or el_df.empty:
+        return
+    cat_tier = el_df[el_df["estimation_level"] == "category_tier"]
+    if cat_tier.empty:
+        return
+    with st.expander(t("Price elasticity context")):
+        st.caption(t("Estimated price elasticity by category and customer tier — more negative means more price-sensitive."))
+        pivot = cat_tier.pivot_table(index="category", columns="customer_tier",
+                                     values="estimated_elasticity", aggfunc="first")
+        st.dataframe(pivot.round(3), width='stretch')
 
-    st.markdown(f"### {t('Star Schema')}")
-    schema = {
-        "fact_sales_weekly": "Weekly sales transactions",
-        "fact_inventory_weekly": "Weekly inventory positions and weeks of cover",
-        "fact_purchase_orders": "Open and planned purchase orders",
-        "fact_inventory_transfers": "Inter-region transfer recommendations",
-        "fact_inventory_actions": "Replenishment, stop-order, markdown actions",
-        "fact_price_history": "Price changes with reason codes",
-        "fact_recommendations": "Joint pricing + inventory recommendations",
-        "dim_product": "SKU master with cost, margin, lead time",
-        "dim_supplier": "Supplier lead time and MOQ",
-        "dim_region": "4 BC regions",
-        "dim_customer_tier": "Retail, Trade, Fleet",
-        "dim_calendar": "104-week calendar",
-    }
-    for table, desc in schema.items():
-        st.markdown(f"- **{table}:** {t(desc)}")
 
-    st.markdown(f"### {t('Metric Definitions')}")
-    metrics_def = {
-        "Revenue": "realized_price × units_sold",
-        "Gross Profit": "revenue − COGS (unit_cost × units_sold)",
-        "Gross Margin": "gross_profit / revenue",
-        "Inventory Turns": "annual_units_sold / average_inventory",
-        "Weeks of Cover": "ending_inventory / weekly_demand",
-        "Stockout Rate": "% of SKU-weeks with stockout_flag = true",
-        "Excess Inventory Value": "sum(inventory × unit_cost) where weeks_of_cover > 16",
-        "Modeled Lift": "simulated GP difference between dynamic and current pricing",
-    }
-    for m, d in metrics_def.items():
-        st.markdown(f"- **{t(m)}:** {d}")
-
-    st.markdown(f"### {t('Approval Workflow')}")
-    st.markdown(tf("approval_workflow"))
-
-    st.markdown(f"### {t('Production Monitoring Checklist')}")
-    monitors = [
-        "Demand forecast error", "Stockout-rate change", "Excess-inventory change",
-        "Transfer success rate", "Replenishment service level", "Inventory-turn change",
-        "Holding-cost change", "Realized vs expected sell-through",
-        "Analyst override rate", "Pricing rollback rate", "Inventory-action rollback rate",
-    ]
-    for m in monitors:
-        st.markdown(f"- {t(m)}")
+def render_method_fold():
+    """折叠：方法、指标定义与数据说明（从原 Governance 页精简而来）。"""
+    with st.expander(t("Method, metrics & data")):
+        metrics_def = {
+            "Revenue": "realized_price × units_sold",
+            "Gross Profit": "revenue − COGS (unit_cost × units_sold)",
+            "Inventory Turns": "annual_units_sold / average_inventory",
+            "Weeks of Cover": "ending_inventory / weekly_demand",
+            "Modeled Lift": "simulated GP difference between dynamic and current pricing",
+        }
+        for m, d in metrics_def.items():
+            st.markdown(f"- **{t(m)}:** {d}")
+        st.caption(t("All data is synthetic and deterministic; figures are modeled estimates, not live results."))
 
 
 def main():
@@ -937,43 +714,33 @@ def main():
         st.exception(exc)
         st.stop()
 
-    st.sidebar.markdown(f"### {t('Navigation')}")
-    pages = [
-        "Executive Command Center",
-        "Demand Model",
-        "Elasticity Explorer",
-        "SKU Decision Workbench",
-        "Inventory Control Tower",
-        "Backtest & Rollback",
-        "AI Analyst",
-        "Data & Governance",
-    ]
-    page = st.sidebar.radio(
-        "Section", pages, format_func=t, label_visibility="collapsed",
-    )
-    st.sidebar.markdown("---")
-
+    # 顶部 Tab 导航：四段式完整故事链，一键切换、滚动流畅（无需侧栏逐页点选）。
     recs, sales, filters = apply_sidebar_filters(
-        state.recommendations, state.sales, page
+        state.recommendations, state.sales, "Executive Command Center"
     )
 
-    if page == "Executive Command Center":
+    tab_exec, tab_sku, tab_inv, tab_bt = st.tabs([
+        t("Executive Command Center"),
+        t("SKU Decision Workbench"),
+        t("Inventory Control Tower"),
+        t("Backtest & Rollback"),
+    ])
+
+    with tab_exec:
         page_executive(recs, sales, state.inventory_analysis,
                        state.backtest_results, filters)
-    elif page == "Demand Model":
-        page_demand_model(state, filters)
-    elif page == "Elasticity Explorer":
-        page_elasticity(state, filters)
-    elif page == "SKU Decision Workbench":
+        render_model_quality_fold(state)
+        render_method_fold()
+
+    with tab_sku:
         page_pricing_studio(recs, state, filters)
-    elif page == "Inventory Control Tower":
+        render_elasticity_fold(state)
+
+    with tab_inv:
         page_inventory_control_tower(state, state.inventory_analysis, recs, filters)
-    elif page == "Backtest & Rollback":
+
+    with tab_bt:
         page_backtest(state, recs, filters)
-    elif page == "AI Analyst":
-        page_ai_analyst(state, recs, sales, filters)
-    elif page == "Data & Governance":
-        page_governance()
 
 
 # Streamlit 每次运行都会执行整个脚本，必须直接调用 main()
