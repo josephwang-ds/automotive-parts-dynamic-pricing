@@ -268,429 +268,494 @@ def apply_sidebar_filters(recs, sales, page):
 
 # ── 页面 ──
 
-def page_executive(recs, sales, inv, bt, filters):
-    """Executive Command Center。"""
-    section_title("Executive Command Center")
+HERO_HEADLINE = "Automotive Parts Dynamic Pricing & Inventory Optimization"
+HERO_SUB = ("Connect pricing, demand forecasting, inventory health, and replenishment "
+            "decisions in one explainable decision-support workflow.")
 
-    total_rev = recs["current_revenue"].sum()
-    total_gp = recs["current_gross_profit"].sum()
-    gp_lift = recs["gross_profit_lift"].sum()
+
+def _kpi_row(cards):
+    """渲染一行 KPI 卡片。cards = [(label, value, delta), ...]"""
+    cols = st.columns(len(cards))
+    for col, card in zip(cols, cards):
+        label, value = card[0], card[1]
+        delta = card[2] if len(card) > 2 else ""
+        with col:
+            metric_card(label, value, delta)
+
+
+def _plot(fig):
+    fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
+    st.plotly_chart(fig, width="stretch")
+
+
+# ════════════════════════ PAGE 1 — EXECUTIVE OVERVIEW ════════════════════════
+def page_overview(recs, sales, state, filters):
+    inv = state.inventory_analysis
+    st.markdown(f"### {HERO_HEADLINE}")
+    st.caption(HERO_SUB)
+
+    total_rev = recs["current_revenue"].sum() if len(recs) else 0
+    total_gp = recs["current_gross_profit"].sum() if len(recs) else 0
+    gp_margin = (total_gp / total_rev) if total_rev else 0
+    gp_lift = recs["gross_profit_lift"].sum() if len(recs) else 0
     inv_val = inv.get("total_inventory_value", 0)
+    turns = inv.get("avg_inventory_turns", 0)
+    excess = inv.get("excess_inventory_value", 0)
+    snap = inv.get("latest_snapshot", pd.DataFrame())
+    stockout_rate = 0.0
+    if not snap.empty and "inventory_status" in snap.columns:
+        stockout_rate = float(snap["inventory_status"].isin(["STOCKOUT", "STOCKOUT_RISK"]).mean())
+    price_ops = int(recs["recommendation_action"].isin(["Increase", "Decrease"]).sum()) if len(recs) else 0
+    high_risk = int(recs["inventory_status"].isin(["STOCKOUT", "STOCKOUT_RISK"]).sum()) if "inventory_status" in recs.columns else 0
+    awaiting = int(recs.get("manual_review_required", pd.Series([], dtype=bool)).sum())
 
-    c1, c2, c3, c4 = st.columns(4)
-    with c1:
-        metric_card("SKUs in Scope", f"{len(recs):,}")
-    with c2:
-        metric_card("Current Revenue", format_currency(total_rev))
-    with c3:
-        metric_card("Current Gross Profit", format_currency(total_gp))
-    with c4:
-        metric_card("Modeled GP Lift", format_currency(gp_lift), t("Simulated estimate"))
+    section_title("Headline KPIs")
+    _kpi_row([
+        ("Total Revenue", format_currency(total_rev), t("Latest period")),
+        ("Gross Margin $", format_currency(total_gp)),
+        ("Gross Margin %", format_pct(gp_margin)),
+        ("Inventory Value", format_currency(inv_val)),
+        ("Inventory Turnover", f"{turns:.1f}"),
+    ])
+    _kpi_row([
+        ("Stockout Rate", format_pct(stockout_rate)),
+        ("Excess Inventory Value", format_currency(excess)),
+        ("Expected Margin Opportunity", format_currency(gp_lift), t("Modeled")),
+        ("Pricing Opportunities", f"{price_ops:,}"),
+        ("Recommendations Awaiting Review", f"{awaiting:,}"),
+    ])
 
-    c5, c6, c7, c8 = st.columns(4)
-    with c5:
-        metric_card("Inventory Value", format_currency(inv_val))
-    with c6:
-        metric_card("Avg Inventory Turns", f"{inv.get('avg_inventory_turns', 0):.1f}")
-    with c7:
-        metric_card("Excess Inventory", format_currency(inv.get("excess_inventory_value", 0)))
-    with c8:
-        metric_card("Stockout-Risk SKUs", f"{inv.get('stockout_risk_skus', 0):,}")
-
-    # Executive summary
-    top_cat = recs.groupby("category")["gross_profit_lift"].sum().idxmax() if len(recs) > 0 else "N/A"
-    action_dist = recs["recommendation_action"].value_counts().to_dict() if len(recs) > 0 else {}
-    increases = action_dist.get("Increase", 0)
-    decreases = action_dist.get("Decrease", 0)
-    st.markdown(
-        f'<div class="callout">'
-        + tf("exec_summary", n=f"{len(recs):,}", gp=format_currency(gp_lift),
-             cat=top_cat, inc=increases, dec=decreases)
-        + '</div>',
-        unsafe_allow_html=True,
-    )
-
-    col1, col2 = st.columns(2)
-    with col1:
-        if len(recs) > 0:
-            fig = px.bar(
-                recs.groupby("category")["gross_profit_lift"].sum().reset_index(),
-                x="category", y="gross_profit_lift",
-                title=t("Modeled Opportunity by Category"),
-                color_discrete_sequence=[UI_COLORS["electric_blue"]],
-            )
-            fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-            st.plotly_chart(fig, width='stretch')
-
-    with col2:
-        if len(recs) > 0:
-            fig = px.pie(
-                recs, names="recommendation_action",
-                title=t("Recommendation Action Distribution"),
-                color_discrete_sequence=px.colors.qualitative.Set2,
-            )
-            fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-            st.plotly_chart(fig, width='stretch')
-
-    col3, col4 = st.columns(2)
-    with col3:
-        if len(recs) > 0:
-            fig = px.bar(
-                recs.groupby("region")["gross_profit_lift"].sum().reset_index(),
-                x="region", y="gross_profit_lift",
-                title=t("Opportunity by Region"),
-                color_discrete_sequence=[UI_COLORS["emerald"]],
-            )
-            fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-            st.plotly_chart(fig, width='stretch')
-
-    with col4:
-        top_candidates = recs.nlargest(10, "gross_profit_lift")[
-            ["sku_id", "category", "gross_profit_lift", "recommendation_action"]
-        ] if len(recs) > 0 else pd.DataFrame()
-        st.markdown(f"**{t('Top Approval Candidates')}**")
-        st.dataframe(top_candidates, width='stretch', hide_index=True)
-
-
-def page_pricing_studio(recs, state, filters):
-    """SKU Decision Workbench（定价 + 库存联合决策）。"""
-    section_title("SKU Decision Workbench")
+    st.markdown('<div class="callout">' + t(
+        "The system helps pricing, category, and inventory teams identify margin improvement "
+        "opportunities, stockout risks, excess inventory, competitive price gaps, and "
+        "replenishment and transfer needs — each with a reason code, confidence level, and a "
+        "recommended operational action.") + '</div>', unsafe_allow_html=True)
 
     if recs.empty:
         st.warning(t("No recommendations for current filters."))
         return
 
-    sku_ids = recs["sku_id"].unique().tolist()
-    selected_sku = st.selectbox(t("Select SKU"), sku_ids)
-
-    rec = recs[recs["sku_id"] == selected_sku].iloc[0]
-
-    c1, c2, c3, c4 = st.columns(4)
-    with c1:
-        metric_card("Current Price", format_currency(rec["current_price"]))
-    with c2:
-        metric_card("Recommended Price", format_currency(rec["recommended_price"]))
-    with c3:
-        metric_card("Price Change", format_pct(rec["price_change_pct"]))
-    with c4:
-        metric_card("Action", rec["recommendation_action"])
-
-    c5, c6, c7, c8 = st.columns(4)
-    with c5:
-        metric_card("Predicted Units (Current)", f"{rec['predicted_current_units']:.1f}")
-    with c6:
-        metric_card("Predicted Units (Recommended)", f"{rec['predicted_recommended_units']:.1f}")
-    with c7:
-        metric_card("GP Lift", format_currency(rec["gross_profit_lift"]))
-    with c8:
-        metric_card("Margin", format_pct(rec["gross_margin_pct"]))
-
-    st.markdown(
-        '<div class="callout">'
-        + tf("why_price",
-             reason=rec.get("pricing_reason_code", rec.get("reason_code", "")),
-             elasticity=rec["elasticity"],
-             conf=rec.get("elasticity_confidence", 0),
-             guardrail=rec.get("guardrail_triggered") or "None")
-        + '</div>',
-        unsafe_allow_html=True,
-    )
-
-    # 库存决策区
-    if "inventory_status" in rec.index:
-        section_title("Inventory Decision")
-        ic1, ic2, ic3, ic4 = st.columns(4)
-        with ic1:
-            metric_card("Inventory Status", rec.get("inventory_status", "N/A"))
-        with ic2:
-            metric_card("Inventory Action", rec.get("inventory_action", "N/A"))
-        with ic3:
-            metric_card("Weeks of Cover", f"{rec.get('available_weeks_of_cover', 0):.1f}")
-        with ic4:
-            metric_card("Joint Confidence", rec.get("joint_confidence", "N/A"))
-
-        ic5, ic6, ic7, ic8 = st.columns(4)
-        with ic5:
-            metric_card("On-Hand", f"{rec.get('on_hand_inventory', 0):,.0f}")
-        with ic6:
-            metric_card("On-Order", f"{rec.get('on_order_inventory', 0):,.0f}")
-        with ic7:
-            metric_card("Stockout Prob.", format_pct(rec.get("stockout_probability", 0)))
-        with ic8:
-            metric_card("Reorder Qty", f"{rec.get('recommended_order_quantity', 0):,.0f}")
-
-        st.markdown(
-            '<div class="callout">'
-            + tf("decision_path",
-                 status=rec.get("inventory_status"),
-                 pricing=rec.get("pricing_action", rec.get("recommendation_action")),
-                 inv_action=rec.get("inventory_action"),
-                 approval=tf("Required") if rec.get("manual_review_required") else tf("Standard"))
-            + '</div>',
-            unsafe_allow_html=True,
-        )
-
-    # 候选价格模拟图
-    if state.demand_model and state.sales is not None:
-        from src.optimizer import PriceOptimizer
-
-        latest = state.sales.sort_values("week_num").groupby(
-            ["sku_id", "region", "customer_tier"]
-        ).last().reset_index()
-        row_data = latest[
-            (latest["sku_id"] == selected_sku)
-            & (latest["region"] == rec["region"])
-            & (latest["customer_tier"] == rec["customer_tier"])
-        ]
-        if len(row_data) > 0:
-            opt = PriceOptimizer(demand_model=state.demand_model)
-            el_info = state.elasticity.get_elasticity(
-                rec["category"], rec["region"], rec["customer_tier"]
-            ) if state.elasticity else {}
-            candidates = opt.generate_candidate_prices(rec["current_price"])
-            sims = [opt.simulate_candidate(row_data.iloc[0], cp, el_info) for cp in candidates]
-            sim_df = pd.DataFrame(sims)
-
-            col1, col2 = st.columns(2)
-            with col1:
-                fig = px.line(sim_df, x="candidate_price", y="predicted_units",
-                              title=t("Price vs Predicted Units"),
-                              color_discrete_sequence=[UI_COLORS["electric_blue"]])
-                fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-                st.plotly_chart(fig, width='stretch')
-            with col2:
-                fig = px.line(sim_df, x="candidate_price", y="gross_profit",
-                              title=t("Price vs Gross Profit"),
-                              color_discrete_sequence=[UI_COLORS["emerald"]])
-                fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-                st.plotly_chart(fig, width='stretch')
-
-
-def page_inventory_control_tower(state, inv, recs, filters):
-    """Inventory Control Tower。"""
-    section_title("Inventory Control Tower")
-
-    transfers = getattr(state, "transfers", pd.DataFrame())
-    inv_snap = inv.get("latest_snapshot", pd.DataFrame())
-
-    c1, c2, c3, c4 = st.columns(4)
-    with c1:
-        metric_card("Total Inventory Value", format_currency(inv.get("total_inventory_value", 0)))
-    with c2:
-        metric_card("Excess Inventory", format_currency(inv.get("excess_inventory_value", 0)))
-    with c3:
-        metric_card("Stockout-Risk SKUs", f"{inv.get('stockout_risk_skus', 0):,}")
-    with c4:
-        metric_card("Est. Lost Sales", f"{inv.get('estimated_lost_sales', 0):,.0f}")
-
-    c5, c6, c7, c8 = st.columns(4)
-    with c5:
-        metric_card("Avg Inventory Turns", f"{inv.get('avg_inventory_turns', 0):.1f}")
-    with c6:
-        metric_card("Avg Weeks of Cover", f"{inv.get('avg_weeks_of_cover', 0):.1f}")
-    with c7:
-        metric_card("Transfer Opportunities", f"{len(transfers):,}")
-    with c8:
-        rep_count = len(recs[recs.get("inventory_action", pd.Series()).isin(["REPLENISH", "EXPEDITE_ORDER"])]) if "inventory_action" in recs.columns else 0
-        metric_card("Replenishment Candidates", f"{rep_count:,}")
-
     col1, col2 = st.columns(2)
     with col1:
-        if not inv_snap.empty and "inventory_status" in inv_snap.columns:
-            fig = px.bar(
-                inv_snap["inventory_status"].value_counts().reset_index(),
-                x="count", y="inventory_status", orientation="h",
-                title=t("Inventory Health Distribution"),
-                color_discrete_sequence=[UI_COLORS["electric_blue"]],
-            )
-            fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-            st.plotly_chart(fig, width='stretch')
+        d = recs.groupby("category")["gross_profit_lift"].sum().reset_index()
+        _plot(px.bar(d, x="category", y="gross_profit_lift",
+                     title=t("Modeled Margin Opportunity by Category"),
+                     color_discrete_sequence=[UI_COLORS["electric_blue"]]))
     with col2:
-        if not inv_snap.empty and "inventory_status" in inv_snap.columns:
-            val_by_status = inv_snap.groupby("inventory_status")["inventory_value"].sum().reset_index()
-            fig = px.bar(val_by_status, x="inventory_status", y="inventory_value",
-                         title=t("Inventory Value by Status"),
-                         color_discrete_sequence=[UI_COLORS["warning_amber"]])
-            fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-            st.plotly_chart(fig, width='stretch')
+        _plot(px.pie(recs, names="recommendation_action",
+                     title=t("Recommended Actions by Type"),
+                     color_discrete_sequence=px.colors.qualitative.Set2))
 
     col3, col4 = st.columns(2)
     with col3:
-        if not inv_snap.empty and "available_weeks_of_cover" in inv_snap.columns:
-            fig = px.histogram(inv_snap, x="available_weeks_of_cover", nbins=30,
-                               title=t("Weeks-of-Cover Distribution"),
-                               color_discrete_sequence=[UI_COLORS["electric_blue"]])
-            fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-            st.plotly_chart(fig, width='stretch')
+        d = recs.groupby("region")["gross_profit_lift"].sum().reset_index()
+        _plot(px.bar(d, x="region", y="gross_profit_lift",
+                     title=t("Opportunity by Region"),
+                     color_discrete_sequence=[UI_COLORS["emerald"]]))
     with col4:
-        if not inv_snap.empty and "inventory_turns" in inv_snap.columns:
-            fig = px.scatter(inv_snap, x="inventory_turns", y="unit_cost",
-                             size="excess_inventory_value", color="inventory_status",
-                             title=t("Margin vs Inventory Turns"),
-                             opacity=0.6)
-            fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-            st.plotly_chart(fig, width='stretch')
-
-    if "inventory_action" in recs.columns:
-        action_dist = recs.drop_duplicates(["sku_id", "region"])["inventory_action"].value_counts()
-        fig = px.pie(values=action_dist.values, names=action_dist.index,
-                     title=t("Inventory Action Distribution"))
-        fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-        st.plotly_chart(fig, width='stretch')
-
-    # 决策矩阵
-    if "inventory_status" in recs.columns and "pricing_action" in recs.columns:
-        matrix = recs.drop_duplicates(["sku_id", "region"]).groupby(
-            ["inventory_status", "pricing_action"]
-        ).size().reset_index(name="count")
-        if not matrix.empty:
-            st.markdown(f"**{t('Pricing vs Inventory Action Matrix')}**")
-            st.dataframe(matrix.head(50), width='stretch', hide_index=True)
-
-    # 数据表
-    st.markdown(f"**{t('Top Excess Inventory Candidates')}**")
-    if not inv_snap.empty:
-        excess = inv_snap[inv_snap.get("is_excess", inv_snap.get("inventory_status", "") == "OVERSTOCKED")]
-        if len(excess) == 0 and "inventory_status" in inv_snap.columns:
-            excess = inv_snap[inv_snap["inventory_status"].isin(["OVERSTOCKED", "SLOW_MOVING"])]
-        cols = [c for c in ["sku_id", "category", "region", "inventory_status", "excess_inventory_value",
-                            "available_weeks_of_cover"] if c in excess.columns]
-        st.dataframe(excess.nlargest(50, "excess_inventory_value")[cols] if len(excess) > 0 else pd.DataFrame(),
-                     width='stretch', hide_index=True)
-
-    if not transfers.empty:
-        st.markdown(f"**{t('Transfer Recommendations')}**")
-        st.dataframe(transfers.head(50), width='stretch', hide_index=True)
-
-    if "inventory_action" in recs.columns:
-        manual = recs[recs.get("manual_review_required", False) == True]  # noqa: E712
-        if len(manual) > 0:
-            st.markdown(f"**{t('Manual Review Queue')}**")
-            show_cols = [c for c in ["sku_id", "region", "customer_tier", "pricing_action",
-                        "inventory_action", "joint_confidence", "inventory_reason_code"] if c in manual.columns]
-            st.dataframe(manual[show_cols].head(50), width='stretch', hide_index=True)
+        st.markdown(f"**{t('Top Margin Opportunities')}**")
+        top = recs.nlargest(10, "gross_profit_lift")[
+            ["sku_id", "category", "region", "gross_profit_lift", "recommendation_action"]]
+        st.dataframe(top, width="stretch", hide_index=True)
 
 
-def page_backtest(state, recs, filters):
-    """Backtest & Rollback。"""
-    section_title("Backtest & Rollback Simulator")
+# ════════════════════════ PAGE 2 — PRICING OPPORTUNITIES ═════════════════════
+def page_pricing_opportunities(recs, sales, state, filters):
+    section_title("Pricing Opportunities")
+    if recs.empty:
+        st.warning(t("No recommendations for current filters."))
+        return
 
-    bt = state.backtest_results
-    comparison = bt.get("strategy_comparison", pd.DataFrame())
+    movers = recs[recs["recommendation_action"].isin(["Increase", "Decrease"])]
+    _kpi_row([
+        ("Pricing Opportunities", f"{len(movers):,}"),
+        ("Avg Recommended Move", format_pct(movers["price_change_pct"].mean() if len(movers) else 0)),
+        ("Modeled Margin Lift", format_currency(recs["gross_profit_lift"].sum())),
+        ("High-Confidence Share", format_pct((recs["joint_confidence"] == "HIGH").mean())),
+    ])
 
-    if not comparison.empty:
-        st.markdown(
-            f'<div class="callout">{tf("backtest_methodology")}</div>',
-            unsafe_allow_html=True,
-        )
+    col1, col2 = st.columns(2)
+    with col1:
+        top = movers.reindex(movers["gross_profit_lift"].abs().sort_values(ascending=False).index).head(15)
+        if not top.empty:
+            d = top[["sku_id", "current_price", "recommended_price"]].melt(
+                id_vars="sku_id", var_name="type", value_name="price")
+            _plot(px.bar(d, x="sku_id", y="price", color="type", barmode="group",
+                         title=t("Current vs Recommended Price (top movers)")))
+    with col2:
+        _plot(px.histogram(recs, x="price_change_pct", nbins=40,
+                           title=t("Price-Change Distribution"),
+                           color_discrete_sequence=[UI_COLORS["electric_blue"]]))
 
-        st.dataframe(comparison, width='stretch')
+    col3, col4 = st.columns(2)
+    with col3:
+        if "competitor_price_index" in sales.columns and len(sales):
+            comp = sales.groupby("category")["competitor_price_index"].mean().reset_index()
+            fig = px.bar(comp, x="category", y="competitor_price_index",
+                         title=t("Competitor Price Index by Category (1.0 = parity)"),
+                         color_discrete_sequence=[UI_COLORS["warning_amber"]])
+            fig.add_hline(y=1.0, line_dash="dash", line_color="gray")
+            _plot(fig)
+    with col4:
+        d = recs.copy()
+        d["unit_impact"] = d["predicted_recommended_units"] - d["predicted_current_units"]
+        _plot(px.scatter(d, x="unit_impact", y="gross_profit_lift", color="recommendation_action",
+                         title=t("Margin Lift vs Unit Impact"), opacity=0.5))
 
-        col1, col2 = st.columns(2)
-        with col1:
-            fig = px.bar(
-                comparison.reset_index(), x="index", y="total_gross_profit",
-                title=t("Gross Profit Comparison by Strategy"),
-                labels={"index": t("Strategy")},
-                color_discrete_sequence=[UI_COLORS["emerald"]],
-            )
-            fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-            st.plotly_chart(fig, width='stretch')
+    st.markdown(f"**{t('High-Confidence Pricing Opportunities')}**")
+    hi = recs[(recs["joint_confidence"] == "HIGH")
+              & (recs["recommendation_action"].isin(["Increase", "Decrease"]))].nlargest(50, "gross_profit_lift")
+    cols = [c for c in ["sku_id", "category", "region", "customer_tier", "current_price",
+            "recommended_price", "price_change_pct", "gross_profit_lift", "gross_margin_pct",
+            "reason_code"] if c in hi.columns]
+    st.dataframe(hi[cols], width="stretch", hide_index=True)
 
-        with col2:
-            fig = px.bar(
-                comparison.reset_index(), x="index", y="total_revenue",
-                title=t("Revenue Comparison by Strategy"),
-                labels={"index": t("Strategy")},
-                color_discrete_sequence=[UI_COLORS["electric_blue"]],
-            )
-            fig.update_layout(plot_bgcolor="white", paper_bgcolor="white")
-            st.plotly_chart(fig, width='stretch')
 
-    # Rollback
-    st.markdown(f"### {t('Rollback Simulator')}")
-    col_r1, col_r2, col_r3 = st.columns(3)
-    with col_r1:
-        pricing_rb = st.slider(t("Pricing Rollback %"), 0, 100, 0, 5)
-    with col_r2:
-        transfer_rb = st.slider(t("Transfer Rollback %"), 0, 100, 0, 5)
-    with col_r3:
-        replenish_rb = st.slider(t("Replenishment Rollback %"), 0, 100, 0, 5)
-
+# ════════════════════════════ PAGE 3 — INVENTORY RISK ════════════════════════
+def page_inventory_risk(recs, state, filters):
+    section_title("Inventory Risk")
+    inv = state.inventory_analysis
+    snap = inv.get("latest_snapshot", pd.DataFrame())
     transfers = getattr(state, "transfers", pd.DataFrame())
-    simulator = RollbackSimulator(recs, transfers)
-    result = simulator.simulate_rollback(
-        pricing_rollback_pct=pricing_rb / 100,
-        transfer_rollback_pct=transfer_rb / 100,
-        replenishment_rollback_pct=replenish_rb / 100,
-    )
 
-    summary = result["summary"]
-    c1, c2, c3, c4 = st.columns(4)
+    _kpi_row([
+        ("Inventory Value", format_currency(inv.get("total_inventory_value", 0))),
+        ("Excess Inventory Value", format_currency(inv.get("excess_inventory_value", 0))),
+        ("Stockout-Risk SKUs", f"{inv.get('stockout_risk_skus', 0):,}"),
+        ("Est. Lost Sales", f"{inv.get('estimated_lost_sales', 0):,.0f}"),
+        ("Avg Weeks of Cover", f"{inv.get('avg_weeks_of_cover', 0):.1f}"),
+    ])
+
+    col1, col2 = st.columns(2)
+    with col1:
+        if not snap.empty and "inventory_status" in snap.columns:
+            d = snap["inventory_status"].value_counts().reset_index()
+            d.columns = ["inventory_status", "count"]
+            _plot(px.bar(d, x="count", y="inventory_status", orientation="h",
+                         title=t("Inventory Health Distribution"),
+                         color_discrete_sequence=[UI_COLORS["electric_blue"]]))
+    with col2:
+        if not recs.empty and {"region", "category", "inventory_status"}.issubset(recs.columns):
+            r = recs.drop_duplicates(["sku_id", "region"]).copy()
+            r["at_risk"] = r["inventory_status"].isin(["STOCKOUT", "STOCKOUT_RISK"]).astype(int)
+            piv = r.pivot_table(index="category", columns="region", values="at_risk", aggfunc="mean")
+            if not piv.empty:
+                _plot(px.imshow(piv, title=t("Stockout-Risk Heatmap (Category x Region)"),
+                                color_continuous_scale="Reds", aspect="auto"))
+
+    col3, col4 = st.columns(2)
+    with col3:
+        if not snap.empty and "available_weeks_of_cover" in snap.columns:
+            _plot(px.histogram(snap, x="available_weeks_of_cover", nbins=30,
+                               title=t("Weeks-of-Cover Distribution"),
+                               color_discrete_sequence=[UI_COLORS["electric_blue"]]))
+    with col4:
+        if not recs.empty:
+            d = recs.groupby("category")["excess_inventory_value"].sum().reset_index()
+            _plot(px.bar(d, x="category", y="excess_inventory_value",
+                         title=t("Excess Inventory by Category"),
+                         color_discrete_sequence=[UI_COLORS["warning_amber"]]))
+
+    if not recs.empty and "inventory_action" in recs.columns:
+        d = recs["inventory_action"].value_counts().reset_index()
+        d.columns = ["inventory_action", "count"]
+        fig = px.bar(d, x="inventory_action", y="count",
+                     title=t("Recommended Inventory Actions"),
+                     color_discrete_sequence=[UI_COLORS["emerald"]])
+        fig.update_layout(xaxis_tickangle=-30)
+        _plot(fig)
+
+    st.markdown(f"**{t('Warehouse-to-Store Transfer Recommendations')}**")
+    if transfers is not None and len(transfers):
+        cols = [c for c in ["sku_id", "category", "source_region", "destination_region",
+                "transfer_quantity", "net_transfer_value", "transfer_reason"] if c in transfers.columns]
+        st.dataframe(transfers.sort_values("net_transfer_value", ascending=False)[cols].head(50),
+                     width="stretch", hide_index=True)
+    else:
+        st.caption(t("No transfer opportunities under current filters."))
+
+    st.markdown(f"**{t('Top Excess / Aged Inventory')}**")
+    if not recs.empty and "inventory_status" in recs.columns:
+        aged = recs[recs["inventory_status"].isin(["SLOW_MOVING", "OBSOLETE_RISK"])]
+        cols = [c for c in ["sku_id", "category", "region", "inventory_status",
+                "excess_inventory_value", "available_weeks_of_cover", "obsolescence_risk_score"]
+                if c in aged.columns]
+        if len(aged):
+            st.dataframe(aged.nlargest(50, "excess_inventory_value")[cols],
+                         width="stretch", hide_index=True)
+
+
+# ═════════════════ PAGE 4 — SKU EXPLORER + SCENARIO SIMULATOR ════════════════
+def page_sku_explorer(recs, sales, state, filters):
+    section_title("SKU Explorer")
+    if recs.empty:
+        st.warning(t("No recommendations for current filters."))
+        return
+    sku = st.selectbox(t("Select SKU"), recs["sku_id"].unique().tolist())
+    rec = recs[recs["sku_id"] == sku].iloc[0]
+
+    prod = state.products[state.products["sku_id"] == sku]
+    pname = prod.iloc[0]["product_name"] if len(prod) else sku
+    st.markdown(f"#### {pname} — {sku}")
+    if len(prod):
+        p = prod.iloc[0]
+        cs = st.columns(4)
+        with cs[0]:
+            metric_card("Category", f"{p['category']} / {p.get('subcategory', '')}")
+        with cs[1]:
+            metric_card("Brand Tier", str(p.get("brand_tier", "")))
+        with cs[2]:
+            metric_card("Lead Time (days)", f"{p.get('lead_time_days', '')}")
+        with cs[3]:
+            metric_card("Lifecycle", str(p.get("lifecycle_stage", "")))
+
+    _kpi_row([
+        ("Current Price", format_currency(rec["current_price"])),
+        ("Recommended", format_currency(rec["recommended_price"]), rec["recommendation_action"]),
+        ("Forecast Demand (wk)", f"{rec['predicted_current_units']:.1f}"),
+        ("Weeks of Cover", f"{rec.get('available_weeks_of_cover', 0):.1f}"),
+        ("Stockout Prob.", format_pct(rec.get("stockout_probability", 0))),
+    ])
+    st.markdown('<div class="callout">' + tf("why_price",
+                reason=rec.get("pricing_reason_code", rec.get("reason_code", "")),
+                elasticity=rec["elasticity"], conf=rec.get("elasticity_confidence", 0),
+                guardrail=rec.get("guardrail_triggered") or "None") + '</div>',
+                unsafe_allow_html=True)
+
+    st.divider()
+    section_title("Scenario Simulator")
+    st.caption(t("Adjust the candidate price and conditions; the engine re-simulates demand, "
+                 "margin, and inventory outcomes."))
+
+    base_row = None
+    if state.sales is not None and len(state.sales):
+        latest = state.sales.sort_values("week_num").groupby(
+            ["sku_id", "region", "customer_tier"]).last().reset_index()
+        match = latest[(latest["sku_id"] == sku)
+                       & (latest["region"] == rec["region"])
+                       & (latest["customer_tier"] == rec["customer_tier"])]
+        if len(match):
+            base_row = match.iloc[0]
+
+    if base_row is None:
+        st.info(t("Scenario data unavailable for this SKU / segment."))
+        return
+
+    from src.optimizer import PriceOptimizer
+    cur = float(rec["current_price"])
+    sc1, sc2, sc3 = st.columns(3)
+    with sc1:
+        cand = st.slider(t("Candidate Price"), float(round(cur * 0.8, 2)),
+                         float(round(cur * 1.2, 2)), float(round(cur, 2)))
+    with sc2:
+        promo = st.checkbox(t("Promotion active"), value=bool(base_row.get("promotion_flag", 0)))
+    with sc3:
+        avail = st.number_input(t("Available Inventory"), min_value=0,
+                                value=int(base_row.get("ending_inventory", 50)))
+
+    row = base_row.copy()
+    row["ending_inventory"] = avail
+    row["promotion_flag"] = 1 if promo else 0
+    el_info = state.elasticity.get_elasticity(rec["category"], rec["region"], rec["customer_tier"]) if state.elasticity else {}
+    opt = PriceOptimizer(demand_model=state.demand_model)
+    sim = opt.simulate_candidate(row, cand, el_info)
+
+    _kpi_row([
+        ("Forecast Demand", f"{sim['predicted_units']:.1f}"),
+        ("Expected Revenue", format_currency(sim["revenue"])),
+        ("Expected Gross Margin", format_pct(sim["gross_margin_pct"])),
+        ("Ending Inventory", f"{sim['expected_ending_inventory']:.0f}"),
+        ("Weeks of Supply", f"{sim['expected_weeks_of_cover']:.1f}"),
+    ])
+    _kpi_row([
+        ("Stockout Probability", format_pct(sim["stockout_probability"])),
+        ("Gross Profit", format_currency(sim["gross_profit"])),
+        ("Competitor Index", f"{base_row.get('competitor_price_index', 1.0):.2f}"),
+        ("Elasticity", f"{el_info.get('estimated_elasticity', rec['elasticity']):.2f}"),
+        ("Confidence", str(rec.get("joint_confidence", ""))),
+    ])
+
+    candidates = opt.generate_candidate_prices(cur)
+    sims = pd.DataFrame([opt.simulate_candidate(row, cp, el_info) for cp in candidates])
+    c1, c2 = st.columns(2)
     with c1:
-        metric_card("GP Lift Retained", format_currency(summary["gross_profit_lift_retained"]))
+        fig = px.line(sims, x="candidate_price", y="predicted_units", markers=True,
+                      title=t("Price vs Predicted Units"),
+                      color_discrete_sequence=[UI_COLORS["electric_blue"]])
+        fig.add_vline(x=cand, line_dash="dash", line_color="gray")
+        _plot(fig)
     with c2:
-        metric_card("Revenue Retained", format_currency(summary["revenue_retained"]))
-    with c3:
-        metric_card("Cancelled Transfers", f"{summary.get('cancelled_transfers', 0):,}")
-    with c4:
-        metric_card("Unit Recovery", f"{summary.get('unit_recovery_pct', 0)*100:.0f}%")
-
-    st.dataframe(result["audit_table"].head(20), width='stretch', hide_index=True)
+        fig = px.line(sims, x="candidate_price", y="gross_profit", markers=True,
+                      title=t("Price vs Gross Profit"),
+                      color_discrete_sequence=[UI_COLORS["emerald"]])
+        fig.add_vline(x=cand, line_dash="dash", line_color="gray")
+        _plot(fig)
 
 
-def render_model_quality_fold(state):
-    """折叠：需求模型关键质量指标（从原 Demand Model 页精简而来）。"""
+# ════════════════════════ PAGE 5 — RECOMMENDATION QUEUE ══════════════════════
+def page_recommendation_queue(recs, state, filters):
+    section_title("Recommendation Queue")
+    st.caption(t("Each recommendation is a reviewable item: approve, override the price, request "
+                 "replenish / transfer, pause, or add a note. Nothing is auto-applied."))
+    if recs.empty:
+        st.warning(t("No recommendations for current filters."))
+        return
+
+    decisions = st.session_state.setdefault("queue_decisions", {})
+
+    fc1, fc2, fc3 = st.columns(3)
+    with fc1:
+        only_action = st.checkbox(t("Only items needing action"), value=True)
+    with fc2:
+        conf_filter = st.selectbox(t("Confidence"), ["All", "HIGH", "MEDIUM"], index=0)
+    with fc3:
+        review_only = st.checkbox(t("Only manual-review items"), value=False)
+
+    q = recs.copy()
+    if only_action:
+        act = q["recommendation_action"].isin(["Increase", "Decrease", "Test"])
+        if "inventory_action" in q.columns:
+            act = act | q["inventory_action"].isin(
+                ["EXPEDITE_ORDER", "REPLENISH", "INTER_REGION_TRANSFER", "STOP_OR_DELAY_ORDER"])
+        q = q[act]
+    if conf_filter != "All":
+        q = q[q["joint_confidence"] == conf_filter]
+    if review_only and "manual_review_required" in q.columns:
+        q = q[q["manual_review_required"] == True]  # noqa: E712
+    q = q.sort_values("gross_profit_lift", ascending=False).head(200)
+
+    _kpi_row([
+        ("Items in Queue", f"{len(q):,}"),
+        ("Modeled GP Lift", format_currency(q["gross_profit_lift"].sum())),
+        ("Decisions Logged", f"{len(decisions):,}"),
+        ("Awaiting Review", f"{int(recs.get('manual_review_required', pd.Series([], dtype=bool)).sum()):,}"),
+    ])
+
+    show = [c for c in ["sku_id", "category", "region", "customer_tier", "current_price",
+            "recommended_price", "price_change_pct", "recommendation_action", "inventory_action",
+            "joint_confidence", "reason_code"] if c in q.columns]
+    disp = q[show].copy()
+    disp["decision"] = disp["sku_id"].map(lambda s: decisions.get(s, {}).get("decision", "—"))
+    st.dataframe(disp, width="stretch", hide_index=True, height=360)
+
+    st.divider()
+    st.markdown(f"#### {t('Review an item')}")
+    if len(q):
+        sku = st.selectbox(t("SKU to review"), q["sku_id"].tolist())
+        rec = q[q["sku_id"] == sku].iloc[0]
+        a, b, c, d = st.columns(4)
+        with a:
+            metric_card("Current Price", format_currency(rec["current_price"]))
+        with b:
+            metric_card("Recommended", format_currency(rec["recommended_price"]), rec["recommendation_action"])
+        with c:
+            metric_card("Inventory Action", rec.get("inventory_action", "N/A"))
+        with d:
+            metric_card("Confidence", rec.get("joint_confidence", "N/A"))
+        st.markdown('<div class="callout"><b>' + t("Reason") + ':</b> '
+                    + f'{rec.get("reason_code", "")} · {rec.get("inventory_reason_code", "")}</div>',
+                    unsafe_allow_html=True)
+
+        dc1, dc2 = st.columns([2, 1])
+        with dc1:
+            choice = st.radio(t("Decision"), [t("Approve"), t("Override price"),
+                              t("Request replenish"), t("Request transfer"), t("Pause"),
+                              t("Hold for data")])
+            override_price = None
+            if choice == t("Override price"):
+                override_price = st.number_input(t("New price"), min_value=0.0,
+                                                 value=float(rec["recommended_price"]))
+            note = st.text_input(t("Business note (optional)"))
+        with dc2:
+            st.markdown("&nbsp;")
+            if st.button(t("Log decision"), type="primary"):
+                decisions[sku] = {"decision": choice, "override_price": override_price, "note": note}
+                st.success(f"{t('Decision logged')}: {sku}")
+                st.rerun()
+
+    if decisions:
+        st.markdown(f"#### {t('Decision log')}")
+        log = pd.DataFrame([{"sku_id": k, **v} for k, v in decisions.items()])
+        st.dataframe(log, width="stretch", hide_index=True)
+        st.download_button(t("Download decision log (CSV)"),
+                           log.to_csv(index=False).encode("utf-8"),
+                           file_name="recommendation_decisions.csv", mime="text/csv")
+
+
+# ════════════════════ PAGE 6 — MODEL & METHODOLOGY ═══════════════════════════
+ARCH_DIAGRAM = """POS Sales / Product / Cost / Inventory / Promotion / Competitor
+            -> Data Validation & Feature Pipeline
+            -> SKU x Region x Tier x Week Analytical Dataset
+            -> SKU Segmentation
+            -> Demand Forecasting (global tree model)
+            -> Price Sensitivity Estimation
+            -> Candidate Price Simulation
+            -> Inventory & Business Constraints
+            -> Recommendation Engine
+            -> Price / Replenish / Transfer / Promote / Hold
+            -> Dashboard & Human Approval
+            -> Pilot Measurement & Model Monitoring"""
+
+ASSUMPTIONS = [
+    "Observed sales during a stockout do not equal true demand; censored periods are flagged.",
+    "Sparse long-tail SKUs use product-family priors and conservative, rule-based recommendations.",
+    "Historical price-sales relationships are decision-support evidence, not strict causality.",
+    "Competitor prices are used only when product-match confidence is sufficient.",
+    "Recommendations are a price range plus an operational action, kept under human review.",
+]
+
+
+def page_methodology(state, recs):
+    section_title("Model Performance")
     metrics = {}
     if state.demand_model:
         metrics = state.demand_model.metrics
     elif state.model_results:
         metrics = state.model_results.get("hgb", {}).get("metrics", {})
     test_m = metrics.get("test", {})
-    if not test_m:
-        return
-    with st.expander(t("Demand model quality")):
-        st.caption(tf("model_info",
-                      name=metrics.get("model_name", "HistGradientBoosting"),
-                      train=metrics.get("train_weeks", 78),
-                      val=metrics.get("val_weeks", 13)))
-        m1, m2, m3 = st.columns(3)
-        with m1:
-            metric_card("MAE", f"{test_m.get('MAE', 0):.2f}")
-        with m2:
-            metric_card("WAPE", f"{test_m.get('WAPE', 0):.3f}")
-        with m3:
-            metric_card("Baseline Improvement", f"{test_m.get('WAPE_improvement', 0)*100:.1f}%")
+    if test_m:
+        _kpi_row([
+            ("Model", metrics.get("model_name", "HistGradientBoosting")),
+            ("MAE", f"{test_m.get('MAE', 0):.2f}"),
+            ("WAPE", f"{test_m.get('WAPE', 0):.3f}"),
+            ("Forecast Bias", f"{test_m.get('Bias', 0):.2f}"),
+            ("Baseline Improvement", f"{test_m.get('WAPE_improvement', 0)*100:.1f}%"),
+        ])
+        st.caption(t("WAPE is preferred over MAPE because MAPE is unstable when demand is near zero."))
 
+    bt = state.backtest_results.get("strategy_comparison") if state.backtest_results else None
+    if bt is not None and len(bt):
+        st.markdown(f"#### {t('Strategy Backtest (modeled)')}")
+        st.dataframe(bt, width="stretch")
+        d = bt.reset_index().rename(columns={"index": "strategy"})
+        if "strategy" in d.columns and "total_gross_profit" in d.columns:
+            fig = px.bar(d, x="strategy", y="total_gross_profit",
+                         title=t("Gross Profit by Strategy"),
+                         color_discrete_sequence=[UI_COLORS["emerald"]])
+            fig.update_layout(xaxis_tickangle=-20)
+            _plot(fig)
 
-def render_elasticity_fold(state):
-    """折叠：价格弹性概览（从原 Elasticity 页精简为一张表，不再用热力图）。"""
-    el_df = getattr(state, "elasticity_df", None)
-    if el_df is None or el_df.empty:
-        return
-    cat_tier = el_df[el_df["estimation_level"] == "category_tier"]
-    if cat_tier.empty:
-        return
-    with st.expander(t("Price elasticity context")):
-        st.caption(t("Estimated price elasticity by category and customer tier — more negative means more price-sensitive."))
-        pivot = cat_tier.pivot_table(index="category", columns="customer_tier",
-                                     values="estimated_elasticity", aggfunc="first")
-        st.dataframe(pivot.round(3), width='stretch')
+    section_title("Data & Methodology")
+    st.markdown(t("**Data grain:** SKU x Region x Customer Tier x Week. Weekly aggregation reduces "
+                  "long-tail daily noise and aligns with pricing and replenishment review cycles."))
+    st.code(ARCH_DIAGRAM, language="text")
 
+    section_title("Business Assumptions")
+    for a in ASSUMPTIONS:
+        st.markdown(f"- {t(a)}")
 
-def render_method_fold():
-    """折叠：方法、指标定义与数据说明（从原 Governance 页精简而来）。"""
-    with st.expander(t("Method, metrics & data")):
-        metrics_def = {
-            "Revenue": "realized_price × units_sold",
-            "Gross Profit": "revenue − COGS (unit_cost × units_sold)",
-            "Inventory Turns": "annual_units_sold / average_inventory",
-            "Weeks of Cover": "ending_inventory / weekly_demand",
-            "Modeled Lift": "simulated GP difference between dynamic and current pricing",
-        }
-        for m, d in metrics_def.items():
-            st.markdown(f"- **{t(m)}:** {d}")
-        st.caption(t("All data is synthetic and deterministic; figures are modeled estimates, not live results."))
+    section_title("Positioning")
+    st.markdown('<div class="callout">' + t(
+        "Positioned as an explainable pricing and inventory decision-support prototype — not a fully "
+        "autonomous engine that changes prices without review. Dynamic pricing is about selecting the "
+        "best business action under demand, inventory, margin, supply, and service-level constraints.")
+        + '</div>', unsafe_allow_html=True)
+
+    st.markdown('<div class="disclosure">' + t(
+        "This demo uses synthetic sample data to demonstrate the analytical workflow, business logic, "
+        "and user experience. It contains no confidential employer, supplier, customer, or transaction "
+        "data. Model outputs are illustrative and should be validated through controlled business "
+        "pilots before production use.") + '</div>', unsafe_allow_html=True)
 
 
 def main():
@@ -703,7 +768,7 @@ def main():
     i18n.set_language(st.session_state.get("lang", "en"))
     st.sidebar.markdown("---")
 
-    st.title(t("Parts Dynamic Pricing & Inventory AI"))
+    st.title(HERO_HEADLINE)
     synthetic_disclosure()
 
     try:
@@ -714,33 +779,31 @@ def main():
         st.exception(exc)
         st.stop()
 
-    # 顶部 Tab 导航：四段式完整故事链，一键切换、滚动流畅（无需侧栏逐页点选）。
+    # 顶部 Tab 导航：完整故事链，一键切换、滚动流畅。
     recs, sales, filters = apply_sidebar_filters(
         state.recommendations, state.sales, "Executive Command Center"
     )
 
-    tab_exec, tab_sku, tab_inv, tab_bt = st.tabs([
-        t("Executive Command Center"),
-        t("SKU Decision Workbench"),
-        t("Inventory Control Tower"),
-        t("Backtest & Rollback"),
+    tabs = st.tabs([
+        t("Overview"),
+        t("Pricing Opportunities"),
+        t("Inventory Risk"),
+        t("SKU Explorer"),
+        t("Recommendation Queue"),
+        t("Model & Methodology"),
     ])
-
-    with tab_exec:
-        page_executive(recs, sales, state.inventory_analysis,
-                       state.backtest_results, filters)
-        render_model_quality_fold(state)
-        render_method_fold()
-
-    with tab_sku:
-        page_pricing_studio(recs, state, filters)
-        render_elasticity_fold(state)
-
-    with tab_inv:
-        page_inventory_control_tower(state, state.inventory_analysis, recs, filters)
-
-    with tab_bt:
-        page_backtest(state, recs, filters)
+    with tabs[0]:
+        page_overview(recs, sales, state, filters)
+    with tabs[1]:
+        page_pricing_opportunities(recs, sales, state, filters)
+    with tabs[2]:
+        page_inventory_risk(recs, state, filters)
+    with tabs[3]:
+        page_sku_explorer(recs, sales, state, filters)
+    with tabs[4]:
+        page_recommendation_queue(recs, state, filters)
+    with tabs[5]:
+        page_methodology(state, recs)
 
 
 # Streamlit 每次运行都会执行整个脚本，必须直接调用 main()
