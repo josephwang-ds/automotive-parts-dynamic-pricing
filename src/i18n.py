@@ -358,3 +358,126 @@ _ZH_TPL = {
     "Standard": "标准",
     "policy_pass": "{n} / {total} 个 SKU 符合当前策略",
 }
+
+
+# ── 新增页面（6-tab 重构）中文文案 ──
+_ZH.update({
+    # 品牌文案 / Hero
+    "Automotive Parts Dynamic Pricing & Inventory Optimization": "汽车零配件动态定价与库存优化",
+    "Connect pricing, demand forecasting, inventory health, and replenishment decisions in one explainable decision-support workflow.":
+        "在一个可解释的决策支持流程中，打通定价、需求预测、库存健康与补货决策。",
+    # Tab / 页面标题
+    "Overview": "总览",
+    "Pricing Opportunities": "定价机会",
+    "Inventory Risk": "库存风险",
+    "SKU Explorer": "SKU 浏览器",
+    "Recommendation Queue": "建议队列",
+    "Model & Methodology": "模型与方法",
+    # 区块标题
+    "Headline KPIs": "首屏 KPI",
+    "Scenario Simulator": "情景模拟器",
+    "Model Performance": "模型表现",
+    "Data & Methodology": "数据与方法",
+    "Business Assumptions": "业务假设",
+    "Positioning": "项目定位",
+    "Review an item": "复核单项",
+    "Decision log": "决策日志",
+    # KPI 卡片
+    "Total Revenue": "总营收",
+    "Gross Margin $": "毛利额",
+    "Gross Margin %": "毛利率",
+    "Inventory Turnover": "库存周转",
+    "Expected Margin Opportunity": "预计毛利机会",
+    "Recommendations Awaiting Review": "待审核建议数",
+    "Latest period": "最新周期",
+    "Modeled": "模型测算",
+    "Avg Recommended Move": "平均建议调价幅度",
+    "Modeled Margin Lift": "模型测算毛利提升",
+    "High-Confidence Share": "高置信占比",
+    "Forecast Demand (wk)": "预测需求（周）",
+    "Brand Tier": "品牌档次",
+    "Lead Time (days)": "交货周期（天）",
+    "Lifecycle": "生命周期",
+    "Forecast Demand": "预测需求",
+    "Expected Revenue": "预计营收",
+    "Expected Gross Margin": "预计毛利率",
+    "Ending Inventory": "期末库存",
+    "Weeks of Supply": "可供应周数",
+    "Stockout Probability": "缺货概率",
+    "Competitor Index": "竞品价格指数",
+    "Items in Queue": "队列项数",
+    "Modeled GP Lift": "模型测算毛利提升",
+    "Decisions Logged": "已记录决策数",
+    "Awaiting Review": "待审核",
+    "Model": "模型",
+    "MAE": "MAE",
+    "WAPE": "WAPE",
+    "Forecast Bias": "预测偏差",
+    # 图表标题
+    "Modeled Margin Opportunity by Category": "分品类模型测算毛利机会",
+    "Recommended Actions by Type": "建议动作类型分布",
+    "Top Margin Opportunities": "毛利机会 Top",
+    "Current vs Recommended Price (top movers)": "现价 vs 建议价（重点调价 SKU）",
+    "Price-Change Distribution": "调价幅度分布",
+    "Competitor Price Index by Category (1.0 = parity)": "分品类竞品价格指数（1.0 = 持平）",
+    "Margin Lift vs Unit Impact": "毛利提升 vs 销量影响",
+    "High-Confidence Pricing Opportunities": "高置信定价机会",
+    "Stockout-Risk Heatmap (Category x Region)": "缺货风险热力图（品类 × 区域）",
+    "Weeks-of-Cover Distribution": "周转天数（周）分布",
+    "Excess Inventory by Category": "分品类过剩库存",
+    "Recommended Inventory Actions": "建议库存动作",
+    "Warehouse-to-Store Transfer Recommendations": "仓店调拨建议",
+    "Top Excess / Aged Inventory": "过剩 / 老化库存 Top",
+    "Price vs Predicted Units": "价格 vs 预测销量",
+    "Price vs Gross Profit": "价格 vs 毛利",
+    "Strategy Backtest (modeled)": "策略回测（模型测算）",
+    "Gross Profit by Strategy": "各策略毛利对比",
+    # 控件 / 按钮 / 选项
+    "Candidate Price": "候选价格",
+    "Promotion active": "促销进行中",
+    "Available Inventory": "可用库存",
+    "Only items needing action": "仅显示需行动项",
+    "Only manual-review items": "仅显示需人工复核项",
+    "SKU to review": "待复核 SKU",
+    "Reason": "理由",
+    "Decision": "决策",
+    "Approve": "批准",
+    "Override price": "改价",
+    "Request replenish": "申请补货",
+    "Request transfer": "申请调拨",
+    "Pause": "暂停",
+    "Hold for data": "暂缓（等数据）",
+    "New price": "新价格",
+    "Business note (optional)": "业务备注（可选）",
+    "Log decision": "记录决策",
+    "Decision logged": "决策已记录",
+    "Download decision log (CSV)": "下载决策日志（CSV）",
+    # 说明 / 长文案
+    "The system helps pricing, category, and inventory teams identify margin improvement opportunities, stockout risks, excess inventory, competitive price gaps, and replenishment and transfer needs — each with a reason code, confidence level, and a recommended operational action.":
+        "系统帮助定价、品类与库存团队识别：毛利提升机会、缺货风险、过剩库存、竞品价差，以及补货与调拨需求——每一项都附带理由代码、置信度和建议的业务动作。",
+    "Adjust the candidate price and conditions; the engine re-simulates demand, margin, and inventory outcomes.":
+        "调整候选价格与条件，引擎会重新模拟需求、毛利与库存结果。",
+    "Scenario data unavailable for this SKU / segment.": "该 SKU / 细分暂无情景数据。",
+    "No transfer opportunities under current filters.": "当前筛选下没有调拨机会。",
+    "Each recommendation is a reviewable item: approve, override the price, request replenish / transfer, pause, or add a note. Nothing is auto-applied.":
+        "每条建议都是可复核项：批准、改价、申请补货 / 调拨、暂停或添加备注。任何动作都不会自动执行。",
+    "WAPE is preferred over MAPE because MAPE is unstable when demand is near zero.":
+        "优先使用 WAPE 而非 MAPE，因为当需求接近零时 MAPE 不稳定。",
+    "**Data grain:** SKU x Region x Customer Tier x Week. Weekly aggregation reduces long-tail daily noise and aligns with pricing and replenishment review cycles.":
+        "**数据粒度：** SKU × 区域 × 客户层级 × 周。按周聚合可降低长尾日度噪声，并与定价和补货的复盘周期对齐。",
+    "Positioned as an explainable pricing and inventory decision-support prototype — not a fully autonomous engine that changes prices without review. Dynamic pricing is about selecting the best business action under demand, inventory, margin, supply, and service-level constraints.":
+        "定位为可解释的定价与库存决策支持原型，而非无需人工复核就自动改价的全自动引擎。动态定价的核心，是在需求、库存、毛利、供应与服务水平约束下选出最优业务动作。",
+    "This demo uses synthetic sample data to demonstrate the analytical workflow, business logic, and user experience. It contains no confidential employer, supplier, customer, or transaction data. Model outputs are illustrative and should be validated through controlled business pilots before production use.":
+        "本演示使用合成示例数据，用于展示分析流程、业务逻辑与用户体验。不包含任何雇主、供应商、客户或交易的机密数据。模型输出仅供示意，投产前应通过受控试点验证。",
+    # 业务假设（列表项）
+    "Observed sales during a stockout do not equal true demand; censored periods are flagged.":
+        "缺货期间的观测销量不等于真实需求；这类被截断的时段会被标记。",
+    "Sparse long-tail SKUs use product-family priors and conservative, rule-based recommendations.":
+        "稀疏长尾 SKU 采用产品族先验与保守的规则化建议。",
+    "Historical price-sales relationships are decision-support evidence, not strict causality.":
+        "历史价格-销量关系是决策支持证据，并非严格因果。",
+    "Competitor prices are used only when product-match confidence is sufficient.":
+        "只有当产品匹配置信度足够时才使用竞品价格。",
+    "Recommendations are a price range plus an operational action, kept under human review.":
+        "建议是「价格区间 + 业务动作」，并始终保留人工复核。",
+})

@@ -5,8 +5,8 @@
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    Streamlit UI (app.py)                     │
-│  Executive | Demand | Elasticity | Pricing | Inventory |    │
-│  Backtest | AI Analyst | Governance                          │
+│  Overview | Pricing Opportunities | Inventory Risk |        │
+│  SKU Explorer + Simulator | Recommendation Queue | Method    │
 └────────────────────────┬────────────────────────────────────┘
                          │
 ┌────────────────────────▼────────────────────────────────────┐

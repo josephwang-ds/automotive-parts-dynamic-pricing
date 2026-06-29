@@ -291,8 +291,8 @@ def _plot(fig):
 # ════════════════════════ PAGE 1 — EXECUTIVE OVERVIEW ════════════════════════
 def page_overview(recs, sales, state, filters):
     inv = state.inventory_analysis
-    st.markdown(f"### {HERO_HEADLINE}")
-    st.caption(HERO_SUB)
+    st.markdown(f"### {t(HERO_HEADLINE)}")
+    st.caption(t(HERO_SUB))
 
     total_rev = recs["current_revenue"].sum() if len(recs) else 0
     total_gp = recs["current_gross_profit"].sum() if len(recs) else 0
@@ -768,7 +768,7 @@ def main():
     i18n.set_language(st.session_state.get("lang", "en"))
     st.sidebar.markdown("---")
 
-    st.title(HERO_HEADLINE)
+    st.title(t(HERO_HEADLINE))
     synthetic_disclosure()
 
     try:

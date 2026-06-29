@@ -24,7 +24,7 @@ This system does **not** predict "what a part should cost." Instead, it predicts
 - **Demand model**: HistGradientBoostingRegressor with stockout-adjusted targets
 - **Elasticity**: Log-log regression on exogenous price-test observations
 - **Optimization**: 4 objectives, 31 candidate prices per SKU, 9 guardrails
-- **UI**: 8-page Streamlit dashboard with AI Analyst, bilingual EN / 中文
+- **UI**: 6-tab Streamlit dashboard (top-tab navigation), bilingual EN / 中文
 
 ## Business Problem
 
@@ -159,22 +159,20 @@ Compares four policies over the 13-week test period:
 
 Results are **modeled/simulated estimates**, not proven business impact. A production implementation requires controlled price experiments.
 
-## UI Overview — what each page shows
+## UI Overview — what each tab shows
 
-The dashboard has 8 pages (sidebar navigation). A language selector at the top of the sidebar switches the whole UI between **English** and **中文**.
+The dashboard is a **6-tab story chain** with top-tab navigation (one click to switch — no page reloads). A language selector at the top of the sidebar switches the whole UI between **English** and **中文**.
 
-| Page | In plain terms |
+| Tab | In plain terms |
 |---|---|
-| **Executive Command Center** | The headline numbers: revenue, gross profit, modeled profit lift, inventory health, and where the biggest opportunity is. |
-| **Demand Model** | How well the forecasting model predicts unit sales (accuracy metrics, actual-vs-predicted, error by category). |
-| **Elasticity Explorer** | How price-sensitive each category/region/tier is — the heatmap shows where customers react most to price. |
-| **SKU Decision Workbench** | Drill into one part: current vs recommended price, why, the price→units→profit curve, and the linked inventory action. |
-| **Inventory Control Tower** | Stock health across the catalog — excess, stockout risk, weeks of cover, transfer and replenishment candidates. |
-| **Backtest & Rollback** | Compares pricing strategies over a held-out period, plus a slider to simulate rolling back part of the changes. |
-| **AI Analyst** | Ask plain-language questions; a local, deterministic analyst answers from the data (no external LLM calls). |
-| **Data & Governance** | The data model, metric definitions, approval workflow, and production-monitoring checklist. |
+| **Overview** | The headline numbers: revenue, gross margin, inventory health, stockout rate, modeled margin opportunity, and recommendations awaiting review. Demand-model quality and method notes fold in as expanders. |
+| **Pricing Opportunities** | Current vs recommended price, price-change distribution, competitor price index by category, margin-lift vs unit impact, and the high-confidence opportunity list. |
+| **Inventory Risk** | Stock-health distribution, stockout-risk heatmap (category × region), weeks-of-cover, excess by category, recommended inventory actions, and warehouse-to-store transfer recommendations. |
+| **SKU Explorer + Scenario Simulator** | Drill into one part (master data, price / cost / margin, forecast, reason, confidence), then run what-if pricing: adjust candidate price / promotion / inventory and watch demand, margin, weeks-of-supply, and stockout probability re-simulate live. |
+| **Recommendation Queue** | The human-in-the-loop worklist: each recommendation can be approved, price-overridden, sent for replenish / transfer, paused, or annotated; decisions are logged and exportable. Nothing is auto-applied. |
+| **Model & Methodology** | Demand-model performance, strategy backtest, data grain, business assumptions, positioning, and the synthetic-data disclaimer. |
 
-Modern B2B analytics design with custom CSS, metric cards, status pills, and Plotly charts.
+Price elasticity and the full demand-model diagnostics are folded into expanders within these tabs rather than separate pages, keeping the demo a tight, presentable flow. Modern B2B analytics design with custom CSS, metric cards, status pills, and Plotly charts.
 
 ## Project Architecture
 
@@ -272,7 +270,7 @@ Results are **modeled/simulated estimates**, not proven causal lift.
 - No former-employer data is used
 - No data, code, or models from other portfolio projects are reused
 - No API keys, external databases, or paid datasets required
-- No online LLM calls; AI Analyst runs locally and deterministically
+- No online LLM calls; all analysis is local and deterministic
 
 ## License
 
