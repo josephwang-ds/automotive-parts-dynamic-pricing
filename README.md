@@ -18,7 +18,7 @@ This is a portfolio project built to show an end-to-end data-science workflow: s
 
 ## Executive Summary
 
-This system does **not** predict "what a part should cost." Instead, it predicts **how many units will sell at each candidate price** and computes the resulting revenue, gross profit, margin, inventory, and stockout risk. Recommendations are constrained by nine business guardrails and require human approval before implementation.
+Recommendations are constrained by nine business guardrails and require human approval before implementation.
 
 - **3,000 SKUs** × 4 regions × 3 customer tiers × 104 weeks of synthetic data
 - **Demand model**: HistGradientBoostingRegressor with stockout-adjusted targets
@@ -151,11 +151,7 @@ Candidate prices: current ± 15% in 1% steps. Each simulated through the demand 
 
 ## Backtesting
 
-Compares four policies over the 13-week test period:
-- Current pricing (historical)
-- Cost-plus pricing
-- Competitor-match pricing
-- Dynamic pricing (model recommendations)
+Compares six strategies over the 13-week test period: Current pricing, Pricing-Only, Inventory-Only, Joint Pricing + Inventory, Cost-Plus, and Competitor Match.
 
 Results are **modeled/simulated estimates**, not proven business impact. A production implementation requires controlled price experiments.
 
@@ -206,7 +202,7 @@ python -m py_compile app.py src/*.py
 
 20 tests covering: data reproducibility, elasticity signs, inventory censoring, financial formulas, feature leakage, time splits, guardrails, rollback boundaries, AI analyst accuracy, and model persistence.
 
-## Inventory Decision Engine (v2.0)
+## Inventory Decision Engine
 
 Inventory is integrated as a **constraint and operational-action layer** around dynamic pricing—not a separate project.
 
@@ -238,12 +234,6 @@ Decision order: **Transfer → Replenish → Stop order → Markdown (only if ne
 - **Markdown economics**: Only recommend if `net_markdown_value > 0`
 - **Joint confidence**: LOW confidence restricts price moves and transfers
 
-### Backtest Strategies
-
-Compares: Current, Pricing-Only, Inventory-Only, Joint Pricing+Inventory, Cost-Plus, Competitor Match
-
-Results are **modeled/simulated estimates**, not proven causal lift.
-
 ---
 
 ## Limitations
@@ -262,7 +252,6 @@ Results are **modeled/simulated estimates**, not proven causal lift.
 3. Deploy model serving API with drift monitoring
 4. Scale scoring to millions of SKUs (distributed batch)
 5. Integrate approval workflow with ERP/pricing systems
-6. Add LLM-powered analyst (pluggable provider interface ready)
 
 ## Privacy Statement
 
