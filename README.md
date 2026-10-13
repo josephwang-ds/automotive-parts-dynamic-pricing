@@ -2,7 +2,7 @@
 
 A complete SKU-level dynamic pricing decision system for automotive parts retail. The system recommends customer-tier prices based on demand forecasting, price elasticity estimation, inventory position, and business guardrails.
 
-> **The public demo uses a representative synthetic sample. The workflow is designed for production catalogs containing millions of SKUs.**
+> **All data is synthetic. The published run uses 500 SKUs; the generator scales to 3,000.**
 
 ## In one sentence
 
@@ -12,7 +12,7 @@ A complete SKU-level dynamic pricing decision system for automotive parts retail
 
 ## Who is this for / what it demonstrates
 
-This is a portfolio project built to show an end-to-end data-science workflow: synthetic data generation, demand forecasting, causal elasticity estimation, constrained optimization, inventory policy, backtesting, and a polished decision dashboard. No real company data is used. The UI ships **bilingual (English / 中文)** — switch from the language selector at the top of the sidebar.
+This is a portfolio project built to show an end-to-end data-science workflow: synthetic data generation, demand forecasting, log-log elasticity estimation, constrained optimization, inventory policy, backtesting, and a polished decision dashboard. No real company data is used. The UI ships **bilingual (English / 中文)** — switch from the language selector at the top of the sidebar.
 
 **Tech stack:** Python · pandas / NumPy · scikit-learn (HistGradientBoosting) · Plotly · Streamlit · pytest.
 
@@ -20,7 +20,7 @@ This is a portfolio project built to show an end-to-end data-science workflow: s
 
 Recommendations are constrained by nine business guardrails and require human approval before implementation.
 
-- **3,000 SKUs** × 4 regions × 3 customer tiers × 104 weeks of synthetic data
+- **500 SKUs** × 4 regions × 3 customer tiers × 104 weeks of synthetic data in the published run (generator scales to 3,000)
 - **Demand model**: HistGradientBoostingRegressor with stockout-adjusted targets
 - **Elasticity**: Log-log regression on exogenous price-test observations
 - **Optimization**: 4 objectives, 31 candidate prices per SKU, 9 guardrails
@@ -115,7 +115,9 @@ lost_sales = max(0, latent_demand - available_inventory)
 | Ridge Regression | Linear | Interpretable benchmark |
 | HistGradientBoosting | Primary | Best predictive performance |
 
-Metrics: MAE, RMSE, WAPE, RMSLE, Bias, Baseline improvement
+Metrics: MAE, RMSE, WAPE, RMSLE, Bias.
+
+> Known issue: the Seasonal Naive baseline currently predicts 0 for the test window (WAPE = 100%), so no improvement over baseline is reported until it is fixed.
 
 ## Elasticity Methodology
 
@@ -151,7 +153,7 @@ Candidate prices: current ± 15% in 1% steps. Each simulated through the demand 
 
 ## Backtesting
 
-Compares six strategies over the 13-week test period: Current pricing, Pricing-Only, Inventory-Only, Joint Pricing + Inventory, Cost-Plus, and Competitor Match.
+Designed to compare six strategies over the 13-week test period (Current pricing, Pricing-Only, Inventory-Only, Joint Pricing + Inventory, Cost-Plus, Competitor Match). Known issue: the current backtest output is empty, so no backtest result is claimed.
 
 Results are **modeled/simulated estimates**, not proven business impact. A production implementation requires controlled price experiments.
 
@@ -245,13 +247,11 @@ Decision order: **Transfer → Replenish → Stop order → Markdown (only if ne
 - Elasticity estimates have wide confidence intervals for sparse groups
 - Recommendations require human approval; no auto-writeback
 
-## Production Roadmap
+## Next Steps
 
-1. Connect to production catalog and POS data feeds
-2. Implement randomized price A/B testing
-3. Deploy model serving API with drift monitoring
-4. Scale scoring to millions of SKUs (distributed batch)
-5. Integrate approval workflow with ERP/pricing systems
+1. Fix the seasonal-naive baseline and the backtest output
+2. Replace the -0.1 elasticity prior with estimates from a randomized price test
+3. Add uncertainty intervals to the demand model
 
 ## Privacy Statement
 
